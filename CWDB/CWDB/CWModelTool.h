@@ -40,3 +40,13 @@
 
 
 @end
+
+
+// 缓存模型语句
+@interface CWCache : NSCache
+
++ (instancetype)shareInstance;
+
+@end
+
+

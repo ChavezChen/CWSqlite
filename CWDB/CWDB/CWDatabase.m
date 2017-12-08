@@ -42,7 +42,63 @@ static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
     return YES;
 }
 
-
++ (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql uid:(NSString *)uid {
+    
+    if (![self openDB:uid]) {
+        return nil;
+    }
+    
+    sqlite3_stmt *ppStmt     = 0x00;
+    if (sqlite3_prepare_v2(cw_database, sql.UTF8String, -1, &ppStmt, nil) != SQLITE_OK) {
+        NSLog(@"查询准备语句编译失败");
+        return nil;
+    }
+    
+    NSMutableArray *rowDicArray = [NSMutableArray array];
+    while (sqlite3_step(ppStmt) == SQLITE_ROW) { // SQLITE_ROW表示还有数据
+        // 获取有多少列(也就是一条数据有多少个字段)
+        int columnCount = sqlite3_column_count(ppStmt);
+        // 存储一条数据的所有字段名与值 的字典
+        NSMutableDictionary *rowDict = [NSMutableDictionary dictionary];
+        // 遍历数据库一条数据所有字段
+        for (int i = 0; i < columnCount; i++) {
+            // 获取字段名
+            NSString *columnName = [NSString stringWithUTF8String:sqlite3_column_name(ppStmt, i)];
+            // 获取字段名对应的类型
+            int type = sqlite3_column_type(ppStmt, i);
+            // 获取对应的值
+            id value = nil;
+            switch (type) {
+                case SQLITE_INTEGER:
+                    value = @(sqlite3_column_int(ppStmt, i));
+                    break;
+                case SQLITE_FLOAT:
+                    value = @(sqlite3_column_double(ppStmt, i));
+                    
+                    break;
+                case SQLITE_BLOB: // 二进制
+                    value = CFBridgingRelease(sqlite3_column_blob(ppStmt, i));
+                    break;
+                case SQLITE_NULL:
+                    value = @"";
+                    break;
+                case SQLITE3_TEXT:
+                    value = [NSString stringWithUTF8String:(const char *)sqlite3_column_text(ppStmt, i)];
+                    break;
+                    
+                default:
+                    break;
+            }
+            [rowDict setValue:value forKey:columnName];
+        }
+        [rowDicArray addObject:rowDict];
+    }
+    
+    sqlite3_finalize(ppStmt);
+    [self closeDB];
+    
+    return rowDicArray;
+}
 
 // 返回0 则不重试操作数据库，返回非0 将不断尝试操作数据库
 static int CWDBBusyCallBack(void *f, int count) {

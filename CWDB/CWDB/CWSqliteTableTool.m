@@ -10,4 +10,10 @@
 
 @implementation CWSqliteTableTool
 
++ (BOOL)isTableExists:(NSString *)tableName uid:(NSString *)uid{
+    
+    return YES;
+}
+
+
 @end

@@ -10,7 +10,11 @@
 
 @interface CWDatabase : NSObject
 
+// 执行语句
 + (BOOL)execSQL:(NSString *)sql uid:(NSString *)uid;
+
+// 查询语句
++ (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql uid:(NSString *)uid;
 
 + (BOOL)openDB:(NSString *)uid;
 

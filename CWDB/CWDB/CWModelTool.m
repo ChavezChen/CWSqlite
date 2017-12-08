@@ -13,10 +13,15 @@
 @implementation CWModelTool
 
 + (NSString *)tableName:(Class)cls targetId:(NSString *)targetId {
+    if (!targetId) targetId = @"";
     return [NSString stringWithFormat:@"%@%@",NSStringFromClass(cls),targetId];
 }
 
 + (NSDictionary *)classIvarNameAndTypeDic:(Class)cls {
+    NSDictionary *cacheIvarNameAndTypeDic = [[CWCache shareInstance] objectForKey:NSStringFromClass(cls)];
+    if (cacheIvarNameAndTypeDic) {
+        return cacheIvarNameAndTypeDic;
+    }
     unsigned int outCount = 0;
     Ivar *varList = class_copyIvarList(cls, &outCount);
     NSMutableDictionary *nameTypeDic = [NSMutableDictionary dictionary];
@@ -38,7 +43,7 @@
         [nameTypeDic setValue:type forKey:ivarName];
         
     }
-    
+    [[CWCache shareInstance] setObject:nameTypeDic forKey:NSStringFromClass(cls)];
     return nameTypeDic;
 }
 
@@ -72,6 +77,7 @@
 }
 
 + (NSString *)sqlColumnNamesAndTypesStr:(Class)cls {
+    // 缓存
     NSDictionary *sqlDict = [[self classIvarNameAndSqlTypeDic:cls] mutableCopy];
     NSMutableArray *nameTypeArr = [NSMutableArray array];
 
@@ -83,3 +89,21 @@
 }
 
 @end
+
+@implementation CWCache
+
+static CWCache *cw_cache = nil;
+
++ (instancetype)shareInstance {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        cw_cache = [[CWCache alloc] init];
+    });
+    return cw_cache;
+}
+
+
+@end
+
+
+

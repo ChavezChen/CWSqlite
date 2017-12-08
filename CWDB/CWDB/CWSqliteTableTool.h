@@ -10,7 +10,8 @@
 
 @interface CWSqliteTableTool : NSObject
 
-+ (BOOL)isTableExists:(NSString *)tableName;
+// 表格是否存在
++ (BOOL)isTableExists:(NSString *)tableName uid:(NSString *)uid;
 
 
 @end

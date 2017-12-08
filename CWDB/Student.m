@@ -14,4 +14,13 @@
     return @"stuId";
 }
 
+
+
+- (NSString *)description {
+    
+    NSString *str = [NSString stringWithFormat:@"stuId = %d , name = %@ , age = %d , height = %d ,score = %f",_stuId,_name,_age,_height,score];
+    
+    return str;
+}
+
 @end

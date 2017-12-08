@@ -21,8 +21,11 @@
  */
 + (BOOL)createSQLTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
-
+// 插入数据库
 + (BOOL)insertModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
+
+// 查询所有数据
++ (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
 
 @end
