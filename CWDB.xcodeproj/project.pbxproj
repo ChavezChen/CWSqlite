@@ -1,0 +1,623 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		047ECF991FD7D0200022598C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6628423C1FD25FBC00809501 /* libsqlite3.0.tbd */; };
+		047ECF9B1FD7E9B40022598C /* CWSqliteModelToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */; };
+		047ECF9E1FD9112F0022598C /* CWSqliteTableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */; };
+		6628420D1FCEA78B00809501 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6628420B1FCEA78B00809501 /* Main.storyboard */; };
+		6628420F1FCEA78B00809501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6628420E1FCEA78B00809501 /* Assets.xcassets */; };
+		662842121FCEA78B00809501 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 662842101FCEA78B00809501 /* LaunchScreen.storyboard */; };
+		6628421F1FCEA78B00809501 /* CWDBTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6628421E1FCEA78B00809501 /* CWDBTests.m */; };
+		6628422A1FCEA78B00809501 /* CWDBUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842291FCEA78B00809501 /* CWDBUITests.m */; };
+		6628423A1FD25F5500809501 /* CWDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842391FD25F5500809501 /* CWDatabase.m */; };
+		6628423E1FD3928D00809501 /* CWDatabaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6628423D1FD3928D00809501 /* CWDatabaseTest.m */; };
+		662842411FD4040C00809501 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842401FD4040C00809501 /* Student.m */; };
+		662842481FD4043D00809501 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842441FD4043D00809501 /* ViewController.m */; };
+		662842491FD4043D00809501 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842451FD4043D00809501 /* main.m */; };
+		6628424A1FD4043D00809501 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842461FD4043D00809501 /* AppDelegate.m */; };
+		6628424D1FD4050500809501 /* CWSqliteModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6628424C1FD4050500809501 /* CWSqliteModelTool.m */; };
+		662842531FD4053400809501 /* CWModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842521FD4053400809501 /* CWModelTool.m */; };
+		662842561FD416EE00809501 /* CWModelToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842551FD416EE00809501 /* CWModelToolTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6628421B1FCEA78B00809501 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 662841FA1FCEA78B00809501 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 662842011FCEA78B00809501;
+			remoteInfo = CWDB;
+		};
+		662842261FCEA78B00809501 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 662841FA1FCEA78B00809501 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 662842011FCEA78B00809501;
+			remoteInfo = CWDB;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteModelToolTests.m; sourceTree = "<group>"; };
+		047ECF9C1FD9112F0022598C /* CWSqliteTableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWSqliteTableTool.h; sourceTree = "<group>"; };
+		047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteTableTool.m; sourceTree = "<group>"; };
+		662842021FCEA78B00809501 /* CWDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6628420C1FCEA78B00809501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6628420E1FCEA78B00809501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		662842111FCEA78B00809501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		662842131FCEA78B00809501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6628421A1FCEA78B00809501 /* CWDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6628421E1FCEA78B00809501 /* CWDBTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWDBTests.m; sourceTree = "<group>"; };
+		662842201FCEA78B00809501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		662842251FCEA78B00809501 /* CWDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		662842291FCEA78B00809501 /* CWDBUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWDBUITests.m; sourceTree = "<group>"; };
+		6628422B1FCEA78B00809501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		662842381FD25F5500809501 /* CWDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWDatabase.h; sourceTree = "<group>"; };
+		662842391FD25F5500809501 /* CWDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWDatabase.m; sourceTree = "<group>"; };
+		6628423C1FD25FBC00809501 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		6628423D1FD3928D00809501 /* CWDatabaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWDatabaseTest.m; sourceTree = "<group>"; };
+		6628423F1FD4040C00809501 /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		662842401FD4040C00809501 /* Student.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		662842431FD4043D00809501 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		662842441FD4043D00809501 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		662842451FD4043D00809501 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		662842461FD4043D00809501 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		662842471FD4043D00809501 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6628424B1FD4050500809501 /* CWSqliteModelTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWSqliteModelTool.h; sourceTree = "<group>"; };
+		6628424C1FD4050500809501 /* CWSqliteModelTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteModelTool.m; sourceTree = "<group>"; };
+		662842511FD4053400809501 /* CWModelTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWModelTool.h; sourceTree = "<group>"; };
+		662842521FD4053400809501 /* CWModelTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWModelTool.m; sourceTree = "<group>"; };
+		662842541FD4104900809501 /* CWModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWModelProtocol.h; sourceTree = "<group>"; };
+		662842551FD416EE00809501 /* CWModelToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWModelToolTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		662841FF1FCEA78B00809501 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				047ECF991FD7D0200022598C /* libsqlite3.0.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		662842171FCEA78B00809501 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		662842221FCEA78B00809501 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		662841F91FCEA78B00809501 = {
+			isa = PBXGroup;
+			children = (
+				662842041FCEA78B00809501 /* CWDB */,
+				6628421D1FCEA78B00809501 /* CWDBTests */,
+				662842281FCEA78B00809501 /* CWDBUITests */,
+				662842031FCEA78B00809501 /* Products */,
+				6628423B1FD25FBC00809501 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		662842031FCEA78B00809501 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				662842021FCEA78B00809501 /* CWDB.app */,
+				6628421A1FCEA78B00809501 /* CWDBTests.xctest */,
+				662842251FCEA78B00809501 /* CWDBUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		662842041FCEA78B00809501 /* CWDB */ = {
+			isa = PBXGroup;
+			children = (
+				662842421FD4043D00809501 /* Clasess */,
+				662842371FCEA79E00809501 /* CWDB */,
+				6628420B1FCEA78B00809501 /* Main.storyboard */,
+				6628420E1FCEA78B00809501 /* Assets.xcassets */,
+				662842101FCEA78B00809501 /* LaunchScreen.storyboard */,
+				662842131FCEA78B00809501 /* Info.plist */,
+				6628423F1FD4040C00809501 /* Student.h */,
+				662842401FD4040C00809501 /* Student.m */,
+			);
+			path = CWDB;
+			sourceTree = "<group>";
+		};
+		6628421D1FCEA78B00809501 /* CWDBTests */ = {
+			isa = PBXGroup;
+			children = (
+				6628421E1FCEA78B00809501 /* CWDBTests.m */,
+				662842201FCEA78B00809501 /* Info.plist */,
+				6628423D1FD3928D00809501 /* CWDatabaseTest.m */,
+				662842551FD416EE00809501 /* CWModelToolTests.m */,
+				047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */,
+			);
+			path = CWDBTests;
+			sourceTree = "<group>";
+		};
+		662842281FCEA78B00809501 /* CWDBUITests */ = {
+			isa = PBXGroup;
+			children = (
+				662842291FCEA78B00809501 /* CWDBUITests.m */,
+				6628422B1FCEA78B00809501 /* Info.plist */,
+			);
+			path = CWDBUITests;
+			sourceTree = "<group>";
+		};
+		662842371FCEA79E00809501 /* CWDB */ = {
+			isa = PBXGroup;
+			children = (
+				662842381FD25F5500809501 /* CWDatabase.h */,
+				662842391FD25F5500809501 /* CWDatabase.m */,
+				6628424B1FD4050500809501 /* CWSqliteModelTool.h */,
+				6628424C1FD4050500809501 /* CWSqliteModelTool.m */,
+				662842511FD4053400809501 /* CWModelTool.h */,
+				662842521FD4053400809501 /* CWModelTool.m */,
+				047ECF9C1FD9112F0022598C /* CWSqliteTableTool.h */,
+				047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */,
+				662842541FD4104900809501 /* CWModelProtocol.h */,
+			);
+			path = CWDB;
+			sourceTree = "<group>";
+		};
+		6628423B1FD25FBC00809501 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6628423C1FD25FBC00809501 /* libsqlite3.0.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		662842421FD4043D00809501 /* Clasess */ = {
+			isa = PBXGroup;
+			children = (
+				662842431FD4043D00809501 /* AppDelegate.h */,
+				662842441FD4043D00809501 /* ViewController.m */,
+				662842451FD4043D00809501 /* main.m */,
+				662842461FD4043D00809501 /* AppDelegate.m */,
+				662842471FD4043D00809501 /* ViewController.h */,
+			);
+			path = Clasess;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		662842011FCEA78B00809501 /* CWDB */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6628422E1FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDB" */;
+			buildPhases = (
+				662841FE1FCEA78B00809501 /* Sources */,
+				662841FF1FCEA78B00809501 /* Frameworks */,
+				662842001FCEA78B00809501 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CWDB;
+			productName = CWDB;
+			productReference = 662842021FCEA78B00809501 /* CWDB.app */;
+			productType = "com.apple.product-type.application";
+		};
+		662842191FCEA78B00809501 /* CWDBTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 662842311FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBTests" */;
+			buildPhases = (
+				662842161FCEA78B00809501 /* Sources */,
+				662842171FCEA78B00809501 /* Frameworks */,
+				662842181FCEA78B00809501 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6628421C1FCEA78B00809501 /* PBXTargetDependency */,
+			);
+			name = CWDBTests;
+			productName = CWDBTests;
+			productReference = 6628421A1FCEA78B00809501 /* CWDBTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		662842241FCEA78B00809501 /* CWDBUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 662842341FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBUITests" */;
+			buildPhases = (
+				662842211FCEA78B00809501 /* Sources */,
+				662842221FCEA78B00809501 /* Frameworks */,
+				662842231FCEA78B00809501 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				662842271FCEA78B00809501 /* PBXTargetDependency */,
+			);
+			name = CWDBUITests;
+			productName = CWDBUITests;
+			productReference = 662842251FCEA78B00809501 /* CWDBUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		662841FA1FCEA78B00809501 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = Chavez;
+				TargetAttributes = {
+					662842011FCEA78B00809501 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					662842191FCEA78B00809501 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 662842011FCEA78B00809501;
+					};
+					662842241FCEA78B00809501 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 662842011FCEA78B00809501;
+					};
+				};
+			};
+			buildConfigurationList = 662841FD1FCEA78B00809501 /* Build configuration list for PBXProject "CWDB" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 662841F91FCEA78B00809501;
+			productRefGroup = 662842031FCEA78B00809501 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				662842011FCEA78B00809501 /* CWDB */,
+				662842191FCEA78B00809501 /* CWDBTests */,
+				662842241FCEA78B00809501 /* CWDBUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		662842001FCEA78B00809501 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				662842121FCEA78B00809501 /* LaunchScreen.storyboard in Resources */,
+				6628420F1FCEA78B00809501 /* Assets.xcassets in Resources */,
+				6628420D1FCEA78B00809501 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		662842181FCEA78B00809501 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		662842231FCEA78B00809501 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		662841FE1FCEA78B00809501 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				047ECF9E1FD9112F0022598C /* CWSqliteTableTool.m in Sources */,
+				662842481FD4043D00809501 /* ViewController.m in Sources */,
+				662842531FD4053400809501 /* CWModelTool.m in Sources */,
+				6628424D1FD4050500809501 /* CWSqliteModelTool.m in Sources */,
+				662842411FD4040C00809501 /* Student.m in Sources */,
+				6628424A1FD4043D00809501 /* AppDelegate.m in Sources */,
+				6628423A1FD25F5500809501 /* CWDatabase.m in Sources */,
+				662842491FD4043D00809501 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		662842161FCEA78B00809501 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6628423E1FD3928D00809501 /* CWDatabaseTest.m in Sources */,
+				047ECF9B1FD7E9B40022598C /* CWSqliteModelToolTests.m in Sources */,
+				6628421F1FCEA78B00809501 /* CWDBTests.m in Sources */,
+				662842561FD416EE00809501 /* CWModelToolTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		662842211FCEA78B00809501 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6628422A1FCEA78B00809501 /* CWDBUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6628421C1FCEA78B00809501 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 662842011FCEA78B00809501 /* CWDB */;
+			targetProxy = 6628421B1FCEA78B00809501 /* PBXContainerItemProxy */;
+		};
+		662842271FCEA78B00809501 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 662842011FCEA78B00809501 /* CWDB */;
+			targetProxy = 662842261FCEA78B00809501 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6628420B1FCEA78B00809501 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6628420C1FCEA78B00809501 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		662842101FCEA78B00809501 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				662842111FCEA78B00809501 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6628422C1FCEA78B00809501 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6628422D1FCEA78B00809501 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6628422F1FCEA78B00809501 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CWDB/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDB;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		662842301FCEA78B00809501 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CWDB/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDB;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		662842321FCEA78B00809501 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CWDBTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDBTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWDB.app/CWDB";
+			};
+			name = Debug;
+		};
+		662842331FCEA78B00809501 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CWDBTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDBTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWDB.app/CWDB";
+			};
+			name = Release;
+		};
+		662842351FCEA78B00809501 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CWDBUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDBUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CWDB;
+			};
+			name = Debug;
+		};
+		662842361FCEA78B00809501 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CWDBUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDBUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CWDB;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		662841FD1FCEA78B00809501 /* Build configuration list for PBXProject "CWDB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6628422C1FCEA78B00809501 /* Debug */,
+				6628422D1FCEA78B00809501 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6628422E1FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6628422F1FCEA78B00809501 /* Debug */,
+				662842301FCEA78B00809501 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		662842311FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				662842321FCEA78B00809501 /* Debug */,
+				662842331FCEA78B00809501 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		662842341FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				662842351FCEA78B00809501 /* Debug */,
+				662842361FCEA78B00809501 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 662841FA1FCEA78B00809501 /* Project object */;
+}
