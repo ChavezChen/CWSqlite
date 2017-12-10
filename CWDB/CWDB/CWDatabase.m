@@ -12,7 +12,7 @@
 
 //#define kCWDBCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
-#define kCWDBCachePath @"/Users/mac/Desktop"
+#define kCWDBCachePath @"/Users/chenwang/Desktop"
 
 @interface CWDatabase ()
 
@@ -37,25 +37,27 @@ static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
     
     if (result != SQLITE_OK) {
         NSLog(@"exec sql error : %s",errmsg);
+        sqlite3_free(errmsg);
         return NO;
     }
     return YES;
 }
 
 + (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql uid:(NSString *)uid {
-    
+    // 1、打开数据库
     if (![self openDB:uid]) {
         return nil;
     }
-    
-    sqlite3_stmt *ppStmt     = 0x00;
+    // 2、预执行语句
+    sqlite3_stmt *ppStmt     = 0x00; //伴随指针
     if (sqlite3_prepare_v2(cw_database, sql.UTF8String, -1, &ppStmt, nil) != SQLITE_OK) {
         NSLog(@"查询准备语句编译失败");
         return nil;
     }
-    
+    // 3、绑定数据，因为我们的sql语句中不带有？用来赋值，所以不需要进行绑定
+    // 4、执行遍历查询
     NSMutableArray *rowDicArray = [NSMutableArray array];
-    while (sqlite3_step(ppStmt) == SQLITE_ROW) { // SQLITE_ROW表示还有数据
+    while (sqlite3_step(ppStmt) == SQLITE_ROW) { // SQLITE_ROW表示还有下一条数据
         // 获取有多少列(也就是一条数据有多少个字段)
         int columnCount = sqlite3_column_count(ppStmt);
         // 存储一条数据的所有字段名与值 的字典
@@ -93,7 +95,8 @@ static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
         }
         [rowDicArray addObject:rowDict];
     }
-    
+    // 5、重制（省略）
+    // 6、释放资源，关闭数据库
     sqlite3_finalize(ppStmt);
     [self closeDB];
     

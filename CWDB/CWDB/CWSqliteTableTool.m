@@ -7,12 +7,16 @@
 //
 
 #import "CWSqliteTableTool.h"
+#import "CWDatabase.h"
 
 @implementation CWSqliteTableTool
 
 + (BOOL)isTableExists:(NSString *)tableName uid:(NSString *)uid{
+    // 去sqlite_master这个表里面去查询是否存在这个表
+    NSString *queryCreateSqlStr = [NSString stringWithFormat:@"select sql from sqlite_master where type = 'table' and name = '%@'",tableName];
     
-    return YES;
+    NSMutableArray *resultArray = [CWDatabase querySql:queryCreateSqlStr uid:uid];
+    return resultArray.count > 0;
 }
 
 

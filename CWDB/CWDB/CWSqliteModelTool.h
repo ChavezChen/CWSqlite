@@ -27,5 +27,7 @@
 // 查询所有数据
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
+// 插入或者更新数据
++ (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
 
 @end
