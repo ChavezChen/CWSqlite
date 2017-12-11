@@ -17,6 +17,6 @@
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,assign) int age;
 @property (nonatomic,assign) int height;
-
+@property (nonatomic,assign) float weight;
 
 @end

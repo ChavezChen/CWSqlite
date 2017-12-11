@@ -13,6 +13,16 @@
 
 @implementation CWSqliteModelTool
 
++ (NSDictionary *)CWDBNameToValueRelationTypeDic {
+    return @{@(CWDBRelationTypeMore):@">",
+             @(CWDBRelationTypeLess):@"<",
+             @(CWDBRelationTypeEqual):@"=",
+             @(CWDBRelationTypeMoreEqual):@">=",
+             @(CWDBRelationTypeLessEqual):@"<="
+             };
+}
+
+
 + (BOOL)createSQLTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId {
     // 创建数据库表的语句
     // create table if not exists 表名(字段1 字段1类型（约束）,字段2 字段2类型（约束）....., primary key(字段))
@@ -73,6 +83,19 @@
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
     return [self parseResults:results withClass:cls];
 }
+// 根据sql语句查询
++ (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid {
+    NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
+    return [self parseResults:results withClass:cls];
+}
+// 根据条件查询
++ (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
+    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@'", tableName,name,self.CWDBNameToValueRelationTypeDic[@(relation)],value];
+    NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
+    return [self parseResults:results withClass:cls];
+}
+
 // 解析数组
 + (NSArray *)parseResults:(NSArray <NSDictionary *>*)results withClass:(Class)cls  {
     

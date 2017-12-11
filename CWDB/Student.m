@@ -10,11 +10,14 @@
 
 @implementation Student
 
+#pragma mark - CWModelProtocol
 + (NSString *)primaryKey {
     return @"stuId";
 }
 
-
+//+ (NSDictionary *)newNameToOldNameDic {
+//    return @{@"score":@"sss"};
+//}
 
 - (NSString *)description {
     

@@ -10,12 +10,18 @@
 
 @interface CWDatabase : NSObject
 
+// 打开数据库
++ (BOOL)openDB:(NSString *)uid;
+
 // 执行语句
 + (BOOL)execSQL:(NSString *)sql uid:(NSString *)uid;
 
 // 查询语句
 + (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql uid:(NSString *)uid;
 
-+ (BOOL)openDB:(NSString *)uid;
+// 执行多个sql语句
++ (BOOL)execSqls:(NSArray <NSString *>*)sqls uid:(NSString *)uid;
+
+
 
 @end

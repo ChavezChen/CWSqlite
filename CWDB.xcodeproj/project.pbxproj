@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041EEC461FDE2D310048A0F7 /* CWSqliteTableToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 041EEC451FDE2D310048A0F7 /* CWSqliteTableToolTests.m */; };
 		047ECF991FD7D0200022598C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6628423C1FD25FBC00809501 /* libsqlite3.0.tbd */; };
 		047ECF9B1FD7E9B40022598C /* CWSqliteModelToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */; };
 		047ECF9E1FD9112F0022598C /* CWSqliteTableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041EEC451FDE2D310048A0F7 /* CWSqliteTableToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteTableToolTests.m; sourceTree = "<group>"; };
 		047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteModelToolTests.m; sourceTree = "<group>"; };
 		047ECF9C1FD9112F0022598C /* CWSqliteTableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWSqliteTableTool.h; sourceTree = "<group>"; };
 		047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteTableTool.m; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				6628423D1FD3928D00809501 /* CWDatabaseTest.m */,
 				662842551FD416EE00809501 /* CWModelToolTests.m */,
 				047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */,
+				041EEC451FDE2D310048A0F7 /* CWSqliteTableToolTests.m */,
 			);
 			path = CWDBTests;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			files = (
 				6628423E1FD3928D00809501 /* CWDatabaseTest.m in Sources */,
 				047ECF9B1FD7E9B40022598C /* CWSqliteModelToolTests.m in Sources */,
+				041EEC461FDE2D310048A0F7 /* CWSqliteTableToolTests.m in Sources */,
 				6628421F1FCEA78B00809501 /* CWDBTests.m in Sources */,
 				662842561FD416EE00809501 /* CWModelToolTests.m in Sources */,
 			);

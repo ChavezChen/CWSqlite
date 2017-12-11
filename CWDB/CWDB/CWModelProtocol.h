@@ -18,4 +18,11 @@
  */
 + (NSString *)primaryKey;
 
+@optional
+/**
+ 将旧字段名称的值迁移到新字段名称下 { 新字段名称(key) : 旧字段名称,数据表里的字段名(value) }
+  @return 映射表格
+ */
++ (NSDictionary *)newNameToOldNameDic;
+
 @end

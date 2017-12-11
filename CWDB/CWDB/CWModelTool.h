@@ -20,6 +20,10 @@
  */
 + (NSString *)tableName:(Class)cls targetId:(NSString *)targetId;
 
++ (NSString *)tmpTableName:(Class)cls targetId:(NSString *)targetId;
+
+
+
 /**
  获取模型所有成员变量的类型以及名称 {名称 ：类型}
 
@@ -37,6 +41,8 @@
  */
 + (NSString *)sqlColumnNamesAndTypesStr:(Class)cls;
 
+// 返回模型的所有成员变量
++ (NSArray *)allIvarNames:(Class)cls;
 
 
 @end

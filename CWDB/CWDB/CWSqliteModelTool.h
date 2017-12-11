@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "CWModelProtocol.h"
 
+typedef NS_ENUM(NSUInteger,CWDBRelationType) {
+    CWDBRelationTypeMore = 0,       // 大于 >
+    CWDBRelationTypeLess,       // 小于 <
+    CWDBRelationTypeEqual,      // 等于 =
+    CWDBRelationTypeMoreEqual,  // 大于等于 >=
+    CWDBRelationTypeLessEqual   // 小于等于 <=
+};
+
+
 @interface CWSqliteModelTool : NSObject
 
 /**
@@ -21,13 +30,23 @@
  */
 + (BOOL)createSQLTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
+
+
+
+
 // 插入数据库
 + (BOOL)insertModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
+
+// 插入或者更新数据
++ (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
 
 // 查询所有数据
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
-// 插入或者更新数据
-+ (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
+// 自己传sql语句查询
++ (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid;
+
+// 根据条件查询
++ (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
 
 @end

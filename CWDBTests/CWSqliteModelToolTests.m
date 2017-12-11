@@ -84,6 +84,12 @@
     XCTAssertNotNil(models);
 }
 
+- (void)testQueryModelsWithRelation {
+    NSArray *models = [CWSqliteModelTool querModels:[Student class] name:@"age" relation:CWDBRelationTypeLessEqual value:@"50" uid:@"Chavez" targetId:nil];
+    NSLog(@"query models : %@",models);
+    XCTAssertNotNil(models);
+}
+
 
 - (void)testCreateTableAndInsertModel {
     Student *stu = [[Student alloc] init];

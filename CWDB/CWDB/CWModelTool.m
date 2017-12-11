@@ -17,6 +17,12 @@
     return [NSString stringWithFormat:@"%@%@",NSStringFromClass(cls),targetId];
 }
 
++ (NSString *)tmpTableName:(Class)cls targetId:(NSString *)targetId {
+    if (!targetId) targetId = @"";
+    return [NSString stringWithFormat:@"%@_tmp",[self tableName:cls targetId:targetId]];
+}
+
+
 + (NSDictionary *)classIvarNameAndTypeDic:(Class)cls {
     NSDictionary *cacheIvarNameAndTypeDic = [[CWCache shareInstance] objectForKey:NSStringFromClass(cls)];
     if (cacheIvarNameAndTypeDic) {
@@ -87,6 +93,18 @@
     
     return [nameTypeArr componentsJoinedByString:@","];
 }
+
++ (NSArray *)allIvarNames:(Class)cls {
+    NSDictionary *dict = [self classIvarNameAndTypeDic:cls];
+    NSArray *names = dict.allKeys;
+    // 排序
+    names = [names sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+        return [obj1 compare:obj2];
+    }];
+    return names;
+}
+
+
 
 @end
 

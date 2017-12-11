@@ -12,7 +12,7 @@
 
 //#define kCWDBCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
-#define kCWDBCachePath @"/Users/chenwang/Desktop"
+#define kCWDBCachePath @"/Users/mac/Desktop"
 
 @interface CWDatabase ()
 
@@ -24,6 +24,7 @@ sqlite3 *cw_database = nil;
 
 static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
 
+// 执行sql语句
 + (BOOL)execSQL:(NSString *)sql uid:(NSString *)uid {
     
     if (![self openDB:uid]) {
@@ -43,6 +44,24 @@ static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
     return YES;
 }
 
+// 执行多个sql语句
++ (BOOL)execSqls:(NSArray <NSString *>*)sqls uid:(NSString *)uid {
+    // 事务控制所有语句必须返回成功，才算执行成功
+    [self beginTransaction:uid];
+    
+    for (NSString *sql in sqls) {
+        BOOL result = [self execSQL:sql uid:uid];
+        if (result == NO) {
+            [self rollBackTransaction:uid];
+            return NO;
+        }
+    }
+    [self commitTransaction:uid];
+    return YES;
+}
+
+
+// 查询
 + (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql uid:(NSString *)uid {
     // 1、打开数据库
     if (![self openDB:uid]) {
@@ -152,5 +171,22 @@ static int CWDBBusyCallBack(void *f, int count) {
     }
 }
 
+#pragma mark - 事务
++ (void)beginTransaction:(NSString *)uid {
+//    [self deal:@"begin transaction" uid:uid];
+    [self execSQL:@"begin transaction" uid:uid];
+}
+
++ (void)commitTransaction:(NSString *)uid {
+//    [self deal:@"commit transaction" uid:uid];
+     [self execSQL:@"commit transaction" uid:uid];
+    
+}
+
++ (void)rollBackTransaction:(NSString *)uid {
+//    [self deal:@"rollBack transaction" uid:uid];
+     [self execSQL:@"rollBack transaction" uid:uid];
+    
+}
 
 @end
