@@ -77,20 +77,20 @@
     XCTAssertTrue(result3);
     
 }
-
+// 测试查询数据
 - (void)testQueryModels {
     NSArray *models = [CWSqliteModelTool queryAllModels:[Student class] uid:@"Chavez" targetId:nil];
     NSLog(@"query models : %@",models);
     XCTAssertNotNil(models);
 }
-
+// 测试条件查询
 - (void)testQueryModelsWithRelation {
     NSArray *models = [CWSqliteModelTool querModels:[Student class] name:@"age" relation:CWDBRelationTypeLessEqual value:@"50" uid:@"Chavez" targetId:nil];
     NSLog(@"query models : %@",models);
     XCTAssertNotNil(models);
 }
 
-
+// 测试创建表格并插入数据
 - (void)testCreateTableAndInsertModel {
     Student *stu = [[Student alloc] init];
     stu.stuId = 110;
@@ -108,7 +108,7 @@
     BOOL result1 = [CWSqliteModelTool insertOrUpdateModel:stu1 uid:@"Chavez" targetId:@"国防科技大学"];
     XCTAssertTrue(result1);
 }
-
+// 测试更新数据
 - (void)testUpdateModel {
     
     Student *stu = [[Student alloc] init];
@@ -121,5 +121,21 @@
     XCTAssertTrue(result);
 }
 
+// 测试更新数据表
+- (void)testUpdateTable {
+    BOOL result = [CWSqliteModelTool updateTable:[Student class] uid:@"Chavez" targetId:nil];
+    XCTAssertTrue(result);
+}
+// 测试更新数据表、插入数据、字段改名
+- (void)testUpdateTableInsertModelAndRenameColumn {
+    Student *stu = [[Student alloc] init];
+    stu.stuId = 10000;
+    stu.name = @"Baidu";
+    stu.age = 100;
+    stu.height = 190;
+    stu.weight = 140;
+    BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+    XCTAssertTrue(result);
+}
 
 @end

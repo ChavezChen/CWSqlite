@@ -25,4 +25,11 @@
  */
 + (NSDictionary *)newNameToOldNameDic;
 
+/**
+ 忽略的字段数组
+ 
+ @return 忽略的字段数组
+ */
++ (NSArray *)ignoreColumnNames;
+
 @end

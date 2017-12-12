@@ -15,9 +15,9 @@
     return @"stuId";
 }
 
-//+ (NSDictionary *)newNameToOldNameDic {
-//    return @{@"score":@"sss"};
-//}
++ (NSDictionary *)newNameToOldNameDic {
+    return @{@"score":@"score2"};
+}
 
 - (NSString *)description {
     

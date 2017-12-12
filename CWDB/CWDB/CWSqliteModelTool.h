@@ -30,23 +30,37 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  */
 + (BOOL)createSQLTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
-
-
-
-
 // 插入数据库
 + (BOOL)insertModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
 
 // 插入或者更新数据
 + (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
 
+
+#pragma mark -查询
 // 查询所有数据
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
 // 自己传sql语句查询
 + (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid;
 
-// 根据条件查询
+// 根据单个条件查询
 + (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
+
+#pragma mark -删除
+// 删除指定数据,会根据model的主键值来删除对应的数据
++ (BOOL)deleteModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
+
+// 根据单个条件删除
++ (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
+
+// 根据多个条件删除
++ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values uid:(NSString *)uid targetId:(NSString *)targetId;
+
+
+
+#pragma mark - 字段改名，更新数据库表结构，数据迁移
+// 更新数据库表结构、字段改名、数据迁移
++ (BOOL)updateTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
 @end

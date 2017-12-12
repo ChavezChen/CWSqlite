@@ -32,6 +32,11 @@
     Ivar *varList = class_copyIvarList(cls, &outCount);
     NSMutableDictionary *nameTypeDic = [NSMutableDictionary dictionary];
     
+    NSArray *ignoreNames = nil;
+    if ([cls respondsToSelector:@selector(ignoreColumnNames)]) {
+        ignoreNames = [cls ignoreColumnNames];
+    }
+    
     for (int i = 0; i < outCount; i++) {
         Ivar ivar = varList[i];
         // 1.获取成员变量名称
@@ -39,6 +44,11 @@
         
         if ([ivarName hasPrefix:@"_"]) {
             ivarName = [ivarName substringFromIndex:1];
+        }
+        
+        // 忽略字段
+        if ([ignoreNames containsObject:ivarName]) {
+            continue;
         }
         
         // 2.获取成员变量类型 @\"

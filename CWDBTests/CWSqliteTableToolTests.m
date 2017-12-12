@@ -50,9 +50,6 @@
     XCTAssertFalse(isNeedUpdate);
 }
 
-- (void)testUpdateTable {
-    BOOL result = [CWSqliteTableTool updateTable:[Student class] uid:@"Chavez" targetId:nil];
-    XCTAssertTrue(result);
-}
+
 
 @end

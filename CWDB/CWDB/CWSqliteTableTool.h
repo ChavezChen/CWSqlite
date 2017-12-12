@@ -19,7 +19,6 @@
 // 数据库表是否需要更新
 + (BOOL)isTableNeedUpdate:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
-// 更新表结构，并且迁移对应数据
-+ (BOOL)updateTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
+
 
 @end
