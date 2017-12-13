@@ -138,4 +138,18 @@
     XCTAssertTrue(result);
 }
 
+// 测试根据单个条件删除数据
+- (void)testDeleteModel {
+    
+    
+}
+
+// 根据多个条件删除数据
+- (void)testDeleteModelWithMultipleConditions {
+    
+    BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(190)] uid:@"Chavez" targetId:nil];
+    XCTAssertTrue(result);
+}
+
+
 @end

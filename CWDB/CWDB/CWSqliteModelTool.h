@@ -48,6 +48,9 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
 + (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
 
 #pragma mark -删除
+// 删除表中所有数据，是否保留表结构
++ (BOOL)deleteTableAllData:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId isKeepTable:(BOOL)isKeep;
+
 // 删除指定数据,会根据model的主键值来删除对应的数据
 + (BOOL)deleteModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
 

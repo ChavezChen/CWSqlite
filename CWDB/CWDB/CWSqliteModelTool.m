@@ -41,8 +41,12 @@
     }
     
     NSString *createTableSql = [NSString stringWithFormat:@"create table if not exists %@(%@, primary key(%@))",tableName,[CWModelTool sqlColumnNamesAndTypesStr:cls],primaryKey];
+    // 执行语句
+    BOOL result = [CWDatabase execSQL:createTableSql uid:uid];
+    // 关闭数据库
+    [CWDatabase closeDB];
     
-    return [CWDatabase execSQL:createTableSql uid:uid];
+    return result;
 }
 
 #pragma mark 插入数据
@@ -69,7 +73,11 @@
     // insert into 表名(字段1，字段2，字段3) values ('值1'，'值2'，'值3')
     NSString *sql = [NSString stringWithFormat:@"insert into %@(%@) values('%@')",tableName,[allIvarNames componentsJoinedByString:@","],[allIvarValues componentsJoinedByString:@"','"]];
     
-    return [CWDatabase execSQL:sql uid:uid];
+    BOOL result = [CWDatabase execSQL:sql uid:uid];
+    // 关闭数据库
+    [CWDatabase closeDB];
+    
+    return result;
 }
 
 #pragma mark 查询数据
@@ -81,11 +89,15 @@
     NSString *sql = [NSString stringWithFormat:@"select * from %@", tableName];
     
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
+    [CWDatabase closeDB];
     return [self parseResults:results withClass:cls];
 }
 // 根据sql语句查询
 + (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid {
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
+    
+    [CWDatabase closeDB];
+    
     return [self parseResults:results withClass:cls];
 }
 // 根据条件查询
@@ -93,6 +105,7 @@
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@'", tableName,name,self.CWDBNameToValueRelationTypeDic[@(relation)],value];
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
+    [CWDatabase closeDB];
     return [self parseResults:results withClass:cls];
 }
 
@@ -181,10 +194,32 @@
         // insert into 表名(字段1，字段2，字段3) values ('值1'，'值2'，'值3')
         execSql = [NSString stringWithFormat:@"insert into %@(%@) values('%@')",tableName,[allIvarNames componentsJoinedByString:@","],[allIvarValues componentsJoinedByString:@"','"]];
     }
-    return [CWDatabase execSQL:execSql uid:uid];
+    // 执行数据库
+    BOOL ret = [CWDatabase execSQL:execSql uid:uid];
+    // 关闭数据库
+    [CWDatabase closeDB];
+    
+    return ret;
 }
 
 #pragma mark - 删除数据
+// 删除表中所有数据，或者干脆把表也一块删了
++ (BOOL)deleteTableAllData:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId isKeepTable:(BOOL)isKeep {
+    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
+    NSString *deleteSql ;
+    if (isKeep) {
+        deleteSql = [NSString stringWithFormat:@"delete from %@",tableName];
+    }else {
+        deleteSql = [NSString stringWithFormat:@"drop table if exists %@",tableName];
+    }
+    
+    // 执行数据库
+    BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
+    // 关闭数据库
+    [CWDatabase closeDB];
+    return result;
+}
+
 // 根据模型的主键来删除
 + (BOOL)deleteModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
     Class cls = [model class];
@@ -196,17 +231,60 @@
     NSString *primaryKey = [cls primaryKey];
     id primaryValue = [model valueForKeyPath:primaryKey];
     NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where %@ = '%@'",tableName,primaryKey,primaryValue];
-    return [CWDatabase execSQL:deleteSql uid:uid];
+    
+    // 执行数据库
+    BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
+    // 关闭数据库
+    [CWDatabase closeDB];
+    
+    return result;
 }
 
+// 根据单个条件删除
 + (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
     
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     
     NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where %@ %@ '%@'",tableName,name,self.CWDBNameToValueRelationTypeDic[@(relation)],value];
     
-    return [CWDatabase execSQL:deleteSql uid:uid];
+    // 执行数据库
+    BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
+    // 关闭数据库
+    [CWDatabase closeDB];
+    
+    return result;
 }
+
+// 根据多个条件删除
++ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values uid:(NSString *)uid targetId:(NSString *)targetId {
+    
+    if (!(columnNames.count == relations.count && relations.count == values.count)) {
+        NSLog(@"columnNames、relations、values元素个数请保持一致!");
+        return NO;
+    }
+    
+    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
+    
+    NSMutableString *deleteSql = [NSMutableString stringWithFormat:@"delete from %@ where",tableName];
+    for (int i = 0; i < columnNames.count; i++) {
+        NSString *columnName = columnNames[i];
+        NSString *relation = self.CWDBNameToValueRelationTypeDic[relations[i]];
+        id value = values[i];
+        NSString *nameValueStr = [NSString stringWithFormat:@" %@ %@ '%@' ",columnName,relation,value];
+        [deleteSql appendString:nameValueStr];
+        if (i != columnNames.count - 1) {
+            [deleteSql appendString:@"and"];
+        }
+    }
+    
+    // 执行数据库
+    BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
+    // 关闭数据库
+    [CWDatabase closeDB];
+    
+    return result;
+}
+
 
 #pragma mark - 更新数据库表结构、字段改名、数据迁移
 // 更新表并迁移数据
@@ -274,7 +352,11 @@
     NSString *renameTableName = [NSString stringWithFormat:@"alter table %@ rename to %@",tmpTableName,tableName];
     [execSqls addObject:renameTableName];
     
-    return [CWDatabase execSqls:execSqls uid:uid];
+    BOOL result = [CWDatabase execSqls:execSqls uid:uid];
+    
+    [CWDatabase closeDB];
+    
+    return result;
     
 }
 

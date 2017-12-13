@@ -20,21 +20,21 @@
 
 @implementation CWDatabase
 
-sqlite3 *cw_database = nil;
+static sqlite3 *cw_database = nil;
 
 static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
 
 // 执行sql语句
 + (BOOL)execSQL:(NSString *)sql uid:(NSString *)uid {
     
-    if (![self openDB:uid]) {
-        return NO;
+    if (!cw_database) {
+        if (![self openDB:uid]) {
+            return NO;
+        }
     }
     
     char *errmsg = nil;
     int result = sqlite3_exec(cw_database, sql.UTF8String, nil, nil, &errmsg);
-    
-    [self closeDB];
     
     if (result != SQLITE_OK) {
         NSLog(@"exec sql error : %s",errmsg);
@@ -64,9 +64,12 @@ static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
 // 查询
 + (NSMutableArray <NSMutableDictionary *>*)querySql:(NSString *)sql uid:(NSString *)uid {
     // 1、打开数据库
-    if (![self openDB:uid]) {
-        return nil;
+    if (!cw_database) {
+        if (![self openDB:uid]) {
+            return nil;
+        }
     }
+    
     // 2、预执行语句
     sqlite3_stmt *ppStmt     = 0x00; //伴随指针
     if (sqlite3_prepare_v2(cw_database, sql.UTF8String, -1, &ppStmt, nil) != SQLITE_OK) {
@@ -117,7 +120,7 @@ static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
     // 5、重制（省略）
     // 6、释放资源，关闭数据库
     sqlite3_finalize(ppStmt);
-    [self closeDB];
+//    [self closeDB];
     
     return rowDicArray;
 }
@@ -173,20 +176,15 @@ static int CWDBBusyCallBack(void *f, int count) {
 
 #pragma mark - 事务
 + (void)beginTransaction:(NSString *)uid {
-//    [self deal:@"begin transaction" uid:uid];
-    [self execSQL:@"begin transaction" uid:uid];
+    [self execSQL:@"BEGIN TRANSACTION" uid:uid];
 }
 
 + (void)commitTransaction:(NSString *)uid {
-//    [self deal:@"commit transaction" uid:uid];
-     [self execSQL:@"commit transaction" uid:uid];
-    
+     [self execSQL:@"COMMIT TRANSACTION" uid:uid];
 }
 
 + (void)rollBackTransaction:(NSString *)uid {
-//    [self deal:@"rollBack transaction" uid:uid];
-     [self execSQL:@"rollBack transaction" uid:uid];
-    
+     [self execSQL:@"ROLLBACK TRANSACTION" uid:uid];
 }
 
 @end

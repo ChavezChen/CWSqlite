@@ -12,6 +12,8 @@
 
 // 打开数据库
 + (BOOL)openDB:(NSString *)uid;
+// 关闭数据库
++ (void)closeDB;
 
 // 执行语句
 + (BOOL)execSQL:(NSString *)sql uid:(NSString *)uid;

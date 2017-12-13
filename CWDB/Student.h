@@ -18,5 +18,6 @@
 @property (nonatomic,assign) int age;
 @property (nonatomic,assign) int height;
 @property (nonatomic,assign) float weight;
+//@property (nonatomic,assign) float hh;
 
 @end
