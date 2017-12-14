@@ -100,12 +100,40 @@
     
     return [self parseResults:results withClass:cls];
 }
-// 根据条件查询
+// 根据单个条件查询
 + (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@'", tableName,name,self.CWDBNameToValueRelationTypeDic[@(relation)],value];
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
     [CWDatabase closeDB];
+    return [self parseResults:results withClass:cls];
+}
+// 根据多个条件查询
++ (NSArray *)querModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
+    
+    if (!(columnNames.count == relations.count && relations.count == values.count)) {
+        NSLog(@"columnNames、relations、values元素个数请保持一致!");
+        return nil;
+    }
+    
+    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
+    NSString *appendStr = isAnd ? @"and" : @"or" ;
+    NSMutableString *sql = [NSMutableString stringWithFormat:@"select * from %@ where",tableName];
+    for (int i = 0; i < columnNames.count; i++) {
+        NSString *columnName = columnNames[i];
+        NSString *relation = self.CWDBNameToValueRelationTypeDic[relations[i]];
+        id value = values[i];
+        NSString *nameValueStr = [NSString stringWithFormat:@" %@ %@ '%@' ",columnName,relation,value];
+        [sql appendString:nameValueStr];
+        if (i != columnNames.count - 1) {
+            [sql appendString:appendStr];
+        }
+    }
+    
+    NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
+    
+    [CWDatabase closeDB];
+    
     return [self parseResults:results withClass:cls];
 }
 
@@ -114,12 +142,17 @@
     
     NSMutableArray *models = [NSMutableArray array];
     
+    NSArray *ivarNames = [CWModelTool allIvarNames:cls];
+    
     for (NSDictionary *dict in results) {
         id model = [[cls alloc] init];
         
         [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             id value = obj;
-            [model setValue:value forKeyPath:key];
+            // 判断数据库查询到的key 在当前模型中是否存在，存在才赋值
+            if ([ivarNames containsObject:key]) {
+                [model setValue:value forKeyPath:key];
+            }
         }];
         
         [models addObject:model];
@@ -256,7 +289,7 @@
 }
 
 // 根据多个条件删除
-+ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values uid:(NSString *)uid targetId:(NSString *)targetId {
++ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd  uid:(NSString *)uid targetId:(NSString *)targetId {
     
     if (!(columnNames.count == relations.count && relations.count == values.count)) {
         NSLog(@"columnNames、relations、values元素个数请保持一致!");
@@ -264,7 +297,8 @@
     }
     
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
-    
+    NSString *appendStr = isAnd ? @"and" : @"or" ;
+
     NSMutableString *deleteSql = [NSMutableString stringWithFormat:@"delete from %@ where",tableName];
     for (int i = 0; i < columnNames.count; i++) {
         NSString *columnName = columnNames[i];
@@ -273,7 +307,7 @@
         NSString *nameValueStr = [NSString stringWithFormat:@" %@ %@ '%@' ",columnName,relation,value];
         [deleteSql appendString:nameValueStr];
         if (i != columnNames.count - 1) {
-            [deleteSql appendString:@"and"];
+            [deleteSql appendString:appendStr];
         }
     }
     

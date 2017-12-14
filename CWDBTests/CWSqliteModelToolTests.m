@@ -43,6 +43,7 @@
     XCTAssertTrue(result);
 }
 
+#pragma mark - 测试插入数据
 // 测试插入数据
 - (void)testInsertModel {
     // 创建表格
@@ -77,6 +78,7 @@
     XCTAssertTrue(result3);
     
 }
+#pragma mark - 测试数据查询
 // 测试查询数据
 - (void)testQueryModels {
     NSArray *models = [CWSqliteModelTool queryAllModels:[Student class] uid:@"Chavez" targetId:nil];
@@ -89,7 +91,21 @@
     NSLog(@"query models : %@",models);
     XCTAssertNotNil(models);
 }
-
+// 测试多个条件查询
+- (void)testQueryModelWithMultipleConditions {
+    // 根据多个条件与查询
+    NSArray *array = [CWSqliteModelTool querModels:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(182)] isAnd:YES uid:@"Chavez" targetId:nil];
+    
+    NSLog(@"----------%@",array);
+    XCTAssertNotNil(array);
+    
+    // 根据多个条件或查询
+    NSArray *array1 = [CWSqliteModelTool querModels:[Student class] columnNames:@[@"age",@"age",@"height"] relations:@[@(CWDBRelationTypeEqual),@(CWDBRelationTypeEqual),@(CWDBRelationTypeEqual)] values:@[@(100),@(16),@(111)] isAnd:NO uid:@"Chavez" targetId:nil];
+    NSLog(@"==========%@",array1);
+    
+    XCTAssertNotNil(array1);
+}
+#pragma mark - 测试数据更新
 // 测试创建表格并插入数据
 - (void)testCreateTableAndInsertModel {
     Student *stu = [[Student alloc] init];
@@ -137,17 +153,17 @@
     BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
     XCTAssertTrue(result);
 }
-
+#pragma mark - 测试删除数据
 // 测试根据单个条件删除数据
 - (void)testDeleteModel {
-    
-    
+    BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnName:@"age" relation:CWDBRelationTypeLessEqual value:@(20) uid:@"Chavez" targetId:nil];
+    XCTAssertTrue(result);
 }
 
 // 根据多个条件删除数据
 - (void)testDeleteModelWithMultipleConditions {
     
-    BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(190)] uid:@"Chavez" targetId:nil];
+    BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(190)] isAnd:YES uid:@"Chavez" targetId:nil];
     XCTAssertTrue(result);
 }
 

@@ -37,17 +37,21 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
 + (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
 
 
-#pragma mark -查询
+#pragma mark -数据查询
 // 查询所有数据
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
-// 自己传sql语句查询
+// 自己传sql语句查询  select * from xx where xx = xx or/and cc = cc ...
 + (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid;
 
 // 根据单个条件查询
 + (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
 
-#pragma mark -删除
+// 根据多个条件与查询(and必须所有条件都满足才能查询到 or 满足其中一个条件就都查询得到)
++ (NSArray *)querModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId;
+
+
+#pragma mark -数据删除
 // 删除表中所有数据，是否保留表结构
 + (BOOL)deleteTableAllData:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId isKeepTable:(BOOL)isKeep;
 
@@ -57,10 +61,8 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
 // 根据单个条件删除
 + (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
 
-// 根据多个条件删除
-+ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values uid:(NSString *)uid targetId:(NSString *)targetId;
-
-
+// 根据多个条件删除(and删除满足所有条件的数据 or 删除满足其中任何一个条件的数据)
++ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd  uid:(NSString *)uid targetId:(NSString *)targetId;
 
 #pragma mark - 字段改名，更新数据库表结构，数据迁移
 // 更新数据库表结构、字段改名、数据迁移
