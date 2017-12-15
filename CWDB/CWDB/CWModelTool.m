@@ -114,6 +114,103 @@
     return names;
 }
 
++ (id)formatModelValue:(id)value type:(NSString *)type isEncode:(BOOL)isEncode{
+    
+    if (!isEncode && [value isKindOfClass:[NSString class]] && [value isEqualToString:@""]) {
+        return [NSClassFromString(type) new];
+    }
+    
+    if([type isEqualToString:@"i"]||[type isEqualToString:@"I"]||
+       [type isEqualToString:@"s"]||[type isEqualToString:@"S"]||
+       [type isEqualToString:@"q"]||[type isEqualToString:@"Q"]||
+       [type isEqualToString:@"b"]||[type isEqualToString:@"B"]||
+       [type isEqualToString:@"c"]||[type isEqualToString:@"C"]|
+       [type isEqualToString:@"l"]||[type isEqualToString:@"L"]) {
+        return value;
+    }else if([type isEqualToString:@"f"]||[type isEqualToString:@"F"]||
+             [type isEqualToString:@"d"]||[type isEqualToString:@"D"]){
+        return value;
+    }else if ([type containsString:@"Data"]) {
+        return value;
+    }else if ([type containsString:@"String"]) {
+        if ([type containsString:@"AttributedString"]) {
+            if (isEncode) {
+                NSData *data = [[NSKeyedArchiver archivedDataWithRootObject:value] base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            }else {
+                NSData* data = [[NSData alloc] initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters];
+                return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            }
+        }
+        return value;
+    }else if ([type containsString:@"Dictionary"]) {
+        if (isEncode) {
+            return [self stringWithDict:value];
+        }else {
+            return [self dictWithString:value type:type];
+        }
+        
+    }else if ([type containsString:@"Array"]) {
+        if (isEncode) {
+            return [self stringWithArray:value];
+        }else {
+            return [self arrayWithString:value type:type];
+        }
+        
+    }
+    
+    return @"";
+}
+#pragma mark 模型类型转数据库类型字符串
+// 数组转字符串
++ (NSString *)stringWithArray:(id)array {
+    
+    if ([NSJSONSerialization isValidJSONObject:array]) {
+        // array -> Data
+        NSData *data = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:nil];
+        // data -> NSString
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }else {
+        return nil;
+    }
+}
+
+// 字段转字符串
++ (NSString *)stringWithDict:(id)dict {
+    if ([NSJSONSerialization isValidJSONObject:dict]) {
+        // dict -> data
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+        // data -> NSString
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }else {
+        return nil;
+    }
+}
+
+#pragma mark 数据库类型字符串转模型类型
+// 字符串转数组
++ (id)arrayWithString:(NSString *)str type:(NSString *)type{
+    return [self formatJsonArrayAndJsonDict:str type:type];
+}
+// 字符串转字典
++ (id)dictWithString:(NSString *)str type:(NSString *)type {
+    return [self formatJsonArrayAndJsonDict:str type:type];
+}
+
+// json数组和json字典可直接转换
++ (id)formatJsonArrayAndJsonDict:(NSString *)str type:(NSString *)type {
+    id result;
+    if ([type containsString:@"Mutable"]) {
+        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        //NSJSONReadingMutableContainers 可变
+        result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    }else {
+        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        //kNilOptions 不可变
+        result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    }
+    return result;
+}
 
 
 @end

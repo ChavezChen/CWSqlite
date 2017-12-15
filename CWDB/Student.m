@@ -21,7 +21,7 @@
 
 - (NSString *)description {
     
-    NSString *str = [NSString stringWithFormat:@" stuId = %d , name = %@ , age = %d , height = %d ,score = %f",_stuId,_name,_age,_height,score];
+    NSString *str = [NSString stringWithFormat:@" stuId = %d , name = %@ , age = %d , height = %d ,score = %f , array = %@ , arrayM = %@ , dict = %@ , dictM = %@ , attributedString = %@ ",_stuId,_name,_age,_height,score,_array,_arrayM,_dict,_dictM,_attributedString];
     
     return str;
 }

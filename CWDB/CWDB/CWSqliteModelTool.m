@@ -80,6 +80,90 @@
     return result;
 }
 
+#pragma mark 插入或者更新数据
++ (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
+    // 获取表名
+    Class cls = [model class];
+    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
+    
+    // 判断数据库是否存在对应的表，不存在则创建
+    if (![CWSqliteTableTool isTableExists:tableName uid:uid]) {
+        [self createSQLTable:cls uid:uid targetId:targetId];
+    }else { // 如果表格存在，则检测表格是否需要更新
+#warning 因为会影响后面开发功能，暂时注释掉
+        if ([CWSqliteTableTool isTableNeedUpdate:cls uid:uid targetId:targetId] ) {
+            BOOL result = [self updateTable:cls uid:uid targetId:targetId];
+            if (!result) {
+                NSLog(@"更新数据库表结构失败!插入或更新数据失败!");
+                return NO;
+            }
+        }
+    }
+    // 根据主键，判断数据库内是否存在记录
+    // 判断对象是否返回主键信息
+    if (![cls respondsToSelector:@selector(primaryKey)]) {
+        NSLog(@"如果想要操作这个模型，必须要实现+ (NSString *)primaryKey;这个方法，来告诉我主键信息");
+        return NO;
+    }
+    // 获取主键
+    NSString *primaryKey = [cls primaryKey];
+    if (!primaryKey) {
+        NSLog(@"你需要指定一个主键来创建数据库表");
+        return NO;
+    }
+    // 模型中的主键的值
+    id primaryValue = [model valueForKeyPath:primaryKey];
+    //  查询语句：  NSString *checkSql = @"select * from 表名 where 主键 = '主键值' ";
+    NSString * checkSql = [NSString stringWithFormat:@"select * from %@ where %@ = '%@'",tableName,primaryKey,primaryValue];
+    
+    // 执行查询语句,获取结果
+    NSArray *result = [CWDatabase querySql:checkSql uid:uid];
+    // 获取类的所有成员变量的名称与类型
+    NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:cls];
+    // 获取所有成员变量的名称，也就是sql语句字段名称
+    NSArray *allIvarNames = nameTypeDict.allKeys;
+    // 获取所有成员变量对应的值
+    NSMutableArray *allIvarValues = [NSMutableArray array];
+    for (NSString *ivarName in allIvarNames) {
+        // 获取对应的值,暂时不考虑自定义模型和oc模型的情况
+        id value = [model valueForKeyPath:ivarName];
+#warning 处理自定义对象以及oc对象,处理对象为空的场景
+        NSString *type = nameTypeDict[ivarName];
+        
+        if (value == nil) {
+            value = @"";
+        }else {
+            value = [CWModelTool formatModelValue:value type:type isEncode:YES];
+        }
+        
+        [allIvarValues addObject:value];
+    }
+    // 字段1=字段1值 allIvarNames[i]=allIvarValues[i]
+    NSMutableArray *ivarNameValueArray = [NSMutableArray array];
+    NSInteger count = allIvarNames.count;
+    for (int i = 0; i < count; i++) {
+        NSString *name = allIvarNames[i];
+        id value = allIvarValues[i];
+        NSString *ivarNameValue = [NSString stringWithFormat:@"%@='%@'",name,value];
+        [ivarNameValueArray addObject:ivarNameValue];
+    }
+    
+    NSString *execSql = @"";
+    if (result.count > 0) { // 表内存在记录，更新
+        // update 表名 set 字段1='字段1值'，字段2='字段2的值'...where 主键 = '主键值'
+        execSql = [NSString stringWithFormat:@"update %@ set %@ where %@ = '%@'",tableName,[ivarNameValueArray componentsJoinedByString:@","],primaryKey,primaryValue];
+    }else { // 表内不存在记录，插入
+        // insert into 表名(字段1，字段2，字段3) values ('值1'，'值2'，'值3')
+        execSql = [NSString stringWithFormat:@"insert into %@(%@) values('%@')",tableName,[allIvarNames componentsJoinedByString:@","],[allIvarValues componentsJoinedByString:@"','"]];
+    }
+    // 执行数据库
+    BOOL ret = [CWDatabase execSQL:execSql uid:uid];
+    // 关闭数据库
+    [CWDatabase closeDB];
+    
+    return ret;
+}
+
 #pragma mark 查询数据
 // 查询表内所有数据
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId {
@@ -137,13 +221,16 @@
     return [self parseResults:results withClass:cls];
 }
 
-// 解析数组
+// 解析数组                             {字段名称 : 值}
 + (NSArray *)parseResults:(NSArray <NSDictionary *>*)results withClass:(Class)cls  {
     
     NSMutableArray *models = [NSMutableArray array];
-    
+    // 获取所有属性名
     NSArray *ivarNames = [CWModelTool allIvarNames:cls];
+    // 获取所有属性名和类型的字典 {ivarName : type}
+    NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:cls];
     
+    // {字段名称 : 值}
     for (NSDictionary *dict in results) {
         id model = [[cls alloc] init];
         
@@ -151,6 +238,13 @@
             id value = obj;
             // 判断数据库查询到的key 在当前模型中是否存在，存在才赋值
             if ([ivarNames containsObject:key]) {
+                
+                NSString *type = nameTypeDict[key];
+                
+                value = [CWModelTool formatModelValue:value type:type isEncode:NO];
+                if (value == nil) {
+                    value = @(0);
+                }
                 [model setValue:value forKeyPath:key];
             }
         }];
@@ -161,79 +255,7 @@
     return models;
 }
 
-#pragma mark 插入或者更新数据
-+ (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
-    // 获取表名
-    Class cls = [model class];
-    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
-    
-    // 判断数据库是否存在对应的表，不存在则创建
-    if (![CWSqliteTableTool isTableExists:tableName uid:uid]) {
-        [self createSQLTable:cls uid:uid targetId:targetId];
-    }else { // 如果表格存在，则检测表格是否需要更新
-        if ([CWSqliteTableTool isTableNeedUpdate:cls uid:uid targetId:targetId] ) {
-            BOOL result = [self updateTable:cls uid:uid targetId:targetId];
-            if (!result) {
-                NSLog(@"更新数据库表结构失败!插入或更新数据失败!");
-                return NO;
-            }
-        }
-    }
-    // 根据主键，判断数据库内是否存在记录
-    // 判断对象是否返回主键信息
-    if (![cls respondsToSelector:@selector(primaryKey)]) {
-        NSLog(@"如果想要操作这个模型，必须要实现+ (NSString *)primaryKey;这个方法，来告诉我主键信息");
-        return NO;
-    }
-    // 获取主键
-    NSString *primaryKey = [cls primaryKey];
-    if (!primaryKey) {
-        NSLog(@"你需要指定一个主键来创建数据库表");
-        return NO;
-    }
-    // 模型中的主键的值
-    id primaryValue = [model valueForKeyPath:primaryKey];
-    //  查询语句：  NSString *checkSql = @"select * from 表名 where 主键 = '主键值' ";
-    NSString * checkSql = [NSString stringWithFormat:@"select * from %@ where %@ = '%@'",tableName,primaryKey,primaryValue];
-    
-    // 执行查询语句,获取结果
-    NSArray *result = [CWDatabase querySql:checkSql uid:uid];
-    // 获取类的所有成员变量的名称与类型
-    NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:cls];
-    // 获取所有成员变量的名称，也就是sql语句字段名称
-    NSArray *allIvarNames = nameTypeDict.allKeys;
-    // 获取所有成员变量对应的值
-    NSMutableArray *allIvarValues = [NSMutableArray array];
-    for (NSString *ivarName in allIvarNames) {
-        // 获取对应的值,暂时不考虑自定义模型和oc模型的情况
-        id value = [model valueForKeyPath:ivarName];
-        [allIvarValues addObject:value];
-    }
-    // 字段1=字段1值 allIvarNames[i]=allIvarValues[i]
-    NSMutableArray *ivarNameValueArray = [NSMutableArray array];
-    NSInteger count = allIvarNames.count;
-    for (int i = 0; i < count; i++) {
-        NSString *name = allIvarNames[i];
-        id value = allIvarValues[i];
-        NSString *ivarNameValue = [NSString stringWithFormat:@"%@='%@'",name,value];
-        [ivarNameValueArray addObject:ivarNameValue];
-    }
-    
-    NSString *execSql = @"";
-    if (result.count > 0) { // 表内存在记录，更新
-        // update 表名 set 字段1='字段1值'，字段2='字段2的值'...where 主键 = '主键值'
-        execSql = [NSString stringWithFormat:@"update %@ set %@ where %@ = '%@'",tableName,[ivarNameValueArray componentsJoinedByString:@","],primaryKey,primaryValue];
-    }else { // 表内不存在记录，插入
-        // insert into 表名(字段1，字段2，字段3) values ('值1'，'值2'，'值3')
-        execSql = [NSString stringWithFormat:@"insert into %@(%@) values('%@')",tableName,[allIvarNames componentsJoinedByString:@","],[allIvarValues componentsJoinedByString:@"','"]];
-    }
-    // 执行数据库
-    BOOL ret = [CWDatabase execSQL:execSql uid:uid];
-    // 关闭数据库
-    [CWDatabase closeDB];
-    
-    return ret;
-}
+
 
 #pragma mark - 删除数据
 // 删除表中所有数据，或者干脆把表也一块删了
@@ -289,7 +311,7 @@
 }
 
 // 根据多个条件删除
-+ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd  uid:(NSString *)uid targetId:(NSString *)targetId {
++ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
     
     if (!(columnNames.count == relations.count && relations.count == values.count)) {
         NSLog(@"columnNames、relations、values元素个数请保持一致!");
@@ -391,7 +413,6 @@
     [CWDatabase closeDB];
     
     return result;
-    
 }
 
 @end

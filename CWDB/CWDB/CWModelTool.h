@@ -44,6 +44,11 @@
 // 返回模型的所有成员变量
 + (NSArray *)allIvarNames:(Class)cls;
 
+// 格式化模型的value或将数据库内的数据转换到模型对应的类型的值，我们的口号：一切不是数据库支持格式的数据，通通都转成字符串
++ (id)formatModelValue:(id)value type:(NSString *)type isEncode:(BOOL)isEncode;
+
+
+
 
 @end
 

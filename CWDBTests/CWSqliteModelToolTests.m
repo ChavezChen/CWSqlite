@@ -82,7 +82,10 @@
 // 测试查询数据
 - (void)testQueryModels {
     NSArray *models = [CWSqliteModelTool queryAllModels:[Student class] uid:@"Chavez" targetId:nil];
-    NSLog(@"query models : %@",models);
+//    NSLog(@"query models : %@",models);
+    for (Student *stu in models) {
+        NSLog(@"--------stu : %@",stu);
+    }
     XCTAssertNotNil(models);
 }
 // 测试条件查询
@@ -153,6 +156,7 @@
     BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
     XCTAssertTrue(result);
 }
+
 #pragma mark - 测试删除数据
 // 测试根据单个条件删除数据
 - (void)testDeleteModel {
@@ -164,6 +168,21 @@
 - (void)testDeleteModelWithMultipleConditions {
     
     BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(190)] isAnd:YES uid:@"Chavez" targetId:nil];
+    XCTAssertTrue(result);
+}
+
+- (void)testInserDictAndArray{
+    Student *stu = [[Student alloc] init];
+    stu.stuId = 10000;
+    stu.name = @"Baidu";
+    stu.age = 100;
+    stu.height = 190;
+    stu.weight = 140;
+    stu.dict = @{@"name" : @"chavez"};
+    stu.arrayM = [@[@"chavez",@"cw",@"ccww"] mutableCopy];
+    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
+    stu.attributedString = attributedStr;
+    BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
     XCTAssertTrue(result);
 }
 
