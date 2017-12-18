@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041490101FE765EC00D8DC34 /* School.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414900F1FE765EC00D8DC34 /* School.m */; };
 		041EEC461FDE2D310048A0F7 /* CWSqliteTableToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 041EEC451FDE2D310048A0F7 /* CWSqliteTableToolTests.m */; };
 		047ECF991FD7D0200022598C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6628423C1FD25FBC00809501 /* libsqlite3.0.tbd */; };
 		047ECF9B1FD7E9B40022598C /* CWSqliteModelToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0414900E1FE765EC00D8DC34 /* School.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = School.h; sourceTree = "<group>"; };
+		0414900F1FE765EC00D8DC34 /* School.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = School.m; sourceTree = "<group>"; };
 		041EEC451FDE2D310048A0F7 /* CWSqliteTableToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteTableToolTests.m; sourceTree = "<group>"; };
 		047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteModelToolTests.m; sourceTree = "<group>"; };
 		047ECF9C1FD9112F0022598C /* CWSqliteTableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWSqliteTableTool.h; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				662842131FCEA78B00809501 /* Info.plist */,
 				6628423F1FD4040C00809501 /* Student.h */,
 				662842401FD4040C00809501 /* Student.m */,
+				0414900E1FE765EC00D8DC34 /* School.h */,
+				0414900F1FE765EC00D8DC34 /* School.m */,
 			);
 			path = CWDB;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				6628424A1FD4043D00809501 /* AppDelegate.m in Sources */,
 				6628423A1FD25F5500809501 /* CWDatabase.m in Sources */,
 				662842491FD4043D00809501 /* main.m in Sources */,
+				041490101FE765EC00D8DC34 /* School.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

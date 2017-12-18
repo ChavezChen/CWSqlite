@@ -172,6 +172,11 @@
 }
 
 - (void)testInserDictAndArray{
+    
+    School *school = [[School alloc] init];
+    school.name = @"清华大学";
+    school.schoolId = 1;
+    
     Student *stu = [[Student alloc] init];
     stu.stuId = 10000;
     stu.name = @"Baidu";
@@ -182,6 +187,10 @@
     stu.arrayM = [@[@"chavez",@"cw",@"ccww"] mutableCopy];
     NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
     stu.attributedString = attributedStr;
+    stu.school = school;
+    
+    
+    
     BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
     XCTAssertTrue(result);
 }

@@ -49,6 +49,17 @@
 
 
 
+// 模型转字典
++ (NSDictionary *)dictWithModel:(id)model;
+
+// 字典转模型
++ (id)model:(Class)cls Dict:(NSDictionary *)dict;
+
+// 字典转字符串
++ (NSString *)stringWithDict:(id)dict;
+
+// 字符串转字典
++ (id)dictWithString:(NSString *)str type:(NSString *)type;
 
 @end
 

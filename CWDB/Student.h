@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CWModelProtocol.h"
+#import "School.h"
 
 @interface Student : NSObject<CWModelProtocol>
 {
@@ -32,6 +33,8 @@
 @property (nonatomic,strong) NSArray *array;
 
 @property (nonatomic,strong) NSMutableArray *arrayM;
+
+@property (nonatomic,strong) School *school;
 
 
 @end

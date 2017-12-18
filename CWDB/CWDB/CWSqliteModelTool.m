@@ -130,11 +130,10 @@
 #warning 处理自定义对象以及oc对象,处理对象为空的场景
         NSString *type = nameTypeDict[ivarName];
         
-        if (value == nil) {
-            value = @"";
-        }else {
-            value = [CWModelTool formatModelValue:value type:type isEncode:YES];
-        }
+        
+        NSLog(@"type: %@ , value : %@ , valueClass : %@ , ivarName : %@",type,value,[value class],ivarName);
+        
+        value = [CWModelTool formatModelValue:value type:type isEncode:YES];
         
         [allIvarValues addObject:value];
     }

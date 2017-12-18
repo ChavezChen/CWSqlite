@@ -116,6 +116,10 @@
 
 + (id)formatModelValue:(id)value type:(NSString *)type isEncode:(BOOL)isEncode{
     
+    if (isEncode && value == nil) { // 只有对象才能为nil，基本数据类型没值时为0
+        return @"";
+    }
+    
     if (!isEncode && [value isKindOfClass:[NSString class]] && [value isEqualToString:@""]) {
         return [NSClassFromString(type) new];
     }
@@ -156,11 +160,18 @@
         }else {
             return [self arrayWithString:value type:type];
         }
-        
+    }else { // 当模型处理
+        if (isEncode) {  // 模型转json字符串
+            NSDictionary *modelDict = [self dictWithModel:value];
+            return [self stringWithDict:modelDict];
+        }else {  // 字符串转模型
+            NSDictionary *dict = [self dictWithString:value type:type];
+            return [self model:NSClassFromString(type) Dict:dict];
+        }
     }
-    
     return @"";
 }
+
 #pragma mark 模型类型转数据库类型字符串
 // 数组转字符串
 + (NSString *)stringWithArray:(id)array {
@@ -175,7 +186,7 @@
     }
 }
 
-// 字段转字符串
+// 字典转字符串
 + (NSString *)stringWithDict:(id)dict {
     if ([NSJSONSerialization isValidJSONObject:dict]) {
         // dict -> data
@@ -211,6 +222,52 @@
     }
     return result;
 }
+
+#pragma mark 模型转字典
++ (NSDictionary *)dictWithModel:(id)model {
+    // 获取类的所有成员变量的名称与类型
+    NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:[model class]];
+    // 获取模型所有成员变量
+    NSArray *allIvarNames = nameTypeDict.allKeys;
+    
+    NSMutableDictionary *allIvarValues = [NSMutableDictionary dictionary];
+    // 获取所有成员变量对应的值
+    for (NSString *ivarName in allIvarNames) {
+        id value = [model valueForKeyPath:ivarName];
+        NSString *type = nameTypeDict[ivarName];
+        
+        value = [CWModelTool formatModelValue:value type:type isEncode:YES];
+        allIvarValues[ivarName] = value;
+    }
+    return allIvarValues;
+}
+
+#pragma mark 字典转模型
++ (id)model:(Class)cls Dict:(NSDictionary *)dict {
+    id model = [cls new];
+    // 获取所有属性名
+    NSArray *ivarNames = [CWModelTool allIvarNames:cls];
+    // 获取所有属性名和类型的字典 {ivarName : type}
+    NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:cls];
+    
+    [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        id value = obj;
+        // 判断数据库查询到的key 在当前模型中是否存在，存在才赋值
+        if ([ivarNames containsObject:key]) {
+            
+            NSString *type = nameTypeDict[key];
+            
+            value = [CWModelTool formatModelValue:value type:type isEncode:NO];
+            if (value == nil) {
+                value = @(0);
+            }
+            [model setValue:value forKeyPath:key];
+        }
+    }];
+    
+    return model;
+}
+
 
 
 @end
