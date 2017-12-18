@@ -114,6 +114,7 @@
     return names;
 }
 
+#pragma mark - 格式化字段数据，我们的宗旨：一切不可识别的对象，都转字符串
 + (id)formatModelValue:(id)value type:(NSString *)type isEncode:(BOOL)isEncode{
     
     if (isEncode && value == nil) { // 只有对象才能为nil，基本数据类型没值时为0
@@ -172,7 +173,7 @@
     return @"";
 }
 
-#pragma mark 模型类型转数据库类型字符串
+#pragma mark 集合转数据库类型字符串
 // 数组转字符串
 + (NSString *)stringWithArray:(id)array {
     
@@ -182,7 +183,12 @@
         // data -> NSString
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     }else {
-        return nil;
+        NSMutableArray *arrayM = [NSMutableArray array];
+        for (id value in array) {
+            id result = [self formatModelValue:value type:NSStringFromClass([value class]) isEncode:YES];
+            [arrayM addObject:result];
+        }
+        return [self stringWithArray:arrayM];
     }
 }
 
@@ -198,7 +204,7 @@
     }
 }
 
-#pragma mark 数据库类型字符串转模型类型
+#pragma mark 数据库类型字符串转集合类型
 // 字符串转数组
 + (id)arrayWithString:(NSString *)str type:(NSString *)type{
     return [self formatJsonArrayAndJsonDict:str type:type];

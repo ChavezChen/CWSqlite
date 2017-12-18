@@ -87,4 +87,40 @@
     
 }
 
+- (void)testStringWithArray {
+    
+    School *school = [[School alloc] init];
+    school.name = @"清华大学";
+    school.schoolId = 1;
+    
+    Student *stu = [[Student alloc] init];
+    stu.stuId = 10000;
+    stu.name = @"Baidu";
+    stu.age = 100;
+    stu.height = 190;
+    stu.weight = 140;
+    stu.dict = @{@"name" : @"chavez"};
+    stu.arrayM = [@[@"chavez",@"cw",@"ccww"] mutableCopy];
+    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
+    stu.attributedString = attributedStr;
+    stu.school = school;
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    
+    [arr addObject:school];
+    [arr addObject:stu];
+    [arr addObject:@(1)];
+    [arr addObject:@(1.5)];
+    [arr addObject:@"haha"];
+    [arr addObject:@[@"1",@(2)]];
+    
+    NSArray *a = @[school,stu];
+    [arr addObject:a];
+    
+    NSString *str = [CWModelTool stringWithArray:arr];
+    NSLog(@"%@",str);
+    
+}
+
+
 @end
