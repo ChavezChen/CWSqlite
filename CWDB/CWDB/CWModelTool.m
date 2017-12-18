@@ -130,7 +130,7 @@
        [type isEqualToString:@"q"]||[type isEqualToString:@"Q"]||
        [type isEqualToString:@"b"]||[type isEqualToString:@"B"]||
        [type isEqualToString:@"c"]||[type isEqualToString:@"C"]|
-       [type isEqualToString:@"l"]||[type isEqualToString:@"L"]) {
+       [type isEqualToString:@"l"]||[type isEqualToString:@"L"] || [value isKindOfClass:[NSNumber class]]) {
         return value;
     }else if([type isEqualToString:@"f"]||[type isEqualToString:@"F"]||
              [type isEqualToString:@"d"]||[type isEqualToString:@"D"]){
@@ -155,7 +155,7 @@
             return [self dictWithString:value type:type];
         }
         
-    }else if ([type containsString:@"Array"]) {
+    }else if ([type containsString:@"Array"] && [type containsString:@"NS"] ) {
         if (isEncode) {
             return [self stringWithArray:value];
         }else {
@@ -185,6 +185,7 @@
     }else {
         NSMutableArray *arrayM = [NSMutableArray array];
         for (id value in array) {
+            
             id result = [self formatModelValue:value type:NSStringFromClass([value class]) isEncode:YES];
             [arrayM addObject:result];
         }
