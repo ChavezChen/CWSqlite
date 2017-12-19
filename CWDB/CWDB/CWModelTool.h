@@ -64,6 +64,10 @@
 // 数组转字典
 + (NSString *)stringWithArray:(id)array;
 
+// 字符串转数组
++ (id)arrayWithString:(NSString *)str type:(NSString *)type;
+
+
 
 @end
 

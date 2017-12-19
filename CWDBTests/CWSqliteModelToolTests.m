@@ -86,6 +86,7 @@
     for (Student *stu in models) {
         NSLog(@"--------stu : %@",stu);
     }
+    
     XCTAssertNotNil(models);
 }
 // 测试条件查询
@@ -173,9 +174,14 @@
 
 - (void)testInserDictAndArray{
     
+    School *school1 = [[School alloc] init];
+    school1.name = @"北京大学";
+    school1.schoolId = 2;
+    
     School *school = [[School alloc] init];
     school.name = @"清华大学";
     school.schoolId = 1;
+    school.school1 = school1;
     
     Student *stu = [[Student alloc] init];
     stu.stuId = 10000;
@@ -188,6 +194,7 @@
     NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
     stu.attributedString = attributedStr;
     stu.school = school;
+    
     
     
     

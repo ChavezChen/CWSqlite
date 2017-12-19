@@ -13,4 +13,8 @@
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,assign) NSInteger schoolId;
 
+@property (nonatomic,strong) School *school1;
+
+
+
 @end

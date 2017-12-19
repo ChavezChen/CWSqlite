@@ -114,11 +114,21 @@
     [arr addObject:@"haha"];
     [arr addObject:@[@"1",@(2)]];
     
+    
     NSArray *a = @[school,stu];
-    [arr addObject:a];
+    NSMutableArray *aM = [NSMutableArray arrayWithArray:a];
+    [arr addObject:aM];
+    
+    
     
     NSString *str = [CWModelTool stringWithArray:arr];
+//    str = [str stringByAppendingString:@"CWCustomCollection"];
     NSLog(@"%@",str);
+    
+    NSArray *arrar = [CWModelTool arrayWithString:str type:NSStringFromClass([NSMutableArray class])];
+    
+    
+    NSLog(@"=================%@",arrar);
     
 }
 

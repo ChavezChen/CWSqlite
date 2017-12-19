@@ -148,7 +148,7 @@
             }
         }
         return value;
-    }else if ([type containsString:@"Dictionary"]) {
+    }else if ([type containsString:@"Dictionary"] && [type containsString:@"NS"]) {
         if (isEncode) {
             return [self stringWithDict:value];
         }else {
@@ -173,7 +173,7 @@
     return @"";
 }
 
-#pragma mark 集合转数据库类型字符串
+#pragma mark 集合类型转JSON字符串
 // 数组转字符串
 + (NSString *)stringWithArray:(id)array {
     
@@ -187,9 +187,10 @@
         for (id value in array) {
             
             id result = [self formatModelValue:value type:NSStringFromClass([value class]) isEncode:YES];
-            [arrayM addObject:result];
+            NSDictionary *dict = @{NSStringFromClass([value class]) : result};
+            [arrayM addObject:dict];
         }
-        return [self stringWithArray:arrayM];
+        return [[self stringWithArray:arrayM] stringByAppendingString:@"CWCustomCollection"];
     }
 }
 
@@ -205,10 +206,30 @@
     }
 }
 
-#pragma mark 数据库类型字符串转集合类型
+#pragma mark JSON字符串转集合类型
 // 字符串转数组
 + (id)arrayWithString:(NSString *)str type:(NSString *)type{
-    return [self formatJsonArrayAndJsonDict:str type:type];
+    if ([str containsString:@"CWCustomCollection"]) {
+        NSUInteger length = @"CWCustomCollection".length;
+        str = [str substringToIndex:str.length - length];
+        NSJSONReadingOptions options = kNilOptions; // 是否可变
+        if ([type containsString:@"Mutable"] || [type containsString:@"NSArrayM"]) {
+            options = NSJSONReadingMutableContainers;
+        }
+        NSMutableArray *resultArr = [NSMutableArray array];
+        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        id result = [NSJSONSerialization JSONObjectWithData:data options:options error:nil];
+        id value;
+        for (NSDictionary *dict in result) {
+            value = [self formatModelValue:dict.allValues.firstObject type:dict.allKeys.firstObject isEncode:NO];
+            [resultArr addObject:value];
+        }
+        
+        return resultArr;
+    }else {
+        return [self formatJsonArrayAndJsonDict:str type:type];
+    }
+    
 }
 // 字符串转字典
 + (id)dictWithString:(NSString *)str type:(NSString *)type {
@@ -217,16 +238,13 @@
 
 // json数组和json字典可直接转换
 + (id)formatJsonArrayAndJsonDict:(NSString *)str type:(NSString *)type {
-    id result;
-    if ([type containsString:@"Mutable"]) {
-        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-        //NSJSONReadingMutableContainers 可变
-        result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-    }else {
-        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-        //kNilOptions 不可变
-        result = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    NSJSONReadingOptions options = kNilOptions;
+    if ([type containsString:@"Mutable"] || [type containsString:@"NSArrayM"] || [type containsString:@""]) {
+        options = NSJSONReadingMutableContainers;
     }
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    id result = [NSJSONSerialization JSONObjectWithData:data options:options error:nil];
+    
     return result;
 }
 
