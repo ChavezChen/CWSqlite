@@ -172,7 +172,8 @@
     XCTAssertTrue(result);
 }
 
-- (void)testInserDictAndArray{
+// 测试模型，数组，字典各种嵌套(复杂)的模型
+- (void)testInserComplicatedModel{
     
     School *school1 = [[School alloc] init];
     school1.name = @"北京大学";
@@ -204,7 +205,6 @@
     BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
     
     XCTAssertTrue(result);
-    
 }
 
 

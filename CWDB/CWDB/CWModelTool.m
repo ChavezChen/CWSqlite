@@ -272,7 +272,7 @@
 // json数组和json字典可直接转换
 + (id)formatJsonArrayAndJsonDict:(NSString *)str type:(NSString *)type {
     NSJSONReadingOptions options = kNilOptions;
-    if ([type containsString:@"Mutable"] || [type containsString:@"NSArrayM"] || [type containsString:@""]) {
+    if ([type containsString:@"Mutable"] || [type containsString:@"NSArrayM"] || [type containsString:@"NSDictionaryM"]) {
         options = NSJSONReadingMutableContainers;
     }
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
