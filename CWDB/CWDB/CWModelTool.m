@@ -195,21 +195,31 @@
 }
 
 // 字典转字符串
-+ (NSString *)stringWithDict:(id)dict {
++ (NSString *)stringWithDict:(NSDictionary *)dict {
     if ([NSJSONSerialization isValidJSONObject:dict]) {
         // dict -> data
         NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
         // data -> NSString
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     }else {
-        return nil;
+        
+        NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+        for (NSString *key in dict.allKeys) {
+            id value = dict[key];
+            id result = [self formatModelValue:value type:NSStringFromClass([value class]) isEncode:YES];
+            NSDictionary *valueDict = @{NSStringFromClass([value class]) : result};
+            [dictM setValue:valueDict forKey:key];
+//            NSLog(@"dictM : %@",dictM);
+        }
+//        return [self stringWithDict:dictM];
+        return [[self stringWithDict:dictM] stringByAppendingString:@"CWCustomCollection"];
     }
 }
 
 #pragma mark JSON字符串转集合类型
-// 字符串转数组
+// 字符串转数组(还原)
 + (id)arrayWithString:(NSString *)str type:(NSString *)type{
-    if ([str containsString:@"CWCustomCollection"]) {
+    if ([str hasSuffix:@"CWCustomCollection"]) {
         NSUInteger length = @"CWCustomCollection".length;
         str = [str substringToIndex:str.length - length];
         NSJSONReadingOptions options = kNilOptions; // 是否可变
@@ -231,9 +241,32 @@
     }
     
 }
-// 字符串转字典
+// 字符串转字典(还原)
 + (id)dictWithString:(NSString *)str type:(NSString *)type {
-    return [self formatJsonArrayAndJsonDict:str type:type];
+    if ([str hasSuffix:@"CWCustomCollection"]) {
+        NSUInteger length = @"CWCustomCollection".length;
+        str = [str substringToIndex:str.length - length];
+        NSJSONReadingOptions options = kNilOptions; // 是否可变
+        if ([type containsString:@"Mutable"] || [type containsString:@"NSDictionaryM"]) {
+            options = NSJSONReadingMutableContainers;
+        }
+        NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+        NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+        id resultDict = [NSJSONSerialization JSONObjectWithData:data options:options error:nil];
+        
+        for (NSString *key in [resultDict allKeys]) {
+            NSDictionary *valueDict = [resultDict valueForKey:key];
+            id value = valueDict.allValues.firstObject;
+            NSString *type = valueDict.allKeys.firstObject;
+            id resultValue = [self formatModelValue:value type:type isEncode:NO];
+            [dictM setValue:resultValue forKey:key];
+            
+        }
+        return dictM;
+    }else {
+        return [self formatJsonArrayAndJsonDict:str type:type];
+    }
+    
 }
 
 // json数组和json字典可直接转换

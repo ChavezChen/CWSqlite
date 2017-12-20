@@ -114,21 +114,63 @@
     [arr addObject:@"haha"];
     [arr addObject:@[@"1",@(2)]];
     
-    
     NSArray *a = @[school,stu];
     NSMutableArray *aM = [NSMutableArray arrayWithArray:a];
     [arr addObject:aM];
     
-    
-    
     NSString *str = [CWModelTool stringWithArray:arr];
-//    str = [str stringByAppendingString:@"CWCustomCollection"];
+    
     NSLog(@"%@",str);
     
     NSArray *arrar = [CWModelTool arrayWithString:str type:NSStringFromClass([NSMutableArray class])];
     
-    
     NSLog(@"=================%@",arrar);
+}
+
+- (void)testStringWithDict {
+    
+    School *school = [[School alloc] init];
+    school.name = @"清华大学";
+    school.schoolId = 1;
+    
+    Student *stu = [[Student alloc] init];
+    stu.stuId = 10000;
+    stu.name = @"Baidu";
+    stu.age = 100;
+    stu.height = 190;
+    stu.weight = 140;
+    stu.dict = @{@"school" : school};
+    stu.arrayM = [@[@"chavez",@"cw",@"ccww"] mutableCopy];
+    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
+    stu.attributedString = attributedStr;
+    stu.school = school;
+    
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+    
+    dictM[@"sch"] = school;
+    dictM[@"stu"] = stu;
+    dictM[@"xxx"] = @(1.5);
+    dictM[@"yyy"] = @(1);
+    dictM[@"arr"] = @[@"cw",@(111)];
+    dictM[@"arrM"] = [NSMutableArray arrayWithArray:@[@"arrM1",@"arrM2"]];
+    dictM[@"dict"] = @{@"dictKey" : @"dictValue"};
+    dictM[@"dictM"] = [NSMutableDictionary dictionaryWithDictionary:@{@"dictMKey" : @"dictMValue"}];
+    
+    NSDictionary *dict = @{@"arrayKey" : @[@"cw",@(111)] ,
+                       @"arrayMKey" : [NSMutableArray arrayWithArray:@[@"arrM1",@"arrM2"]] ,
+                       @"dictKey" : @{@"dictKey" : @"dictValue"} ,
+                       @"dictMkey" : [NSMutableDictionary dictionaryWithDictionary:@{@"dictMKey" : @"dictMValue"}] ,
+                       @"xxx" : @(1.5) ,
+                       @"stu" : stu,
+                       };
+    
+    
+    NSString *str = [CWModelTool stringWithDict:dictM];
+    NSLog(@"%@",str);
+    
+    NSLog(@"============%@",dictM);
+    NSDictionary *resultDict = [CWModelTool dictWithString:str type:NSStringFromClass([dictM class])];
+    NSLog(@"------------%@",resultDict);
     
 }
 

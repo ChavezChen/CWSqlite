@@ -196,10 +196,10 @@
 			isa = PBXGroup;
 			children = (
 				662842431FD4043D00809501 /* AppDelegate.h */,
-				662842441FD4043D00809501 /* ViewController.m */,
-				662842451FD4043D00809501 /* main.m */,
 				662842461FD4043D00809501 /* AppDelegate.m */,
+				662842451FD4043D00809501 /* main.m */,
 				662842471FD4043D00809501 /* ViewController.h */,
+				662842441FD4043D00809501 /* ViewController.m */,
 			);
 			path = Clasess;
 			sourceTree = "<group>";

@@ -190,16 +190,21 @@
     stu.height = 190;
     stu.weight = 140;
     stu.dict = @{@"name" : @"chavez"};
-    stu.arrayM = [@[@"chavez",@"cw",@"ccww"] mutableCopy];
+    // 字典嵌套模型
+    stu.dictM = [@{@"清华大学" : school , @"北京大学" : school1 , @"money" : @(100)} mutableCopy];
+    // 数组嵌套字典，字典嵌套模型
+    stu.arrayM = [@[@"chavez",@"cw",@"ccww",@{@"清华大学" : school}] mutableCopy];
+    // 数组嵌套模型
+    stu.array = @[@(1),@(2),@(3),school,school1];
     NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
     stu.attributedString = attributedStr;
+    // 模型嵌套模型
     stu.school = school;
     
-    
-    
-    
     BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+    
     XCTAssertTrue(result);
+    
 }
 
 
