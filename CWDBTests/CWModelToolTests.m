@@ -64,10 +64,11 @@
     stu.age = 100;
     stu.height = 190;
     stu.weight = 140;
-    stu.dict = @{@"name" : @"chavez"};
-    stu.arrayM = [@[@"chavez",@"cw",@"ccww"] mutableCopy];
+//    stu.dict = @{@"name" : @"chavez"};
+//    stu.arrayM = [@[@"chavez",@"cw",@"ccww"] mutableCopy];
     NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
     stu.attributedString = attributedStr;
+    // 模型嵌套模型
     stu.school = school;
     
     // 模型转字典
@@ -83,8 +84,6 @@
     // 字典转模型
     id model = [CWModelTool model:[stu class] Dict:dict1];
     NSLog(@"=====%@",model);
-    
-    
 }
 
 - (void)testStringWithArray {

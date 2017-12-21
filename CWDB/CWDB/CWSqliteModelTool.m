@@ -224,36 +224,12 @@
 + (NSArray *)parseResults:(NSArray <NSDictionary *>*)results withClass:(Class)cls  {
     
     NSMutableArray *models = [NSMutableArray array];
-//    // 获取所有属性名
-//    NSArray *ivarNames = [CWModelTool allIvarNames:cls];
-//    // 获取所有属性名和类型的字典 {ivarName : type}
-//    NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:cls];
-    
     // {字段名称 : 值}
     for (NSDictionary *dict in results) {
         
         id model = [CWModelTool model:cls Dict:dict];
-        
-//        id model = [[cls alloc] init];
-//
-//        [dict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-//            id value = obj;
-//            // 判断数据库查询到的key 在当前模型中是否存在，存在才赋值
-//            if ([ivarNames containsObject:key]) {
-//
-//                NSString *type = nameTypeDict[key];
-//
-//                value = [CWModelTool formatModelValue:value type:type isEncode:NO];
-//                if (value == nil) {
-//                    value = @(0);
-//                }
-//                [model setValue:value forKeyPath:key];
-//            }
-//        }];
-        
         [models addObject:model];
     }
-    
     return models;
 }
 

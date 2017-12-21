@@ -9,6 +9,7 @@
 #import "CWModelTool.h"
 #import "CWModelProtocol.h"
 #import <objc/runtime.h>
+#import <UIKit/UIKit.h>
 
 @implementation CWModelTool
 
@@ -129,8 +130,9 @@
        [type isEqualToString:@"s"]||[type isEqualToString:@"S"]||
        [type isEqualToString:@"q"]||[type isEqualToString:@"Q"]||
        [type isEqualToString:@"b"]||[type isEqualToString:@"B"]||
-       [type isEqualToString:@"c"]||[type isEqualToString:@"C"]|
-       [type isEqualToString:@"l"]||[type isEqualToString:@"L"] || [value isKindOfClass:[NSNumber class]]) {
+       [type isEqualToString:@"c"]||[type isEqualToString:@"C"]||
+       [type isEqualToString:@"l"]||[type isEqualToString:@"L"]||
+       [value isKindOfClass:[NSNumber class]] || [type isEqualToString:@"NSData"]) {
         return value;
     }else if([type isEqualToString:@"f"]||[type isEqualToString:@"F"]||
              [type isEqualToString:@"d"]||[type isEqualToString:@"D"]){
@@ -161,6 +163,15 @@
         }else {
             return [self arrayWithString:value type:type];
         }
+    }else if ([type containsString:@"UIColor"]){
+        if(isEncode){
+            CGFloat r, g, b, a;
+            [value getRed:&r green:&g blue:&b alpha:&a];
+            return [NSString stringWithFormat:@"%.3f,%.3f,%.3f,%.3f", r, g, b, a];
+        }else{
+            NSArray<NSString*>* arr = [value componentsSeparatedByString:@","];
+            return [UIColor colorWithRed:arr[0].floatValue green:arr[1].floatValue blue:arr[2].floatValue alpha:arr[3].floatValue];
+        }
     }else { // 当模型处理
         if (isEncode) {  // 模型转json字符串
             NSDictionary *modelDict = [self dictWithModel:value];
@@ -171,6 +182,20 @@
         }
     }
     return @"";
+}
+
+#pragma mark - NSDate<-->字符串
++ (NSString *)stringWithDate:(NSDate *)date {
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    return [formatter stringFromDate:date];
+}
+
++ (NSDate *)dateWithString:(NSString *)str {
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = [formatter dateFromString:str];
+    return date;
 }
 
 #pragma mark 集合类型转JSON字符串
@@ -209,9 +234,7 @@
             id result = [self formatModelValue:value type:NSStringFromClass([value class]) isEncode:YES];
             NSDictionary *valueDict = @{NSStringFromClass([value class]) : result};
             [dictM setValue:valueDict forKey:key];
-//            NSLog(@"dictM : %@",dictM);
         }
-//        return [self stringWithDict:dictM];
         return [[self stringWithDict:dictM] stringByAppendingString:@"CWCustomCollection"];
     }
 }
@@ -234,7 +257,9 @@
             value = [self formatModelValue:dict.allValues.firstObject type:dict.allKeys.firstObject isEncode:NO];
             [resultArr addObject:value];
         }
-        
+        if (options == kNilOptions) {
+            resultArr = [resultArr copy]; // 不可变数组
+        }
         return resultArr;
     }else {
         return [self formatJsonArrayAndJsonDict:str type:type];
