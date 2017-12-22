@@ -106,9 +106,9 @@ static CWSqliteModelTool * instance = nil;
 
 #pragma mark 插入或者更新数据
 + (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
-    NSLog(@"--------------------------------------1");
+//    NSLog(@"--------------------------------------1");
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
-    NSLog(@"--------------------------------------2");
+//    NSLog(@"--------------------------------------2");
     // 获取表名
     Class cls = [model class];
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
@@ -199,7 +199,7 @@ static CWSqliteModelTool * instance = nil;
     // 关闭数据库
     [CWDatabase closeDB];
     dispatch_semaphore_signal([[self shareInstance] dsema]);
-    NSLog(@"--------------------------------------3");
+//    NSLog(@"--------------------------------------3");
     return ret;
 }
 
@@ -309,9 +309,9 @@ static CWSqliteModelTool * instance = nil;
 
 // 根据模型的主键来删除
 + (BOOL)deleteModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
-    NSLog(@"delete--------------------------------delete1");
+//    NSLog(@"delete--------------------------------delete1");
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
-    NSLog(@"delete--------------------------------delete2");
+//    NSLog(@"delete--------------------------------delete2");
     Class cls = [model class];
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     if (![cls respondsToSelector:@selector(primaryKey)]) {
@@ -326,7 +326,7 @@ static CWSqliteModelTool * instance = nil;
     BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
     [CWDatabase closeDB];
     dispatch_semaphore_signal([[self shareInstance] dsema]);
-    NSLog(@"delete--------------------------------delete3");
+//    NSLog(@"delete--------------------------------delete3");
 
     return result;
 }

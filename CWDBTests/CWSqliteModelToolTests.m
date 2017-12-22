@@ -91,7 +91,7 @@
 }
 // 测试条件查询
 - (void)testQueryModelsWithRelation {
-    NSArray *models = [CWSqliteModelTool querModels:[Student class] name:@"age" relation:CWDBRelationTypeLessEqual value:@"50" uid:@"Chavez" targetId:nil];
+    NSArray *models = [CWSqliteModelTool querModels:[Student class] name:@"stuId" relation:CWDBRelationTypeLessEqual value:@"50" uid:@"Chavez" targetId:nil];
     NSLog(@"query models : %@",models);
     XCTAssertNotNil(models);
 }
@@ -218,7 +218,7 @@
 }
 
 
-- (Student *)studentWithId:(NSInteger)stuId {
+- (Student *)studentWithId:(int)stuId {
     School *school1 = [[School alloc] init];
     school1.name = @"北京大学";
     school1.schoolId = 2;
@@ -254,82 +254,82 @@
 }
 
 // 测试多线程少量数据操作
-- (void)testMultiThreadingSqliteLess {
-    
-    // 测试少量数据的插入和删除操作
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        Student *stu = [self studentWithId:0];
-        BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
-        NSLog(@"result : %d   %zd",result,stu.stuId);
-    });
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        Student *stu = [self studentWithId:1];
-        BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
-        NSLog(@"result : %d   %zd",result,stu.stuId);
-    });
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        Student *stu = [self studentWithId:2];
-        BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
-        NSLog(@"result : %d   %zd",result,stu.stuId);
-    });
-    
-    Student *stu = [self studentWithId:3];
-    BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
-    NSLog(@"result : %d   %zd",result,stu.stuId);
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        Student *stu = [self studentWithId:0];
-        BOOL result = [CWSqliteModelTool deleteModel:stu uid:@"Chavez" targetId:nil];
-        NSLog(@"delete result : %d   %zd",result,stu.stuId);
-    });
-    
-    
-}
+//- (void)testMultiThreadingSqliteLess {
+//
+//    // 测试少量数据的插入和删除操作
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        Student *stu = [self studentWithId:0];
+//        BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+//        NSLog(@"result : %d   %zd",result,stu.stuId);
+//    });
+//
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        Student *stu = [self studentWithId:1];
+//        BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+//        NSLog(@"result : %d   %zd",result,stu.stuId);
+//    });
+//
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        Student *stu = [self studentWithId:2];
+//        BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+//        NSLog(@"result : %d   %zd",result,stu.stuId);
+//    });
+//
+//    Student *stu = [self studentWithId:3];
+//    BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+//    NSLog(@"result : %d   %zd",result,stu.stuId);
+//
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        Student *stu = [self studentWithId:0];
+//        BOOL result = [CWSqliteModelTool deleteModel:stu uid:@"Chavez" targetId:nil];
+//        NSLog(@"delete result : %d   %zd",result,stu.stuId);
+//    });
+//
+//
+//}
 
-- (void)testMultiThreadingSqliteMore {
+//- (void)testMultiThreadingSqliteMore {
+//
+//        dispatch_queue_t queue1 = dispatch_queue_create("CWDBTest1", DISPATCH_QUEUE_CONCURRENT);
+//        dispatch_queue_t queue2 = dispatch_queue_create("CWDBTest2", DISPATCH_QUEUE_CONCURRENT);
+//        dispatch_queue_t queue3 = dispatch_queue_create("CWDBTest3", DISPATCH_QUEUE_CONCURRENT);
+//        dispatch_queue_t queue4 = dispatch_queue_create("CWDBTest4", DISPATCH_QUEUE_CONCURRENT);
+//
+//        dispatch_async(queue1, ^{
+//            for (int i = 1; i < 200; i++) {
+//                NSLog(@"for-------------------------");
+//                Student *stu = [self studentWithId:i];
+//                BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+//                NSLog(@"result : %d   %zd",result,stu.stuId);
+//            }
+//        });
     
-        dispatch_queue_t queue1 = dispatch_queue_create("CWDBTest1", DISPATCH_QUEUE_CONCURRENT);
-        dispatch_queue_t queue2 = dispatch_queue_create("CWDBTest2", DISPATCH_QUEUE_CONCURRENT);
-        dispatch_queue_t queue3 = dispatch_queue_create("CWDBTest3", DISPATCH_QUEUE_CONCURRENT);
-        dispatch_queue_t queue4 = dispatch_queue_create("CWDBTest4", DISPATCH_QUEUE_CONCURRENT);
-    
-        dispatch_async(queue1, ^{
-            for (int i = 1; i < 200; i++) {
-                NSLog(@"for-------------------------");
-                Student *stu = [self studentWithId:i];
-                BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
-                NSLog(@"result : %d   %zd",result,stu.stuId);
-            }
-        });
-    
-        dispatch_async(queue2, ^{
-            for (int i = 200; i < 400; i++) {
-                Student *stu = [self studentWithId:i];
-                BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
-                NSLog(@"result : %d   %zd",result,stu.stuId);
-            }
-        });
-
-        dispatch_async(queue3, ^{
-            for (int i = 400; i < 600; i++) {
-                Student *stu = [self studentWithId:i];
-                BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
-                NSLog(@"result : %d   %zd",result,stu.stuId);
-            }
-        });
-
-        dispatch_async(queue4, ^{
-            for (int i = 1; i < 100; i++) {
-                Student *stu = [self studentWithId:i];
-                // 删除数据
-                BOOL result = [CWSqliteModelTool deleteModel:stu uid:@"Chavez" targetId:nil];
-                NSLog(@"delete result : %d   %zd",result,stu.stuId);
-            }
-        });
-
-}
+//        dispatch_async(queue2, ^{
+//            for (int i = 200; i < 400; i++) {
+//                Student *stu = [self studentWithId:i];
+//                BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+//                NSLog(@"result : %d   %zd",result,stu.stuId);
+//            }
+//        });
+//
+//        dispatch_async(queue3, ^{
+//            for (int i = 400; i < 600; i++) {
+//                Student *stu = [self studentWithId:i];
+//                BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+//                NSLog(@"result : %d   %zd",result,stu.stuId);
+//            }
+//        });
+//
+//        dispatch_async(queue4, ^{
+//            for (int i = 1; i < 100; i++) {
+//                Student *stu = [self studentWithId:i];
+//                // 删除数据
+//                BOOL result = [CWSqliteModelTool deleteModel:stu uid:@"Chavez" targetId:nil];
+//                NSLog(@"delete result : %d   %zd",result,stu.stuId);
+//            }
+//        });
+//
+//}
 
 
 

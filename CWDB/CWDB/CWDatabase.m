@@ -12,7 +12,7 @@
 
 //#define kCWDBCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
-#define kCWDBCachePath @"/Users/mac/Desktop"
+#define kCWDBCachePath @"/Users/chenwang/Desktop"
 
 @interface CWDatabase ()
 
