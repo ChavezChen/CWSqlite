@@ -90,14 +90,28 @@
     if (![CWSqliteTableTool isTableExists:tableName uid:uid]) {
         [self createSQLTable:cls uid:uid targetId:targetId];
     }else { // 如果表格存在，则检测表格是否需要更新
-#warning 因为会影响后面开发功能，暂时注释掉
-        if ([CWSqliteTableTool isTableNeedUpdate:cls uid:uid targetId:targetId] ) {
-            BOOL result = [self updateTable:cls uid:uid targetId:targetId];
-            if (!result) {
-                NSLog(@"更新数据库表结构失败!插入或更新数据失败!");
-                return NO;
+        // 1、检查缓存，表格是否更新过,不考虑动态添加属性的情况下，只要更新更高一次即可
+        if (!targetId) targetId = @"";
+        NSString *cacheKey = [NSString stringWithFormat:@"%@%@CWUpdated",NSStringFromClass(cls),targetId];
+        BOOL updated = [[CWCache shareInstance] objectForKey:cacheKey]; // 表格是否更新过
+        if (!updated) { // 2、如果表格没有更新过,检测是否需要更新
+            if ([CWSqliteTableTool isTableNeedUpdate:cls uid:uid targetId:targetId] ) {
+                // 2.1、表格需要更新,则进行更新操作
+                BOOL result = [self updateTable:cls uid:uid targetId:targetId];
+                if (!result) {
+                    // 2.2、更新失败，设置缓存为未更新
+                    [[CWCache shareInstance] setObject:@(0) forKey:cacheKey];
+                    NSLog(@"更新数据库表结构失败!插入或更新数据失败!");
+                    return NO;
+                }
+                // 2.3、更新成功，设置缓存为已更新
+                [[CWCache shareInstance] setObject:@(1) forKey:cacheKey];
+            }else {
+                // 3、表格不需要更新,设置缓存为已更新
+                [[CWCache shareInstance] setObject:@(1) forKey:cacheKey];
             }
         }
+        
     }
     // 根据主键，判断数据库内是否存在记录
     // 判断对象是否返回主键信息
@@ -127,11 +141,9 @@
     for (NSString *ivarName in allIvarNames) {
         // 获取对应的值,暂时不考虑自定义模型和oc模型的情况
         id value = [model valueForKeyPath:ivarName];
-#warning 处理自定义对象以及oc对象,处理对象为空的场景
+        
         NSString *type = nameTypeDict[ivarName];
-        
-        
-        NSLog(@"type: %@ , value : %@ , valueClass : %@ , ivarName : %@",type,value,[value class],ivarName);
+//        NSLog(@"type: %@ , value : %@ , valueClass : %@ , ivarName : %@",type,value,[value class],ivarName);
         
         value = [CWModelTool formatModelValue:value type:type isEncode:YES];
         

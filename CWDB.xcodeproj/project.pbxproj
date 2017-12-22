@@ -12,6 +12,7 @@
 		047ECF991FD7D0200022598C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6628423C1FD25FBC00809501 /* libsqlite3.0.tbd */; };
 		047ECF9B1FD7E9B40022598C /* CWSqliteModelToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */; };
 		047ECF9E1FD9112F0022598C /* CWSqliteTableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */; };
+		04AFC52B1FECD4EB00EFAA55 /* 001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AFC52A1FECD4EB00EFAA55 /* 001@2x.png */; };
 		6628420D1FCEA78B00809501 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6628420B1FCEA78B00809501 /* Main.storyboard */; };
 		6628420F1FCEA78B00809501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6628420E1FCEA78B00809501 /* Assets.xcassets */; };
 		662842121FCEA78B00809501 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 662842101FCEA78B00809501 /* LaunchScreen.storyboard */; };
@@ -52,6 +53,7 @@
 		047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteModelToolTests.m; sourceTree = "<group>"; };
 		047ECF9C1FD9112F0022598C /* CWSqliteTableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWSqliteTableTool.h; sourceTree = "<group>"; };
 		047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteTableTool.m; sourceTree = "<group>"; };
+		04AFC52A1FECD4EB00EFAA55 /* 001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "001@2x.png"; sourceTree = "<group>"; };
 		662842021FCEA78B00809501 /* CWDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6628420C1FCEA78B00809501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6628420E1FCEA78B00809501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				6628420E1FCEA78B00809501 /* Assets.xcassets */,
 				662842101FCEA78B00809501 /* LaunchScreen.storyboard */,
 				662842131FCEA78B00809501 /* Info.plist */,
+				04AFC52A1FECD4EB00EFAA55 /* 001@2x.png */,
 				6628423F1FD4040C00809501 /* Student.h */,
 				662842401FD4040C00809501 /* Student.m */,
 				0414900E1FE765EC00D8DC34 /* School.h */,
@@ -310,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04AFC52B1FECD4EB00EFAA55 /* 001@2x.png in Resources */,
 				662842121FCEA78B00809501 /* LaunchScreen.storyboard in Resources */,
 				6628420F1FCEA78B00809501 /* Assets.xcassets in Resources */,
 				6628420D1FCEA78B00809501 /* Main.storyboard in Resources */,

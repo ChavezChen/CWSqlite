@@ -86,8 +86,6 @@
     }else if([type isEqualToString:@"f"]||[type isEqualToString:@"F"]||
              [type isEqualToString:@"d"]||[type isEqualToString:@"D"]){
         return @"real";
-    }else if ([type isEqualToString:@"NSData"]) {
-        return @"blob";
     }else{
         return @"text";
     }
@@ -132,14 +130,25 @@
        [type isEqualToString:@"b"]||[type isEqualToString:@"B"]||
        [type isEqualToString:@"c"]||[type isEqualToString:@"C"]||
        [type isEqualToString:@"l"]||[type isEqualToString:@"L"]||
-       [value isKindOfClass:[NSNumber class]] || [type isEqualToString:@"NSData"]) {
+       [value isKindOfClass:[NSNumber class]]) {
         return value;
     }else if([type isEqualToString:@"f"]||[type isEqualToString:@"F"]||
              [type isEqualToString:@"d"]||[type isEqualToString:@"D"]){
         return value;
-    }else if ([type containsString:@"Data"]) {
-        return value;
-    }else if ([type containsString:@"String"]) {
+    }else if ([type containsString:@"NSData"]) {
+        if (isEncode) {
+            return [value base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        }else {
+            return [[NSData alloc] initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        }
+    }else if ([type isEqualToString:@"UIImage"]) {
+        if (isEncode) {
+            NSData* data = UIImageJPEGRepresentation(value, 1);
+            return [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        }else {
+            return [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:value options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+        }
+    } else if ([type containsString:@"String"]) {
         if ([type containsString:@"AttributedString"]) {
             if (isEncode) {
                 NSData *data = [[NSKeyedArchiver archivedDataWithRootObject:value] base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
@@ -157,7 +166,7 @@
             return [self dictWithString:value type:type];
         }
         
-    }else if ([type containsString:@"Array"] && [type containsString:@"NS"] ) {
+    }else if (([type containsString:@"Array"] || [type containsString:@"Set"]) && [type containsString:@"NS"] ) {
         if (isEncode) {
             return [self stringWithArray:value];
         }else {
@@ -171,6 +180,18 @@
         }else{
             NSArray<NSString*>* arr = [value componentsSeparatedByString:@","];
             return [UIColor colorWithRed:arr[0].floatValue green:arr[1].floatValue blue:arr[2].floatValue alpha:arr[3].floatValue];
+        }
+    }else if ([type containsString:@"NSURL"]){
+        if(isEncode){
+            return [value absoluteString];
+        }else{
+            return [NSURL URLWithString:value];
+        }
+    }else if ([type containsString:@"NSRange"]){
+        if(isEncode){
+            return NSStringFromRange([value rangeValue]);
+        }else{
+            return [NSValue valueWithRange:NSRangeFromString(value)];
         }
     }else { // 当模型处理
         if (isEncode) {  // 模型转json字符串

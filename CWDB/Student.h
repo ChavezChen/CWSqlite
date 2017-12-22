@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CWModelProtocol.h"
 #import "School.h"
+#import <UIKit/UIKit.h>
 
 @interface Student : NSObject<CWModelProtocol>
 {
@@ -36,6 +37,9 @@
 
 @property (nonatomic,strong) School *school;
 
+@property (nonatomic,strong) UIImage *image;
+
+@property (nonatomic,strong) NSData *data;
 
 @end
 

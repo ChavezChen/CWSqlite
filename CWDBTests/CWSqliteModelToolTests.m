@@ -186,25 +186,37 @@
     
     Student *stu = [[Student alloc] init];
     stu.stuId = 10000;
-    stu.name = @"Baidu";
-    stu.age = 100;
-    stu.height = 190;
-    stu.weight = 140;
-    stu.dict = @{@"name" : @"chavez"};
-    // 字典嵌套模型
-    stu.dictM = [@{@"清华大学" : school , @"北京大学" : school1 , @"money" : @(100)} mutableCopy];
-    // 数组嵌套字典，字典嵌套模型
-    stu.arrayM = [@[@"chavez",@"cw",@"ccww",@{@"清华大学" : school}] mutableCopy];
-    // 数组嵌套模型
-    stu.array = @[@(1),@(2),@(3),school,school1];
-    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
-    stu.attributedString = attributedStr;
-    // 模型嵌套模型
-    stu.school = school;
+//    stu.name = @"Baidu";
+//    stu.age = 100;
+//    stu.height = 190;
+//    stu.weight = 140;
+//    stu.dict = @{@"name" : @"chavez"};
+//    // 字典嵌套模型
+//    stu.dictM = [@{@"清华大学" : school , @"北京大学" : school1 , @"money" : @(100)} mutableCopy];
+//    // 数组嵌套字典，字典嵌套模型
+//    stu.arrayM = [@[@"chavez",@"cw",@"ccww",@{@"清华大学" : school}] mutableCopy];
+//    // 数组嵌套模型
+//    stu.array = @[@(1),@(2),@(3),school,school1];
+//    NSAttributedString *attributedStr = [[NSAttributedString alloc] initWithString:@"attributedStr,attributedStr"];
+//    stu.attributedString = attributedStr;
+//    // 模型嵌套模型
+//    stu.school = school;
+    UIImage *image = [UIImage imageNamed:@"001"];
+    NSData *data = UIImageJPEGRepresentation(image, 1);
+    stu.image = image;
+    stu.data = data;
     
     BOOL result = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
     
     XCTAssertTrue(result);
+    
+    stu.stuId = 11111;
+    BOOL result1 = [CWSqliteModelTool insertOrUpdateModel:stu uid:@"Chavez" targetId:nil];
+    
+    XCTAssertTrue(result1);
+    
+    
+    
 }
 
 

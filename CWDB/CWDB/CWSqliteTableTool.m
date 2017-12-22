@@ -63,11 +63,12 @@
 
 // 数据库表是否需要更新
 + (BOOL)isTableNeedUpdate:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId {
-    
+
     NSArray *modelNames = [CWModelTool allIvarNames:cls];
     
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     NSArray *tableNames = [self allTableColumnNames:tableName uid:uid];
+    
     
     return ![modelNames isEqualToArray:tableNames];
 }

@@ -155,13 +155,13 @@
     dictM[@"dict"] = @{@"dictKey" : @"dictValue"};
     dictM[@"dictM"] = [NSMutableDictionary dictionaryWithDictionary:@{@"dictMKey" : @"dictMValue"}];
     
-    NSDictionary *dict = @{@"arrayKey" : @[@"cw",@(111)] ,
-                       @"arrayMKey" : [NSMutableArray arrayWithArray:@[@"arrM1",@"arrM2"]] ,
-                       @"dictKey" : @{@"dictKey" : @"dictValue"} ,
-                       @"dictMkey" : [NSMutableDictionary dictionaryWithDictionary:@{@"dictMKey" : @"dictMValue"}] ,
-                       @"xxx" : @(1.5) ,
-                       @"stu" : stu,
-                       };
+//    NSDictionary *dict = @{@"arrayKey" : @[@"cw",@(111)] ,
+//                       @"arrayMKey" : [NSMutableArray arrayWithArray:@[@"arrM1",@"arrM2"]] ,
+//                       @"dictKey" : @{@"dictKey" : @"dictValue"} ,
+//                       @"dictMkey" : [NSMutableDictionary dictionaryWithDictionary:@{@"dictMKey" : @"dictMValue"}] ,
+//                       @"xxx" : @(1.5) ,
+//                       @"stu" : stu,
+//                       };
     
     
     NSString *str = [CWModelTool stringWithDict:dictM];

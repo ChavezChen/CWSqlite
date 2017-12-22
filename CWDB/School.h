@@ -16,5 +16,4 @@
 @property (nonatomic,strong) School *school1;
 
 
-
 @end
