@@ -11,6 +11,12 @@
 #import "CWDatabase.h"
 #import "CWSqliteTableTool.h"
 
+@interface CWSqliteModelTool ()
+
+@property (nonatomic, strong) dispatch_semaphore_t dsema;
+
+@end
+
 @implementation CWSqliteModelTool
 
 + (NSDictionary *)CWDBNameToValueRelationTypeDic {
@@ -20,6 +26,24 @@
              @(CWDBRelationTypeMoreEqual):@">=",
              @(CWDBRelationTypeLessEqual):@"<="
              };
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.dsema = dispatch_semaphore_create(1);
+    }
+    return self;
+}
+
+static CWSqliteModelTool * instance = nil;
++ (instancetype)shareInstance {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[CWSqliteModelTool alloc] init];
+    });
+    return instance;
 }
 
 
@@ -82,6 +106,9 @@
 
 #pragma mark 插入或者更新数据
 + (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
+    NSLog(@"--------------------------------------1");
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
+    NSLog(@"--------------------------------------2");
     // 获取表名
     Class cls = [model class];
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
@@ -171,7 +198,8 @@
     BOOL ret = [CWDatabase execSQL:execSql uid:uid];
     // 关闭数据库
     [CWDatabase closeDB];
-    
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+    NSLog(@"--------------------------------------3");
     return ret;
 }
 
@@ -179,33 +207,45 @@
 // 查询表内所有数据
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId {
     
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
-    
     NSString *sql = [NSString stringWithFormat:@"select * from %@", tableName];
     
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
     [CWDatabase closeDB];
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+    
     return [self parseResults:results withClass:cls];
 }
 // 根据sql语句查询
 + (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid {
+    
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
-    
     [CWDatabase closeDB];
-    
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+
     return [self parseResults:results withClass:cls];
 }
 // 根据单个条件查询
 + (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
+    
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
+
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     NSString *sql = [NSString stringWithFormat:@"select * from %@ where %@ %@ '%@'", tableName,name,self.CWDBNameToValueRelationTypeDic[@(relation)],value];
+    
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
     [CWDatabase closeDB];
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+
     return [self parseResults:results withClass:cls];
 }
 // 根据多个条件查询
 + (NSArray *)querModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
     
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
+
     if (!(columnNames.count == relations.count && relations.count == values.count)) {
         NSLog(@"columnNames、relations、values元素个数请保持一致!");
         return nil;
@@ -226,9 +266,9 @@
     }
     
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
-    
     [CWDatabase closeDB];
-    
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+
     return [self parseResults:results withClass:cls];
 }
 
@@ -258,15 +298,20 @@
         deleteSql = [NSString stringWithFormat:@"drop table if exists %@",tableName];
     }
     
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
     // 执行数据库
     BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
-    // 关闭数据库
     [CWDatabase closeDB];
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+
     return result;
 }
 
 // 根据模型的主键来删除
 + (BOOL)deleteModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
+    NSLog(@"delete--------------------------------delete1");
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
+    NSLog(@"delete--------------------------------delete2");
     Class cls = [model class];
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     if (![cls respondsToSelector:@selector(primaryKey)]) {
@@ -279,30 +324,32 @@
     
     // 执行数据库
     BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
-    // 关闭数据库
     [CWDatabase closeDB];
-    
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+    NSLog(@"delete--------------------------------delete3");
+
     return result;
 }
 
 // 根据单个条件删除
 + (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
     
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
-    
     NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where %@ %@ '%@'",tableName,name,self.CWDBNameToValueRelationTypeDic[@(relation)],value];
     
-    // 执行数据库
     BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
-    // 关闭数据库
     [CWDatabase closeDB];
-    
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+
     return result;
 }
 
 // 根据多个条件删除
 + (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
     
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
+
     if (!(columnNames.count == relations.count && relations.count == values.count)) {
         NSLog(@"columnNames、relations、values元素个数请保持一致!");
         return NO;
@@ -323,10 +370,9 @@
         }
     }
     
-    // 执行数据库
     BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
-    // 关闭数据库
     [CWDatabase closeDB];
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
     
     return result;
 }
@@ -336,6 +382,7 @@
 // 更新表并迁移数据
 + (BOOL)updateTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId{
     
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
     // 1.创建一个拥有正确结构的临时表
     // 1.1 获取表格名称
     NSString *tmpTableName = [CWModelTool tmpTableName:cls targetId:targetId];
@@ -399,9 +446,9 @@
     [execSqls addObject:renameTableName];
     
     BOOL result = [CWDatabase execSqls:execSqls uid:uid];
-    
     [CWDatabase closeDB];
-    
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+
     return result;
 }
 

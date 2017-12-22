@@ -6,265 +6,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.284307"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "+formatModelValue:type:isEncode:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWSqliteModelTool.m"
-            timestampString = "535618939.284628"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "+insertOrUpdateModel:uid:targetId:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWModelToolTests.m"
-            timestampString = "535618939.284832"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "-testDictWithModel"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWModelToolTests.m"
-            timestampString = "535618939.285011"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-testDictWithModel"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWModelToolTests.m"
-            timestampString = "535618939.285064"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "-testStringWithArray"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWModelToolTests.m"
-            timestampString = "535618939.28511"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "-testStringWithArray"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.285156"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "+stringWithArray:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.285221"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
-            landmarkName = "+stringWithDict:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.285285"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "+stringWithDict:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.285347"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "+stringWithDict:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.285405"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "+dictWithString:type:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.285466"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
-            landmarkName = "+arrayWithString:type:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWModelToolTests.m"
-            timestampString = "535618939.285526"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "CWModelToolTests"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWModelToolTests.m"
-            timestampString = "535618939.28557"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWModelToolTests.m"
-            timestampString = "535618939.285613"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-testDictWithModel"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWModelToolTests.m"
-            timestampString = "535618939.285653"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "-testDictWithModel"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CWDBTests/CWSqliteModelToolTests.m"
-            timestampString = "535618939.285694"
+            timestampString = "535628268.207454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "89"
@@ -273,350 +19,66 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[CWSqliteModelToolTests testQueryModels]"
                   moduleName = "CWDBTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.819299"
+                  timestampString = "535628268.836702"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "90"
                   endingLineNumber = "90"
-                  offsetFromSymbolStart = "580">
+                  offsetFromSymbolStart = "597">
                </Location>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[CWSqliteModelToolTests testQueryModels]"
                   moduleName = "CWDBTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.82109"
+                  timestampString = "535628268.838276"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "90"
                   endingLineNumber = "90"
-                  offsetFromSymbolStart = "1035">
+                  offsetFromSymbolStart = "1052">
                </Location>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[CWSqliteModelToolTests testQueryModels]"
                   moduleName = "CWDBTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.823481"
+                  timestampString = "535628268.839969"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "90"
                   endingLineNumber = "90"
-                  offsetFromSymbolStart = "1137">
+                  offsetFromSymbolStart = "1154">
                </Location>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[CWSqliteModelToolTests testQueryModels]"
                   moduleName = "CWDBTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.825465"
+                  timestampString = "535628268.842138"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "90"
                   endingLineNumber = "90"
-                  offsetFromSymbolStart = "1264">
+                  offsetFromSymbolStart = "1281">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.286317"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "+arrayWithString:type:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWSqliteModelToolTests.m"
-            timestampString = "535618939.2864"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "-testInserComplicatedModel"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWSqliteModelToolTests testInserComplicatedModel]"
-                  moduleName = "CWDBTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.828178"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
-                  offsetFromSymbolStart = "1056">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWSqliteModelToolTests testInserComplicatedModel]"
-                  moduleName = "CWDBTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.830308"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
-                  offsetFromSymbolStart = "2462">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWSqliteModelToolTests testInserComplicatedModel]"
-                  moduleName = "CWDBTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.833626"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
-                  offsetFromSymbolStart = "2599">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWSqliteModelToolTests testInserComplicatedModel]"
-                  moduleName = "CWDBTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.83555"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
-                  offsetFromSymbolStart = "2717">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWSqliteModelTool.m"
-            timestampString = "535618939.286718"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "+insertOrUpdateModel:uid:targetId:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDBTests/CWSqliteModelToolTests.m"
-            timestampString = "535618939.286769"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "-testInserComplicatedModel"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWSqliteModelToolTests testInserComplicatedModel]"
-                  moduleName = "CWDBTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.838477"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "211"
-                  endingLineNumber = "211"
-                  offsetFromSymbolStart = "549">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWSqliteModelToolTests testInserComplicatedModel]"
-                  moduleName = "CWDBTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.841091"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "211"
-                  endingLineNumber = "211"
-                  offsetFromSymbolStart = "961">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWSqliteModelToolTests testInserComplicatedModel]"
-                  moduleName = "CWDBTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.843061"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "211"
-                  endingLineNumber = "211"
-                  offsetFromSymbolStart = "1467">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWSqliteModelToolTests testInserComplicatedModel]"
-                  moduleName = "CWDBTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Desktop/github/CWDB/CWDBTests/CWSqliteModelToolTests.m"
-                  timestampString = "535618939.844864"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "211"
-                  endingLineNumber = "211"
-                  offsetFromSymbolStart = "1576">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.287096"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "+getSqlType:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.28718"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "+formatModelValue:type:isEncode:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWSqliteModelTool.m"
-            timestampString = "535618939.287241"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
-            landmarkName = "+parseResults:withClass:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.287282"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
-            landmarkName = "+model:Dict:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.287324"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "+formatModelValue:type:isEncode:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CWDB/CWDB/CWModelTool.m"
-            timestampString = "535618939.287363"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "+formatModelValue:type:isEncode:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
