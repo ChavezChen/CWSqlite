@@ -30,8 +30,11 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  */
 + (BOOL)createSQLTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
-// 插入数据库
+// 插入数据库(此方法请忽略，直接使用下面的插入或更新的方法)
 + (BOOL)insertModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
+
+// 批量插入或更新数据
++ (BOOL)insertOrUpdateModels:(NSArray<id> *)modelsArray uid:(NSString *)uid targetId:(NSString *)targetId;
 
 // 插入或者更新数据
 + (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;

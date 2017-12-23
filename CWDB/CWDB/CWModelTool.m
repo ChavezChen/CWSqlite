@@ -58,7 +58,6 @@
         type = [type stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"@\""]];
         
         [nameTypeDic setValue:type forKey:ivarName];
-        
     }
     [[CWCache shareInstance] setObject:nameTypeDic forKey:NSStringFromClass(cls)];
     return nameTypeDic;

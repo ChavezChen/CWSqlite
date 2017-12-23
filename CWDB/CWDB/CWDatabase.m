@@ -37,7 +37,7 @@ static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
     int result = sqlite3_exec(cw_database, sql.UTF8String, nil, nil, &errmsg);
     
     if (result != SQLITE_OK) {
-        NSLog(@"exec sql error : %s",errmsg);
+        NSLog(@"exec SQL(%@) error : %s",sql,errmsg);
         sqlite3_free(errmsg);
         return NO;
     }

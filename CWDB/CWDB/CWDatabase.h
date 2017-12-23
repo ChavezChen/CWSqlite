@@ -24,6 +24,12 @@
 // 执行多个sql语句
 + (BOOL)execSqls:(NSArray <NSString *>*)sqls uid:(NSString *)uid;
 
-
+#pragma mark - 事务
+// 开始事务
++ (void)beginTransaction:(NSString *)uid;
+// 提交事务
++ (void)commitTransaction:(NSString *)uid;
+// 回滚事务
++ (void)rollBackTransaction:(NSString *)uid;
 
 @end
