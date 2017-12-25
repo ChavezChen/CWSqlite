@@ -124,7 +124,7 @@
         
         dispatch_async(queue2, ^{
             // 删除数据
-            BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnNames:@[@"stuId",@"stuId"] relations:@[@(CWDBRelationTypeMoreEqual),@(CWDBRelationTypeLess)] values:@[@(1000),@(1900)] isAnd:YES uid:@"Chavez" targetId:nil];
+            BOOL result = [CWSqliteModelTool deleteModels:[Student class] columnNames:@[@"stuId",@"stuId"] relations:@[@(CWDBRelationTypeMoreEqual),@(CWDBRelationTypeLess)] values:@[@(1000),@(1900)] isAnd:YES uid:@"Chavez" targetId:nil];
             NSLog(@"delete result : %d  1000-1900",result);
         });
     });
@@ -208,7 +208,7 @@
         
         dispatch_async(queue2, ^{
             // 传两个条件删除数据
-            BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnNames:@[@"stuId",@"stuId"] relations:@[@(CWDBRelationTypeMoreEqual),@(CWDBRelationTypeLess)] values:@[@(1000),@(1900)] isAnd:YES uid:@"Chavez" targetId:nil];
+            BOOL result = [CWSqliteModelTool deleteModels:[Student class] columnNames:@[@"stuId",@"stuId"] relations:@[@(CWDBRelationTypeMoreEqual),@(CWDBRelationTypeLess)] values:@[@(1000),@(1900)] isAnd:YES uid:@"Chavez" targetId:nil];
             NSLog(@"delete result : %d  1000-1900",result);
         });
         

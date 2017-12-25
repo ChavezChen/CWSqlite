@@ -9,9 +9,9 @@
 #import "CWDatabase.h"
 #import <sqlite3.h>
 
-//#define kCWDBCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
+#define kCWDBCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
-#define kCWDBCachePath @"/Users/chenwang/Desktop"
+//#define kCWDBCachePath @"/Users/chenwang/Desktop"
 
 @interface CWDatabase ()
 

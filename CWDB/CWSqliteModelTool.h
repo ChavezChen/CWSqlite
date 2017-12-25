@@ -143,7 +143,7 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        targetId 目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return                删除是否成功
  */
-+ (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
++ (BOOL)deleteModels:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
 
 // 根据多个条件删除(and删除满足所有条件的数据 or 删除满足其中任何一个条件的数据)
 
@@ -164,7 +164,7 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return                删除是否成功
  */
-+ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId;
++ (BOOL)deleteModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId;
 
 #pragma mark - 更新数据库表结构，数据迁移
 // 更新数据库表结构、字段改名、数据迁移

@@ -161,14 +161,14 @@
 #pragma mark - 测试删除数据
 // 测试根据单个条件删除数据
 - (void)testDeleteModel {
-    BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnName:@"age" relation:CWDBRelationTypeLessEqual value:@(20) uid:@"Chavez" targetId:nil];
+    BOOL result = [CWSqliteModelTool deleteModels:[Student class] columnName:@"age" relation:CWDBRelationTypeLessEqual value:@(20) uid:@"Chavez" targetId:nil];
     XCTAssertTrue(result);
 }
 
 // 根据多个条件删除数据
 - (void)testDeleteModelWithMultipleConditions {
     
-    BOOL result = [CWSqliteModelTool deleteModel:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(190)] isAnd:YES uid:@"Chavez" targetId:nil];
+    BOOL result = [CWSqliteModelTool deleteModels:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(190)] isAnd:YES uid:@"Chavez" targetId:nil];
     XCTAssertTrue(result);
 }
 

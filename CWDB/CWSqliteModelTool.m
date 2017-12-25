@@ -326,7 +326,7 @@ static CWSqliteModelTool * instance = nil;
 }
 
 // 根据单个条件删除
-+ (BOOL)deleteModel:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
++ (BOOL)deleteModels:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
     
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
@@ -340,7 +340,7 @@ static CWSqliteModelTool * instance = nil;
 }
 
 // 根据多个条件删除
-+ (BOOL)deleteModel:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
++ (BOOL)deleteModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
     
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
 
@@ -447,7 +447,7 @@ static CWSqliteModelTool * instance = nil;
     return result;
 }
 
-
+#pragma mark - 枚举与字符串的映射关系
 + (NSDictionary *)CWDBNameToValueRelationTypeDic {
     return @{@(CWDBRelationTypeMore):@">",
              @(CWDBRelationTypeLess):@"<",
