@@ -19,15 +19,6 @@
 
 @implementation CWSqliteModelTool
 
-+ (NSDictionary *)CWDBNameToValueRelationTypeDic {
-    return @{@(CWDBRelationTypeMore):@">",
-             @(CWDBRelationTypeLess):@"<",
-             @(CWDBRelationTypeEqual):@"=",
-             @(CWDBRelationTypeMoreEqual):@">=",
-             @(CWDBRelationTypeLessEqual):@"<="
-             };
-}
-
 - (instancetype)init
 {
     self = [super init];
@@ -46,7 +37,8 @@ static CWSqliteModelTool * instance = nil;
     return instance;
 }
 
-
+#pragma mark - 创建数据库表格
+// 不需要自己调用
 + (BOOL)createSQLTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId {
     // 创建数据库表的语句
     // create table if not exists 表名(字段1 字段1类型（约束）,字段2 字段2类型（约束）....., primary key(字段))
@@ -68,45 +60,20 @@ static CWSqliteModelTool * instance = nil;
     // 执行语句
     BOOL result = [CWDatabase execSQL:createTableSql uid:uid];
     // 关闭数据库
-    [CWDatabase closeDB];
+//    [CWDatabase closeDB];
     
     return result;
 }
 
-#pragma mark 插入数据
-+ (BOOL)insertModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
-    // 获取表名
-    Class cls = [model class];
-    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
-    
-    // 1.判断数据库内是否有对应表格,没有则创建(这一步先不做，因为我们目前还没有实现查询语句,我们先在外面创建一个表格，再执行插入操作)
-    
-    // 2.插入数据
-    // 获取类的所有成员变量的名称与类型
-    NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:cls];
-    // 获取所有成员变量的名称，也就是sql语句字段名称
-    NSArray *allIvarNames = nameTypeDict.allKeys;
-    // 获取所有成员变量对应的值
-    NSMutableArray *allIvarValues = [NSMutableArray array];
-    for (NSString *ivarName in allIvarNames) {
-        // 获取对应的值,暂时不考虑自定义模型和oc模型的情况
-        id value = [model valueForKeyPath:ivarName];
-        [allIvarValues addObject:value];
-    }
-    
-    // insert into 表名(字段1，字段2，字段3) values ('值1'，'值2'，'值3')
-    NSString *sql = [NSString stringWithFormat:@"insert into %@(%@) values('%@')",tableName,[allIvarNames componentsJoinedByString:@","],[allIvarValues componentsJoinedByString:@"','"]];
-    
-    BOOL result = [CWDatabase execSQL:sql uid:uid];
-    // 关闭数据库
-    [CWDatabase closeDB];
-    
-    return result;
+
+#pragma mark - 插入或者更新数据
+
+// 插入单个模型
++ (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
+    return [self insertOrUpdateModels:@[model] uid:uid targetId:targetId];
 }
 
-#pragma mark -插入或者更新数据
-
-#pragma mark 批量插入或更新数据
+// 批量插入或更新数据
 + (BOOL)insertOrUpdateModels:(NSArray<id> *)modelsArray uid:(NSString *)uid targetId:(NSString *)targetId {
     
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
@@ -117,7 +84,11 @@ static CWSqliteModelTool * instance = nil;
     
     // 判断数据库是否存在对应的表，不存在则创建
     if (![CWSqliteTableTool isTableExists:tableName uid:uid]) {
-        [self createSQLTable:cls uid:uid targetId:targetId];
+        BOOL r = [self createSQLTable:cls uid:uid targetId:targetId];
+        if (!r) {
+            dispatch_semaphore_signal([[self shareInstance] dsema]);
+            return NO;
+        }
     }else { // 如果表格存在，则检测表格是否需要更新
         // 1、检查缓存，表格是否更新过,不考虑动态添加属性的情况下，只要更新更高一次即可
         if (!targetId) targetId = @"";
@@ -131,6 +102,7 @@ static CWSqliteModelTool * instance = nil;
                     // 2.2、更新失败，设置缓存为未更新
                     [[CWCache shareInstance] setObject:@(0) forKey:cacheKey];
                     NSLog(@"更新数据库表结构失败!插入或更新数据失败!");
+                    dispatch_semaphore_signal([[self shareInstance] dsema]);
                     return NO;
                 }
                 // 2.3、更新成功，设置缓存为已更新
@@ -146,12 +118,14 @@ static CWSqliteModelTool * instance = nil;
     // 判断对象是否返回主键信息
     if (![cls respondsToSelector:@selector(primaryKey)]) {
         NSLog(@"如果想要操作这个模型，必须要实现+ (NSString *)primaryKey;这个方法，来告诉我主键信息");
+        dispatch_semaphore_signal([[self shareInstance] dsema]);
         return NO;
     }
     // 获取主键
     NSString *primaryKey = [cls primaryKey];
     if (!primaryKey) {
         NSLog(@"你需要指定一个主键来创建数据库表");
+        dispatch_semaphore_signal([[self shareInstance] dsema]);
         return NO;
     }
     [CWDatabase beginTransaction:uid];
@@ -206,6 +180,7 @@ static CWSqliteModelTool * instance = nil;
         BOOL ret = [CWDatabase execSQL:execSql uid:uid];
         if (ret == NO) {
             [CWDatabase rollBackTransaction:uid];
+            dispatch_semaphore_signal([[self shareInstance] dsema]);
             return NO;
         }
         }
@@ -219,116 +194,7 @@ static CWSqliteModelTool * instance = nil;
     return YES;
 }
 
-+ (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
-//    NSLog(@"--------------------------------------1");
-    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
-//    NSLog(@"--------------------------------------2");
-    // 获取表名
-    Class cls = [model class];
-    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
-    
-    // 判断数据库是否存在对应的表，不存在则创建
-    if (![CWSqliteTableTool isTableExists:tableName uid:uid]) {
-        [self createSQLTable:cls uid:uid targetId:targetId];
-    }else { // 如果表格存在，则检测表格是否需要更新
-        // 1、检查缓存，表格是否更新过,不考虑动态添加属性的情况下，只要更新更高一次即可
-        if (!targetId) targetId = @"";
-        NSString *cacheKey = [NSString stringWithFormat:@"%@%@CWUpdated",NSStringFromClass(cls),targetId];
-        BOOL updated = [[CWCache shareInstance] objectForKey:cacheKey]; // 表格是否更新过
-        if (!updated) { // 2、如果表格没有更新过,检测是否需要更新
-            if ([CWSqliteTableTool isTableNeedUpdate:cls uid:uid targetId:targetId] ) {
-                // 2.1、表格需要更新,则进行更新操作
-                BOOL result = [self updateTable:cls uid:uid targetId:targetId];
-                if (!result) {
-                    // 2.2、更新失败，设置缓存为未更新
-                    [[CWCache shareInstance] setObject:@(0) forKey:cacheKey];
-                    NSLog(@"更新数据库表结构失败!插入或更新数据失败!");
-                    return NO;
-                }
-                // 2.3、更新成功，设置缓存为已更新
-                [[CWCache shareInstance] setObject:@(1) forKey:cacheKey];
-            }else {
-                // 3、表格不需要更新,设置缓存为已更新
-                [[CWCache shareInstance] setObject:@(1) forKey:cacheKey];
-            }
-        }
-        
-    }
-    // 根据主键，判断数据库内是否存在记录
-    // 判断对象是否返回主键信息
-    if (![cls respondsToSelector:@selector(primaryKey)]) {
-        NSLog(@"如果想要操作这个模型，必须要实现+ (NSString *)primaryKey;这个方法，来告诉我主键信息");
-        return NO;
-    }
-    // 获取主键
-    NSString *primaryKey = [cls primaryKey];
-    if (!primaryKey) {
-        NSLog(@"你需要指定一个主键来创建数据库表");
-        return NO;
-    }
-    // 模型中的主键的值
-    id primaryValue = [model valueForKeyPath:primaryKey];
-    //  查询语句：  NSString *checkSql = @"select * from 表名 where 主键 = '主键值' ";
-    NSString * checkSql = [NSString stringWithFormat:@"select * from %@ where %@ = '%@'",tableName,primaryKey,primaryValue];
-    
-    // 执行查询语句,获取结果
-    NSArray *result = [CWDatabase querySql:checkSql uid:uid];
-    // 获取类的所有成员变量的名称与类型
-    NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:cls];
-    // 获取所有成员变量的名称，也就是sql语句字段名称
-    NSArray *allIvarNames = nameTypeDict.allKeys;
-    // 获取所有成员变量对应的值
-    NSMutableArray *allIvarValues = [NSMutableArray array];
-    for (NSString *ivarName in allIvarNames) {
-        @autoreleasepool {
-            // 获取对应的值,暂时不考虑自定义模型和oc模型的情况
-            id value = [model valueForKeyPath:ivarName];
-            
-            NSString *type = nameTypeDict[ivarName];
-            //        NSLog(@"type: %@ , value : %@ , valueClass : %@ , ivarName : %@",type,value,[value class],ivarName);
-            
-            value = [CWModelTool formatModelValue:value type:type isEncode:YES];
-            
-            [allIvarValues addObject:value];
-        }
-    }
-    // 字段1=字段1值 allIvarNames[i]=allIvarValues[i]
-    NSMutableArray *ivarNameValueArray = [NSMutableArray array];
-//    NSInteger count = allIvarNames.count;
-    
-    [allIvarNames enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *name = obj;
-        id value = allIvarValues[idx];
-        NSString *ivarNameValue = [NSString stringWithFormat:@"%@='%@'",name,value];
-        [ivarNameValueArray addObject:ivarNameValue];
-    }];
-//    for (int i = 0; i < count; i++) {
-//        @autoreleasepool {
-//            NSString *name = allIvarNames[i];
-//            id value = allIvarValues[i];
-//            NSString *ivarNameValue = [NSString stringWithFormat:@"%@='%@'",name,value];
-//            [ivarNameValueArray addObject:ivarNameValue];
-//        }
-//    }
-    
-    NSString *execSql = @"";
-    if (result.count > 0) { // 表内存在记录，更新
-        // update 表名 set 字段1='字段1值'，字段2='字段2的值'...where 主键 = '主键值'
-        execSql = [NSString stringWithFormat:@"update %@ set %@ where %@ = '%@'",tableName,[ivarNameValueArray componentsJoinedByString:@","],primaryKey,primaryValue];
-    }else { // 表内不存在记录，插入
-        // insert into 表名(字段1，字段2，字段3) values ('值1'，'值2'，'值3')
-        execSql = [NSString stringWithFormat:@"insert into %@(%@) values('%@')",tableName,[allIvarNames componentsJoinedByString:@","],[allIvarValues componentsJoinedByString:@"','"]];
-    }
-    // 执行数据库
-    BOOL ret = [CWDatabase execSQL:execSql uid:uid];
-    // 关闭数据库
-    [CWDatabase closeDB];
-    dispatch_semaphore_signal([[self shareInstance] dsema]);
-//    NSLog(@"--------------------------------------3");
-    return ret;
-}
-
-#pragma mark 查询数据
+#pragma mark - 查询数据
 // 查询表内所有数据
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId {
     
@@ -342,6 +208,7 @@ static CWSqliteModelTool * instance = nil;
     
     return [self parseResults:results withClass:cls];
 }
+
 // 根据sql语句查询
 + (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid {
     
@@ -352,6 +219,7 @@ static CWSqliteModelTool * instance = nil;
 
     return [self parseResults:results withClass:cls];
 }
+
 // 根据单个条件查询
 + (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
     
@@ -366,6 +234,7 @@ static CWSqliteModelTool * instance = nil;
 
     return [self parseResults:results withClass:cls];
 }
+
 // 根据多个条件查询
 + (NSArray *)querModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
     
@@ -373,6 +242,7 @@ static CWSqliteModelTool * instance = nil;
 
     if (!(columnNames.count == relations.count && relations.count == values.count)) {
         NSLog(@"columnNames、relations、values元素个数请保持一致!");
+        dispatch_semaphore_signal([[self shareInstance] dsema]);
         return nil;
     }
     
@@ -410,8 +280,6 @@ static CWSqliteModelTool * instance = nil;
     return models;
 }
 
-
-
 #pragma mark - 删除数据
 // 删除表中所有数据，或者干脆把表也一块删了
 + (BOOL)deleteTableAllData:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId isKeepTable:(BOOL)isKeep {
@@ -441,6 +309,7 @@ static CWSqliteModelTool * instance = nil;
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     if (![cls respondsToSelector:@selector(primaryKey)]) {
         NSLog(@"如果想要操作这个模型，必须要实现+ (NSString *)primaryKey;这个方法，来告诉我主键信息");
+        dispatch_semaphore_signal([[self shareInstance] dsema]);
         return NO;
     }
     NSString *primaryKey = [cls primaryKey];
@@ -477,6 +346,7 @@ static CWSqliteModelTool * instance = nil;
 
     if (!(columnNames.count == relations.count && relations.count == values.count)) {
         NSLog(@"columnNames、relations、values元素个数请保持一致!");
+        dispatch_semaphore_signal([[self shareInstance] dsema]);
         return NO;
     }
     
@@ -503,8 +373,7 @@ static CWSqliteModelTool * instance = nil;
     return result;
 }
 
-
-#pragma mark - 更新数据库表结构、字段改名、数据迁移
+#pragma mark - 更新数据库表结构、数据迁移
 // 更新表并迁移数据
 + (BOOL)updateTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId{
     
@@ -517,6 +386,7 @@ static CWSqliteModelTool * instance = nil;
     // 类方法可以直接响应 对象方法[cls new] responds...
     if (![cls respondsToSelector:@selector(primaryKey)]) {
         NSLog(@"如果想要操作这个模型，必须要实现+ (NSString *)primaryKey;这个方法，来告诉我主键信息");
+        dispatch_semaphore_signal([[self shareInstance] dsema]);
         return NO;
     }
     
@@ -564,7 +434,6 @@ static CWSqliteModelTool * instance = nil;
         
     }
     
-    
     NSString *deleteOldTable = [NSString stringWithFormat:@"drop table if exists %@",tableName];
     [execSqls addObject:deleteOldTable];
     
@@ -576,6 +445,16 @@ static CWSqliteModelTool * instance = nil;
     dispatch_semaphore_signal([[self shareInstance] dsema]);
 
     return result;
+}
+
+
++ (NSDictionary *)CWDBNameToValueRelationTypeDic {
+    return @{@(CWDBRelationTypeMore):@">",
+             @(CWDBRelationTypeLess):@"<",
+             @(CWDBRelationTypeEqual):@"=",
+             @(CWDBRelationTypeMoreEqual):@">=",
+             @(CWDBRelationTypeLessEqual):@"<="
+             };
 }
 
 @end

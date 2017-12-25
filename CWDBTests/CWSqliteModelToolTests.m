@@ -39,45 +39,45 @@
 }
 
 - (void)testCreateSQLTable {
-    BOOL result = [CWSqliteModelTool createSQLTable:[Student class] uid:@"CWDB" targetId:@"53class"];
-    XCTAssertTrue(result);
+//    BOOL result = [CWSqliteModelTool createSQLTable:[Student class] uid:@"CWDB" targetId:@"53class"];
+//    XCTAssertTrue(result);
 }
 
 #pragma mark - 测试插入数据
 // 测试插入数据
-- (void)testInsertModel {
-    // 创建表格
-    BOOL result = [CWSqliteModelTool createSQLTable:[Student class] uid:@"Chavez" targetId:nil];
-    XCTAssertTrue(result);
-    
-    Student *stu = [[Student alloc] init];
-    stu.stuId = 10086;
-    stu.name = @"Alibaba";
-    stu.age = 16;
-    stu.height = 165;
-    // 插入数据
-    BOOL result1 = [CWSqliteModelTool insertModel:stu uid:@"Chavez" targetId:nil];
-    XCTAssertTrue(result1);
-    
-    Student *stu1 = [[Student alloc] init];
-    stu1.stuId = 10010;
-    stu1.name = @"Tencent";
-    stu1.age = 17;
-    stu1.height = 182;
-    // 插入数据
-    BOOL result2 = [CWSqliteModelTool insertModel:stu1 uid:@"Chavez" targetId:nil];
-    XCTAssertTrue(result2);
-    
-    Student *stu2 = [[Student alloc] init];
-    stu2.stuId = 10000;
-    stu2.name = @"Baidu";
-    stu2.age = 18;
-    stu2.height = 180;
-    // 插入数据
-    BOOL result3 = [CWSqliteModelTool insertModel:stu2 uid:@"Chavez" targetId:nil];
-    XCTAssertTrue(result3);
-    
-}
+//- (void)testInsertModel {
+//    // 创建表格
+//    BOOL result = [CWSqliteModelTool createSQLTable:[Student class] uid:@"Chavez" targetId:nil];
+//    XCTAssertTrue(result);
+//
+//    Student *stu = [[Student alloc] init];
+//    stu.stuId = 10086;
+//    stu.name = @"Alibaba";
+//    stu.age = 16;
+//    stu.height = 165;
+//    // 插入数据
+//    BOOL result1 = [CWSqliteModelTool insertModel:stu uid:@"Chavez" targetId:nil];
+//    XCTAssertTrue(result1);
+//
+//    Student *stu1 = [[Student alloc] init];
+//    stu1.stuId = 10010;
+//    stu1.name = @"Tencent";
+//    stu1.age = 17;
+//    stu1.height = 182;
+//    // 插入数据
+//    BOOL result2 = [CWSqliteModelTool insertModel:stu1 uid:@"Chavez" targetId:nil];
+//    XCTAssertTrue(result2);
+//
+//    Student *stu2 = [[Student alloc] init];
+//    stu2.stuId = 10000;
+//    stu2.name = @"Baidu";
+//    stu2.age = 18;
+//    stu2.height = 180;
+//    // 插入数据
+//    BOOL result3 = [CWSqliteModelTool insertModel:stu2 uid:@"Chavez" targetId:nil];
+//    XCTAssertTrue(result3);
+//
+//}
 #pragma mark - 测试数据查询
 // 测试查询数据
 - (void)testQueryModels {

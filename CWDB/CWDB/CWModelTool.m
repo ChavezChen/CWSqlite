@@ -218,7 +218,7 @@
     return date;
 }
 
-#pragma mark 集合类型转JSON字符串
+#pragma mark - 集合类型转JSON字符串
 // 数组转字符串
 + (NSString *)stringWithArray:(id)array {
     
@@ -259,7 +259,7 @@
     }
 }
 
-#pragma mark JSON字符串转集合类型
+#pragma mark - JSON字符串转集合类型
 // 字符串转数组(还原)
 + (id)arrayWithString:(NSString *)str type:(NSString *)type{
     if ([str hasSuffix:@"CWCustomCollection"]) {
@@ -326,7 +326,7 @@
     return result;
 }
 
-#pragma mark 模型转字典
+#pragma mark - 模型转字典
 + (NSDictionary *)dictWithModel:(id)model {
     // 获取类的所有成员变量的名称与类型
     NSDictionary *nameTypeDict = [CWModelTool classIvarNameAndTypeDic:[model class]];
@@ -345,7 +345,7 @@
     return allIvarValues;
 }
 
-#pragma mark 字典转模型
+#pragma mark - 字典转模型
 + (id)model:(Class)cls Dict:(NSDictionary *)dict {
     id model = [cls new];
     // 获取所有属性名

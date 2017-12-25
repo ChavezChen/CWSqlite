@@ -20,6 +20,7 @@
     NSMutableArray *resultArray = [CWDatabase querySql:queryCreateSqlStr uid:uid];
     return resultArray.count > 0;
 }
+
 // 获取表的所有字段名，排序后返回
 + (NSArray *)allTableColumnNames:(NSString *)tableName uid:(NSString *)uid {
     
