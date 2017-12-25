@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    [self testGroupInsert];
+    [self testGroupInsert];
     
 //    [self testMultiThreadingSqliteMore1];
 //    [self testQuery];
@@ -29,8 +29,10 @@
 - (void)testGroupInsert {
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 1; i < 2000; i++) {
+        @autoreleasepool {
         Student *stu = [self studentWithId:i];
         [arr addObject:stu];
+        }
     }
     NSLog(@"开始插入数据");
     // 2017-12-23 16:25:46.145023+0800 CWDB[14678:1604328] 开始插入数据

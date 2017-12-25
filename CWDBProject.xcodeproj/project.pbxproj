@@ -7,26 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		041490101FE765EC00D8DC34 /* School.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414900F1FE765EC00D8DC34 /* School.m */; };
 		041EEC461FDE2D310048A0F7 /* CWSqliteTableToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 041EEC451FDE2D310048A0F7 /* CWSqliteTableToolTests.m */; };
 		047ECF991FD7D0200022598C /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6628423C1FD25FBC00809501 /* libsqlite3.0.tbd */; };
 		047ECF9B1FD7E9B40022598C /* CWSqliteModelToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */; };
-		047ECF9E1FD9112F0022598C /* CWSqliteTableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */; };
-		04AFC52B1FECD4EB00EFAA55 /* 001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AFC52A1FECD4EB00EFAA55 /* 001@2x.png */; };
-		6628420D1FCEA78B00809501 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6628420B1FCEA78B00809501 /* Main.storyboard */; };
-		6628420F1FCEA78B00809501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6628420E1FCEA78B00809501 /* Assets.xcassets */; };
-		662842121FCEA78B00809501 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 662842101FCEA78B00809501 /* LaunchScreen.storyboard */; };
 		6628421F1FCEA78B00809501 /* CWDBTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6628421E1FCEA78B00809501 /* CWDBTests.m */; };
 		6628422A1FCEA78B00809501 /* CWDBUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842291FCEA78B00809501 /* CWDBUITests.m */; };
-		6628423A1FD25F5500809501 /* CWDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842391FD25F5500809501 /* CWDatabase.m */; };
 		6628423E1FD3928D00809501 /* CWDatabaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6628423D1FD3928D00809501 /* CWDatabaseTest.m */; };
-		662842411FD4040C00809501 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842401FD4040C00809501 /* Student.m */; };
-		662842481FD4043D00809501 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842441FD4043D00809501 /* ViewController.m */; };
-		662842491FD4043D00809501 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842451FD4043D00809501 /* main.m */; };
-		6628424A1FD4043D00809501 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842461FD4043D00809501 /* AppDelegate.m */; };
-		6628424D1FD4050500809501 /* CWSqliteModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6628424C1FD4050500809501 /* CWSqliteModelTool.m */; };
-		662842531FD4053400809501 /* CWModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842521FD4053400809501 /* CWModelTool.m */; };
 		662842561FD416EE00809501 /* CWModelToolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 662842551FD416EE00809501 /* CWModelToolTests.m */; };
+		666188BC1FF142530038D644 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188A41FF142530038D644 /* ViewController.m */; };
+		666188BD1FF142530038D644 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188A51FF142530038D644 /* Student.m */; };
+		666188BE1FF142530038D644 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188A61FF142530038D644 /* main.m */; };
+		666188BF1FF142530038D644 /* School.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188A71FF142530038D644 /* School.m */; };
+		666188C01FF142530038D644 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188A81FF142530038D644 /* AppDelegate.m */; };
+		666188C11FF142530038D644 /* 001@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 666188A91FF142530038D644 /* 001@2x.png */; };
+		666188C61FF142530038D644 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666188B61FF142530038D644 /* Assets.xcassets */; };
+		666188C71FF142530038D644 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666188B71FF142530038D644 /* LaunchScreen.storyboard */; };
+		666188C81FF142530038D644 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 666188B91FF142530038D644 /* Main.storyboard */; };
+		666188C91FF142530038D644 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 666188BB1FF142530038D644 /* Info.plist */; };
+		666188D41FF143440038D644 /* CWDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188CC1FF143440038D644 /* CWDatabase.m */; };
+		666188D51FF143440038D644 /* CWSqliteModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188CF1FF143440038D644 /* CWSqliteModelTool.m */; };
+		666188D61FF143440038D644 /* CWModelTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188D01FF143440038D644 /* CWModelTool.m */; };
+		666188D71FF143440038D644 /* CWSqliteTableTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 666188D31FF143440038D644 /* CWSqliteTableTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,41 +48,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0414900E1FE765EC00D8DC34 /* School.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = School.h; sourceTree = "<group>"; };
-		0414900F1FE765EC00D8DC34 /* School.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = School.m; sourceTree = "<group>"; };
 		041EEC451FDE2D310048A0F7 /* CWSqliteTableToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteTableToolTests.m; sourceTree = "<group>"; };
 		047ECF9A1FD7E9B40022598C /* CWSqliteModelToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteModelToolTests.m; sourceTree = "<group>"; };
-		047ECF9C1FD9112F0022598C /* CWSqliteTableTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWSqliteTableTool.h; sourceTree = "<group>"; };
-		047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteTableTool.m; sourceTree = "<group>"; };
-		04AFC52A1FECD4EB00EFAA55 /* 001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "001@2x.png"; sourceTree = "<group>"; };
-		662842021FCEA78B00809501 /* CWDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6628420C1FCEA78B00809501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6628420E1FCEA78B00809501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		662842111FCEA78B00809501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		662842131FCEA78B00809501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6628421A1FCEA78B00809501 /* CWDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		662842021FCEA78B00809501 /* CWDBProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWDBProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6628421A1FCEA78B00809501 /* CWDBProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWDBProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6628421E1FCEA78B00809501 /* CWDBTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWDBTests.m; sourceTree = "<group>"; };
 		662842201FCEA78B00809501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		662842251FCEA78B00809501 /* CWDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		662842251FCEA78B00809501 /* CWDBProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CWDBProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		662842291FCEA78B00809501 /* CWDBUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWDBUITests.m; sourceTree = "<group>"; };
 		6628422B1FCEA78B00809501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		662842381FD25F5500809501 /* CWDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWDatabase.h; sourceTree = "<group>"; };
-		662842391FD25F5500809501 /* CWDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWDatabase.m; sourceTree = "<group>"; };
 		6628423C1FD25FBC00809501 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		6628423D1FD3928D00809501 /* CWDatabaseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWDatabaseTest.m; sourceTree = "<group>"; };
-		6628423F1FD4040C00809501 /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
-		662842401FD4040C00809501 /* Student.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
-		662842431FD4043D00809501 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		662842441FD4043D00809501 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		662842451FD4043D00809501 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		662842461FD4043D00809501 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		662842471FD4043D00809501 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6628424B1FD4050500809501 /* CWSqliteModelTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWSqliteModelTool.h; sourceTree = "<group>"; };
-		6628424C1FD4050500809501 /* CWSqliteModelTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWSqliteModelTool.m; sourceTree = "<group>"; };
-		662842511FD4053400809501 /* CWModelTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWModelTool.h; sourceTree = "<group>"; };
-		662842521FD4053400809501 /* CWModelTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWModelTool.m; sourceTree = "<group>"; };
-		662842541FD4104900809501 /* CWModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CWModelProtocol.h; sourceTree = "<group>"; };
 		662842551FD416EE00809501 /* CWModelToolTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CWModelToolTests.m; sourceTree = "<group>"; };
+		666188A21FF142530038D644 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		666188A31FF142530038D644 /* School.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = School.h; sourceTree = "<group>"; };
+		666188A41FF142530038D644 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		666188A51FF142530038D644 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
+		666188A61FF142530038D644 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		666188A71FF142530038D644 /* School.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = School.m; sourceTree = "<group>"; };
+		666188A81FF142530038D644 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		666188A91FF142530038D644 /* 001@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "001@2x.png"; sourceTree = "<group>"; };
+		666188AA1FF142530038D644 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		666188AB1FF142530038D644 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		666188B61FF142530038D644 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		666188B81FF142530038D644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		666188BA1FF142530038D644 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		666188BB1FF142530038D644 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		666188CB1FF143440038D644 /* CWSqliteModelTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWSqliteModelTool.h; sourceTree = "<group>"; };
+		666188CC1FF143440038D644 /* CWDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWDatabase.m; sourceTree = "<group>"; };
+		666188CD1FF143440038D644 /* CWModelTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWModelTool.h; sourceTree = "<group>"; };
+		666188CE1FF143440038D644 /* CWSqliteTableTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWSqliteTableTool.h; sourceTree = "<group>"; };
+		666188CF1FF143440038D644 /* CWSqliteModelTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWSqliteModelTool.m; sourceTree = "<group>"; };
+		666188D01FF143440038D644 /* CWModelTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWModelTool.m; sourceTree = "<group>"; };
+		666188D11FF143440038D644 /* CWDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWDatabase.h; sourceTree = "<group>"; };
+		666188D21FF143440038D644 /* CWModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWModelProtocol.h; sourceTree = "<group>"; };
+		666188D31FF143440038D644 /* CWSqliteTableTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWSqliteTableTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +114,7 @@
 		662841F91FCEA78B00809501 = {
 			isa = PBXGroup;
 			children = (
-				662842041FCEA78B00809501 /* CWDB */,
+				666188A01FF142530038D644 /* CWDBProject */,
 				6628421D1FCEA78B00809501 /* CWDBTests */,
 				662842281FCEA78B00809501 /* CWDBUITests */,
 				662842031FCEA78B00809501 /* Products */,
@@ -124,29 +125,11 @@
 		662842031FCEA78B00809501 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				662842021FCEA78B00809501 /* CWDB.app */,
-				6628421A1FCEA78B00809501 /* CWDBTests.xctest */,
-				662842251FCEA78B00809501 /* CWDBUITests.xctest */,
+				662842021FCEA78B00809501 /* CWDBProject.app */,
+				6628421A1FCEA78B00809501 /* CWDBProjectTests.xctest */,
+				662842251FCEA78B00809501 /* CWDBProjectUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		662842041FCEA78B00809501 /* CWDB */ = {
-			isa = PBXGroup;
-			children = (
-				662842421FD4043D00809501 /* Clasess */,
-				662842371FCEA79E00809501 /* CWDB */,
-				6628420B1FCEA78B00809501 /* Main.storyboard */,
-				6628420E1FCEA78B00809501 /* Assets.xcassets */,
-				662842101FCEA78B00809501 /* LaunchScreen.storyboard */,
-				662842131FCEA78B00809501 /* Info.plist */,
-				04AFC52A1FECD4EB00EFAA55 /* 001@2x.png */,
-				6628423F1FD4040C00809501 /* Student.h */,
-				662842401FD4040C00809501 /* Student.m */,
-				0414900E1FE765EC00D8DC34 /* School.h */,
-				0414900F1FE765EC00D8DC34 /* School.m */,
-			);
-			path = CWDB;
 			sourceTree = "<group>";
 		};
 		6628421D1FCEA78B00809501 /* CWDBTests */ = {
@@ -171,22 +154,6 @@
 			path = CWDBUITests;
 			sourceTree = "<group>";
 		};
-		662842371FCEA79E00809501 /* CWDB */ = {
-			isa = PBXGroup;
-			children = (
-				662842381FD25F5500809501 /* CWDatabase.h */,
-				662842391FD25F5500809501 /* CWDatabase.m */,
-				6628424B1FD4050500809501 /* CWSqliteModelTool.h */,
-				6628424C1FD4050500809501 /* CWSqliteModelTool.m */,
-				662842511FD4053400809501 /* CWModelTool.h */,
-				662842521FD4053400809501 /* CWModelTool.m */,
-				047ECF9C1FD9112F0022598C /* CWSqliteTableTool.h */,
-				047ECF9D1FD9112F0022598C /* CWSqliteTableTool.m */,
-				662842541FD4104900809501 /* CWModelProtocol.h */,
-			);
-			path = CWDB;
-			sourceTree = "<group>";
-		};
 		6628423B1FD25FBC00809501 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,24 +162,58 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		662842421FD4043D00809501 /* Clasess */ = {
+		666188A01FF142530038D644 /* CWDBProject */ = {
 			isa = PBXGroup;
 			children = (
-				662842431FD4043D00809501 /* AppDelegate.h */,
-				662842461FD4043D00809501 /* AppDelegate.m */,
-				662842451FD4043D00809501 /* main.m */,
-				662842471FD4043D00809501 /* ViewController.h */,
-				662842441FD4043D00809501 /* ViewController.m */,
+				666188CA1FF143440038D644 /* CWDB */,
+				666188A11FF142530038D644 /* Clasess */,
+				666188B61FF142530038D644 /* Assets.xcassets */,
+				666188B71FF142530038D644 /* LaunchScreen.storyboard */,
+				666188B91FF142530038D644 /* Main.storyboard */,
+				666188BB1FF142530038D644 /* Info.plist */,
+			);
+			path = CWDBProject;
+			sourceTree = "<group>";
+		};
+		666188A11FF142530038D644 /* Clasess */ = {
+			isa = PBXGroup;
+			children = (
+				666188A91FF142530038D644 /* 001@2x.png */,
+				666188A21FF142530038D644 /* AppDelegate.h */,
+				666188A81FF142530038D644 /* AppDelegate.m */,
+				666188AB1FF142530038D644 /* ViewController.h */,
+				666188A41FF142530038D644 /* ViewController.m */,
+				666188AA1FF142530038D644 /* Student.h */,
+				666188A51FF142530038D644 /* Student.m */,
+				666188A31FF142530038D644 /* School.h */,
+				666188A71FF142530038D644 /* School.m */,
+				666188A61FF142530038D644 /* main.m */,
 			);
 			path = Clasess;
 			sourceTree = "<group>";
 		};
+		666188CA1FF143440038D644 /* CWDB */ = {
+			isa = PBXGroup;
+			children = (
+				666188D21FF143440038D644 /* CWModelProtocol.h */,
+				666188CB1FF143440038D644 /* CWSqliteModelTool.h */,
+				666188CF1FF143440038D644 /* CWSqliteModelTool.m */,
+				666188D11FF143440038D644 /* CWDatabase.h */,
+				666188CC1FF143440038D644 /* CWDatabase.m */,
+				666188CD1FF143440038D644 /* CWModelTool.h */,
+				666188D01FF143440038D644 /* CWModelTool.m */,
+				666188CE1FF143440038D644 /* CWSqliteTableTool.h */,
+				666188D31FF143440038D644 /* CWSqliteTableTool.m */,
+			);
+			path = CWDB;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		662842011FCEA78B00809501 /* CWDB */ = {
+		662842011FCEA78B00809501 /* CWDBProject */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6628422E1FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDB" */;
+			buildConfigurationList = 6628422E1FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBProject" */;
 			buildPhases = (
 				662841FE1FCEA78B00809501 /* Sources */,
 				662841FF1FCEA78B00809501 /* Frameworks */,
@@ -222,14 +223,14 @@
 			);
 			dependencies = (
 			);
-			name = CWDB;
+			name = CWDBProject;
 			productName = CWDB;
-			productReference = 662842021FCEA78B00809501 /* CWDB.app */;
+			productReference = 662842021FCEA78B00809501 /* CWDBProject.app */;
 			productType = "com.apple.product-type.application";
 		};
-		662842191FCEA78B00809501 /* CWDBTests */ = {
+		662842191FCEA78B00809501 /* CWDBProjectTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 662842311FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBTests" */;
+			buildConfigurationList = 662842311FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBProjectTests" */;
 			buildPhases = (
 				662842161FCEA78B00809501 /* Sources */,
 				662842171FCEA78B00809501 /* Frameworks */,
@@ -240,14 +241,14 @@
 			dependencies = (
 				6628421C1FCEA78B00809501 /* PBXTargetDependency */,
 			);
-			name = CWDBTests;
+			name = CWDBProjectTests;
 			productName = CWDBTests;
-			productReference = 6628421A1FCEA78B00809501 /* CWDBTests.xctest */;
+			productReference = 6628421A1FCEA78B00809501 /* CWDBProjectTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		662842241FCEA78B00809501 /* CWDBUITests */ = {
+		662842241FCEA78B00809501 /* CWDBProjectUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 662842341FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBUITests" */;
+			buildConfigurationList = 662842341FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBProjectUITests" */;
 			buildPhases = (
 				662842211FCEA78B00809501 /* Sources */,
 				662842221FCEA78B00809501 /* Frameworks */,
@@ -258,9 +259,9 @@
 			dependencies = (
 				662842271FCEA78B00809501 /* PBXTargetDependency */,
 			);
-			name = CWDBUITests;
+			name = CWDBProjectUITests;
 			productName = CWDBUITests;
-			productReference = 662842251FCEA78B00809501 /* CWDBUITests.xctest */;
+			productReference = 662842251FCEA78B00809501 /* CWDBProjectUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -288,7 +289,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 662841FD1FCEA78B00809501 /* Build configuration list for PBXProject "CWDB" */;
+			buildConfigurationList = 662841FD1FCEA78B00809501 /* Build configuration list for PBXProject "CWDBProject" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -301,9 +302,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				662842011FCEA78B00809501 /* CWDB */,
-				662842191FCEA78B00809501 /* CWDBTests */,
-				662842241FCEA78B00809501 /* CWDBUITests */,
+				662842011FCEA78B00809501 /* CWDBProject */,
+				662842191FCEA78B00809501 /* CWDBProjectTests */,
+				662842241FCEA78B00809501 /* CWDBProjectUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -313,10 +314,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AFC52B1FECD4EB00EFAA55 /* 001@2x.png in Resources */,
-				662842121FCEA78B00809501 /* LaunchScreen.storyboard in Resources */,
-				6628420F1FCEA78B00809501 /* Assets.xcassets in Resources */,
-				6628420D1FCEA78B00809501 /* Main.storyboard in Resources */,
+				666188C71FF142530038D644 /* LaunchScreen.storyboard in Resources */,
+				666188C61FF142530038D644 /* Assets.xcassets in Resources */,
+				666188C11FF142530038D644 /* 001@2x.png in Resources */,
+				666188C91FF142530038D644 /* Info.plist in Resources */,
+				666188C81FF142530038D644 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,15 +343,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				047ECF9E1FD9112F0022598C /* CWSqliteTableTool.m in Sources */,
-				662842481FD4043D00809501 /* ViewController.m in Sources */,
-				662842531FD4053400809501 /* CWModelTool.m in Sources */,
-				6628424D1FD4050500809501 /* CWSqliteModelTool.m in Sources */,
-				662842411FD4040C00809501 /* Student.m in Sources */,
-				6628424A1FD4043D00809501 /* AppDelegate.m in Sources */,
-				6628423A1FD25F5500809501 /* CWDatabase.m in Sources */,
-				662842491FD4043D00809501 /* main.m in Sources */,
-				041490101FE765EC00D8DC34 /* School.m in Sources */,
+				666188BC1FF142530038D644 /* ViewController.m in Sources */,
+				666188D61FF143440038D644 /* CWModelTool.m in Sources */,
+				666188BE1FF142530038D644 /* main.m in Sources */,
+				666188D51FF143440038D644 /* CWSqliteModelTool.m in Sources */,
+				666188D71FF143440038D644 /* CWSqliteTableTool.m in Sources */,
+				666188BD1FF142530038D644 /* Student.m in Sources */,
+				666188BF1FF142530038D644 /* School.m in Sources */,
+				666188D41FF143440038D644 /* CWDatabase.m in Sources */,
+				666188C01FF142530038D644 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,31 +380,31 @@
 /* Begin PBXTargetDependency section */
 		6628421C1FCEA78B00809501 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 662842011FCEA78B00809501 /* CWDB */;
+			target = 662842011FCEA78B00809501 /* CWDBProject */;
 			targetProxy = 6628421B1FCEA78B00809501 /* PBXContainerItemProxy */;
 		};
 		662842271FCEA78B00809501 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 662842011FCEA78B00809501 /* CWDB */;
+			target = 662842011FCEA78B00809501 /* CWDBProject */;
 			targetProxy = 662842261FCEA78B00809501 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6628420B1FCEA78B00809501 /* Main.storyboard */ = {
+		666188B71FF142530038D644 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6628420C1FCEA78B00809501 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		662842101FCEA78B00809501 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				662842111FCEA78B00809501 /* Base */,
+				666188B81FF142530038D644 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		666188B91FF142530038D644 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				666188BA1FF142530038D644 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -517,8 +519,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = CWDB/Info.plist;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "$(SRCROOT)/CWDBProject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -530,8 +536,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = CWDB/Info.plist;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "$(SRCROOT)/CWDBProject/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -548,7 +558,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDBTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWDB.app/CWDB";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWDBProject.app/CWDBProject";
 			};
 			name = Debug;
 		};
@@ -562,7 +572,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cw.CWDBTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWDB.app/CWDB";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CWDBProject.app/CWDBProject";
 			};
 			name = Release;
 		};
@@ -595,7 +605,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		662841FD1FCEA78B00809501 /* Build configuration list for PBXProject "CWDB" */ = {
+		662841FD1FCEA78B00809501 /* Build configuration list for PBXProject "CWDBProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6628422C1FCEA78B00809501 /* Debug */,
@@ -604,7 +614,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6628422E1FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDB" */ = {
+		6628422E1FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6628422F1FCEA78B00809501 /* Debug */,
@@ -613,7 +623,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		662842311FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBTests" */ = {
+		662842311FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBProjectTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				662842321FCEA78B00809501 /* Debug */,
@@ -622,7 +632,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		662842341FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBUITests" */ = {
+		662842341FCEA78B00809501 /* Build configuration list for PBXNativeTarget "CWDBProjectUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				662842351FCEA78B00809501 /* Debug */,

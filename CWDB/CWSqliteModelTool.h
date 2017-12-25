@@ -168,6 +168,15 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
 
 #pragma mark - 更新数据库表结构，数据迁移
 // 更新数据库表结构、字段改名、数据迁移
+
+/**
+ 更新数据库某表的结构并且数据迁移，大多数情况下，你并不需要自行调用这个方法，因为在我们插入或这更新数据的方法内，已经做了判断，如果需要更新数据库表结构，在插入或者更新数据时就已经做了更新与迁移了，如果你实在需要自行执行更新操作，调用此方法即可
+
+ @param cls         模型所属的类（模型所属的类+targetId为需要更新的数据库表的名字）
+ @param uid         userId，可为nil，数据库名称是以uid命名，保存数据时传的啥，这里就传啥
+ @param targetId    目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
+ @return            更新是否成功
+ */
 + (BOOL)updateTable:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
 
 @end

@@ -9,10 +9,9 @@
 #import "CWDatabase.h"
 #import <sqlite3.h>
 
+//#define kCWDBCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
-#define kCWDBCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
-
-//#define kCWDBCachePath @"/Users/mac/Desktop"
+#define kCWDBCachePath @"/Users/chenwang/Desktop"
 
 @interface CWDatabase ()
 
@@ -186,5 +185,6 @@ static int CWDBBusyCallBack(void *f, int count) {
 + (void)rollBackTransaction:(NSString *)uid {
      [self execSQL:@"ROLLBACK TRANSACTION" uid:uid];
 }
+
 
 @end
