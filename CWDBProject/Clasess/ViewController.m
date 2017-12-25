@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self testGroupInsert];
+//    [self testGroupInsert];
     
 //    [self testMultiThreadingSqliteMore1];
 //    [self testQuery];
