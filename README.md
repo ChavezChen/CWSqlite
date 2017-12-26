@@ -3,18 +3,18 @@
 ## 前言
 大约在公元19..好吧，之前，做过一段时间的IMSDK的开发，数据库也算其中一个比较重要的功能，由于当时属于一个小白阶段，我只能围观围观代码，一直想着自己有一天能封装一个数据库，加上最近学了一丢丢数据库的东西，就尝试着做了一下，为了不让计划太监，我特意每实现一个细节都用文章记录下来，毕竟自制力不一定靠谱。最终。做出来了，做出来的效果我基本满意，首先介绍一下我们的功能：**嗯。。。一句话：简单、实用。** 
 ![效果](https://github.com/ChavezChen/CWDB/blob/master/lalala.gif)
-- 增删查改通通实现，一行代码，你给我一个模型，我还你一个数据库。
-- 多类型支持存储，所有基本数据类型（int，float...），NSArray，NSMutableArray，NSDictionary，NSMutableDictionary，UIImage，NSURL，UIColor，NSSet，NSRange，NSAttributedString，NSData，自定义模型以及数组、字典、模型相互嵌套。一行代码，你给我一个模型，我替你保存整个世界。
-- 多类型支持查询，一行代码，无缝查询，你存我这的是什么，我还你的就是什么，你给我一个西瓜，我一定不会给你一颗芝麻，还你的一定是西瓜，这是男人的义务。
-- 多线程安全，当有一天你左手给我一个西瓜，右手给我一个芝麻，我一定会帮你把西瓜和芝麻都存好，不会存了芝麻丢了西瓜,这是男人的责任。
-- 一统新增与修改两大操作，一行代码，你传我一个模型，我帮你分辨需要插入还是更新，这是男人的第六感，我懂你～
-- 秘密升级数据库并迁移数据，一行代码，你给我一个模型，我帮你升级并迁移数据库，这是男人的第七感，我晓得你～
-- 然后还有什么能吹的么？暂时就这些吧。
+- **增删查改通通实现**:   一行代码，你给我一个模型，我还你一个数据库。
+- **多类型支持存储**:   所有基本数据类型（int，float...），NSArray，NSMutableArray，NSDictionary，NSMutableDictionary，UIImage，NSURL，UIColor，NSSet，NSRange，NSAttributedString，NSData，自定义模型以及数组、字典、模型相互嵌套。一行代码，你给我一个模型，我替你保存整个世界。
+- **多类型支持查询**:   一行代码，无缝查询，你存我这的是什么，我还你的就是什么，你给我一个西瓜，我一定不会给你一颗芝麻，还你的一定是西瓜，这是男人的义务。
+- **多线程安全**:   当有一天你左手给我一个西瓜，右手给我一个芝麻，我一定会帮你把西瓜和芝麻都存好，不会存了芝麻丢了西瓜,这是男人的责任。
+- **一统新增与修改两大操作**:   一行代码，你传我一个模型，我帮你分辨需要插入还是更新，这是男人的第六感，我懂你～
+- **秘密升级数据库并迁移数据**:   一行代码，你给我一个模型，我帮你升级并迁移数据库，这是男人的第七感，我晓得你～
+- **然后还有什么能吹的么？暂时就这些吧。想到了再补充。**
 
 ## 来一句洋文，How to use？
 
 ### 第一步，需要保存入数据库的模型Import并遵守<CWModelProtocol>协议，实现+ (NSString *)primaryKey；方法返回主键信息，主键为数据的唯一标识，如
- ```
+ ```objective-c
   // 一个学校模型，遵守CWModelProtocol协议
 @interface CWSchool : NSObject<CWModelProtocol>
 
@@ -37,7 +37,7 @@
 ### 第二步，一行代码随心所欲来操作你的数据库吧～
 
 - 插入或者更新数据
-```
+```objective-c
 // 使用工厂方法创建的shool模型
 CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想学院"];
     
@@ -46,7 +46,7 @@ BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil
 
 ```
 - 异步插入或更新数据
-```
+```objective-c
 CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想女子学院"];
 dispatch_async(dispatch_get_global_queue(0, 0), ^{
     BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil];
@@ -63,14 +63,14 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
 再次，关于数据库升级以及数据库迁移以及字段改名，我们先模拟一个场景，比如我存在数据库的数据为聊天记录Message，里面有10个成员变量，有一天，业务的提升，我要在Message里面多加一个成员变量，比如新增一个成员变量用来标记是否是撤回的消息，这个时候由于数据库的表结构固定死了没这个字段，**我们将要进行数据库升级，并且要将之前的数据都保留下来，这么麻烦？这个要怎么做呢？这里压根不需要你思考这个问题，我们作为一个负责任的男人，我们很负责任的告诉你，假如你的Message模型增加了1个两个10个成员变量，你只管加，加了之后只管调用上面的方法存，数据的升级以及迁移我们默认会帮你完成！！！** 
 
 当然，还有另外一种场景，比如你的Message模型里面有10个成员变量，其中有一个成员变量为 VoiceUrl（语音路径），有一天脑袋被门夹了一下，你们要把VoiceUrl改为VoicePath，并且以前存在数据库的值也不能删除，怎么办？难道你只能说 **what‘s the fuck**？？这里就用到我们的字段改名，非常的方便，首先你尽管在模型里面将VoiceUrl改为VoicePath，然后你改了之后需要在模型里实现我们CWModelProtocol协议的另一个方法，直接上用例:
-```
+```objective-c
 // 字段改名，实现这个方法，key 为 新的成员变量名称，value为老的成员变量名称，实现之后我们会帮你把之前VoiceUrl下面的值存到VoicePath下！
 + (NSDictionary *)newNameToOldNameDic {
     return @{@"VoicePath" : @"VoiceUrl"};
 }
 ```
 **最后一个场景**，假如你的模型有10个成员变量,但是其中有几个成员变量我不希望存到数据库里面，怎么办？？同样的，在模型里实现我们CWModelProtocol协议的方法,直接上用例
-```
+```objective-c
 // 不想将模型里面的height 以及 weight 保存到数据库,在模型的.m内实现这个方法
 + (NSArray *)ignoreColumnNames {
     return @[@"height",@"weight"];
@@ -78,7 +78,7 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
 ```
 **其他方法使用**
 - 批量插入或者更新数据
-```
+```objective-c
 // 生成5个学校模型保存在数组
 NSMutableArray *schools = [NSMutableArray array];
 for (int i = 0; i < 5; i++) {
@@ -92,22 +92,22 @@ for (int i = 0; i < 5; i++) {
 BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
 ```
 - 查询数据库表内所有数据
-```
+```objective-c
 // 查询CWShool表里的所有数据，uid对应数据库，targetId和表名姓关。返回的数组里面的元素都是CWSchool的模型。
 NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class] uid:nil targetId:nil];
 ```
 - 按照单个条件查询数据表内的数据
-```
+```objective-c
 // 查询CWSchool数据表内 schoolId < 2 的所有数据,详细讲解可以看代码里的API注释
 NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] name:@"schoolId" relation:CWDBRelationTypeLess value:@(2) uid:nil targetId:nil];
 ```
 - 按照多个条件查询
-```
+```objective-c
 // 查询CWSchool数据表内 schoolId < 2 或者 schoolId >= 5 的所有数据,详细讲解可以看代码里的API注释
 NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] columnNames:@[@"schoolId",@"schoolId"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeMoreEqual)] values:@[@(2),@(5)] isAnd:NO uid:nil targetId:nil];
 ```
 - 自己写sql语句查询
-```
+```objective-c
 NSString *tableName = [NSString stringWithFormat:@"%@",NSStringFromClass([CWSchool class])];
 // 查询学校名字为‘梦想女子学院2’的所有数据
 NSString *querySql = [NSString stringWithFormat:@"select * from %@ where schoolName = '梦想女子学院2'",tableName];
@@ -116,23 +116,23 @@ NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] Sql:querySql u
 
 ```
 - 删除一条数据
-```
+```objective-c
 CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想学院"];
 // 这个方法，会根据传进来的模型的主键值去找到数据表里面的数据删除，与模型的其他字段值无关
 BOOL result = [CWSqliteModelTool deleteModel:school uid:nil targetId:nil];
 ```
 - 按照单个条件删除
-```
+```objective-c
 // 删除schoolId小于2的所有数据
 BOOL result = [CWSqliteModelTool deleteModels:[CWSchool class] columnName:@"schoolId" relation:CWDBRelationTypeLess value:@(2) uid:nil targetId:nil];
 ```
 - 按照多个条件删除
-```
+```objective-c
 // 删除schoolId小于2 或者 大于5的所有数据,详细解释请看代码API注释
 BOOL result = [CWSqliteModelTool deleteModels:[CWSchool class] columnNames:@[@"schoolId",@"schoolId"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeMoreEqual)] values:@[@(1),@(5)] isAnd:NO uid:nil targetId:nil];
 ```
 - 自己写sql语句删除
-```
+```objective-c
 // 如果保存模型的时候带有targetId，这里表名需要拼接targetId，格式为 [NSString stringWithFormat:@"%@%@",NSStringFromClass([CWSchool class]),targetId];
 NSString *tableName = [NSString stringWithFormat:@"%@",NSStringFromClass([CWSchool class])];
 NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where schoolName = '梦想女子学院2'",tableName];
@@ -141,7 +141,7 @@ BOOL result = [CWSqliteModelTool deleteModelWithSql:deleteSql uid:nil];
 ```
 
 - 删除表内所有数据或者直接将表以及表内数据全部删除
-```
+```objective-c
 // 最后一个参数传NO表示部保留表结构,将表结构一起删除,传YES表示保留表
 BOOL result = [CWSqliteModelTool deleteTableAllData:[CWSchool class] uid:nil targetId:nil isKeepTable:YES];
 
