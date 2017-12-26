@@ -174,7 +174,7 @@
     NSString *tableName = [NSString stringWithFormat:@"%@",NSStringFromClass([CWSchool class])];
     NSString *querySql = [NSString stringWithFormat:@"select * from %@ where schoolName = '梦想女子学院2'",tableName];
     
-    NSArray *result = [CWSqliteModelTool queryModels:[CWStudent class] Sql:querySql uid:nil];
+    NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] Sql:querySql uid:nil];
     
     [self showMessage:[NSString stringWithFormat:@"数据库有%zd条数据",result.count]];
     NSLog(@"查询结果: %@",result);
@@ -183,7 +183,7 @@
 #pragma mark - 删除数据
 #pragma mark 删除表内所有数据或者将表一起删除
 - (void)deleteAllDataWithTable {
-    // 最后一个参数传YES 将表结构一起删除
+    // 最后一个参数传NO表示部保留表结构,将表结构一起删除,传YES表示保留表
     BOOL result = [CWSqliteModelTool deleteTableAllData:[CWSchool class] uid:nil targetId:nil isKeepTable:YES];
     
     if (result) {
@@ -196,7 +196,7 @@
 #pragma mark 删除一条数据
 - (void)deleteModel {
     CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想学院"];
-    
+    // 这个方法，会根据传进来的模型的主键值去找到数据表里面的数据删除，与模型的其他字段值无关
     BOOL result = [CWSqliteModelTool deleteModel:school uid:nil targetId:nil];
     
     if (result) {
@@ -234,6 +234,7 @@
 #pragma mark 自己写sql语句删除
 - (void)deleteModelWithSql {
     
+    // 如果保存模型的时候带有targetId，这里表名需要拼接targetId，格式为 [NSString stringWithFormat:@"%@%@",NSStringFromClass([CWSchool class]),targetId];
     NSString *tableName = [NSString stringWithFormat:@"%@",NSStringFromClass([CWSchool class])];
     NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where schoolName = '梦想女子学院2'",tableName];
     
