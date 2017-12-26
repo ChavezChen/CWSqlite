@@ -91,20 +91,20 @@
 }
 // 测试条件查询
 - (void)testQueryModelsWithRelation {
-    NSArray *models = [CWSqliteModelTool querModels:[Student class] name:@"stuId" relation:CWDBRelationTypeLessEqual value:@"50" uid:@"Chavez" targetId:nil];
+    NSArray *models = [CWSqliteModelTool queryModels:[Student class] name:@"stuId" relation:CWDBRelationTypeLessEqual value:@"50" uid:@"Chavez" targetId:nil];
     NSLog(@"query models : %@",models);
     XCTAssertNotNil(models);
 }
 // 测试多个条件查询
 - (void)testQueryModelWithMultipleConditions {
     // 根据多个条件与查询
-    NSArray *array = [CWSqliteModelTool querModels:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(182)] isAnd:YES uid:@"Chavez" targetId:nil];
+    NSArray *array = [CWSqliteModelTool queryModels:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(182)] isAnd:YES uid:@"Chavez" targetId:nil];
     
     NSLog(@"----------%@",array);
     XCTAssertNotNil(array);
     
     // 根据多个条件或查询
-    NSArray *array1 = [CWSqliteModelTool querModels:[Student class] columnNames:@[@"age",@"age",@"height"] relations:@[@(CWDBRelationTypeEqual),@(CWDBRelationTypeEqual),@(CWDBRelationTypeEqual)] values:@[@(100),@(16),@(111)] isAnd:NO uid:@"Chavez" targetId:nil];
+    NSArray *array1 = [CWSqliteModelTool queryModels:[Student class] columnNames:@[@"age",@"age",@"height"] relations:@[@(CWDBRelationTypeEqual),@(CWDBRelationTypeEqual),@(CWDBRelationTypeEqual)] values:@[@(100),@(16),@(111)] isAnd:NO uid:@"Chavez" targetId:nil];
     NSLog(@"==========%@",array1);
     
     XCTAssertNotNil(array1);

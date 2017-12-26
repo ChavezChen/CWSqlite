@@ -210,7 +210,7 @@ static CWSqliteModelTool * instance = nil;
 }
 
 // 根据sql语句查询
-+ (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid {
++ (NSArray *)queryModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid {
     
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
     NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
@@ -221,7 +221,7 @@ static CWSqliteModelTool * instance = nil;
 }
 
 // 根据单个条件查询
-+ (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
++ (NSArray *)queryModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId {
     
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
 
@@ -236,7 +236,7 @@ static CWSqliteModelTool * instance = nil;
 }
 
 // 根据多个条件查询
-+ (NSArray *)querModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
++ (NSArray *)queryModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId {
     
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
 
@@ -302,9 +302,9 @@ static CWSqliteModelTool * instance = nil;
 
 // 根据模型的主键来删除
 + (BOOL)deleteModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
-//    NSLog(@"delete--------------------------------delete1");
+    
     dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
-//    NSLog(@"delete--------------------------------delete2");
+
     Class cls = [model class];
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     if (![cls respondsToSelector:@selector(primaryKey)]) {
@@ -320,8 +320,20 @@ static CWSqliteModelTool * instance = nil;
     BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
     [CWDatabase closeDB];
     dispatch_semaphore_signal([[self shareInstance] dsema]);
-//    NSLog(@"delete--------------------------------delete3");
 
+    return result;
+}
+
+// 自己写sql语句删除
++ (BOOL)deleteModelWithSql:(NSString *)deleteSql uid:(NSString *)uid{
+    
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
+    
+    BOOL result = [CWDatabase execSQL:deleteSql uid:uid];
+    
+    [CWDatabase closeDB];
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+    
     return result;
 }
 

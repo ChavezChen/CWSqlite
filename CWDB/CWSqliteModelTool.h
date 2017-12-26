@@ -62,13 +62,16 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
 
 /**
  自己传sql语句查询
+ 写sql语句时，表名为插入数据时的 模型类型的字符串+targetId
+ 比如：插入一个 Student模型时 targetId为张三，那么这个表名为 Student张三，在自己写sql语句时表名通过这个规则写
+ 提供写法：[NSString stringWithFormat:@"%@%@",NSStringFromClass([student class]),targetId] 这样就返回了正确的表名
  
  @param cls     模型的类型，返回的数据内的元素为该类型的模型，请与保存数据时的模型类型对应
  @param sql     sql语句，如 select * from 表名 where xx = xx or/and cc = cc ...
  @param uid     userId,可为nil，数据库名称是以uid命名，保存数据时传的啥，这里就传啥
  @return        查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)querModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid;
++ (NSArray *)queryModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid;
 
 //
 
@@ -84,7 +87,7 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        targetId 目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return                查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)querModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
++ (NSArray *)queryModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
 
 /**
  根据多个条件与查询(and必须所有条件都满足才能查询到 or 满足其中一个条件就都查询得到)
@@ -103,7 +106,7 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return                查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)querModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId;
++ (NSArray *)queryModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId;
 
 
 #pragma mark -数据删除
@@ -129,6 +132,21 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @return            删除是否成功
  */
 + (BOOL)deleteModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
+
+
+/**
+ 自己传sql语句删除
+ 写sql语句时，表名为插入数据时的 模型类型的字符串+targetId
+ 比如：插入一个 Student模型时 targetId为张三，那么这个表名为 Student张三，在自己写sql语句时表名通过这个规则写
+ 提供写法：[NSString stringWithFormat:@"%@%@",NSStringFromClass([student class]),targetId] 这样就返回了正确的表名
+ 
+ @param deleteSql   执行的sql语句
+ @param uid         用户id，可为nil，数据库名称是以uid命名，保存数据时传的啥，这里就传啥
+ @return            删除是否成功
+ */
++ (BOOL)deleteModelWithSql:(NSString *)deleteSql uid:(NSString *)uid;
+
+
 
 /**
  根据单个条件删除数据库内数据
