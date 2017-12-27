@@ -12,8 +12,10 @@
 #import "CWSqliteTableTool.h"
 
 @interface CWSqliteModelTool ()
+{
+    dispatch_semaphore_t dsema;
+}
 
-@property (nonatomic,retain) dispatch_semaphore_t dsema;
 
 @end
 
@@ -23,7 +25,7 @@
 {
     self = [super init];
     if (self) {
-        self.dsema = dispatch_semaphore_create(1);
+        dsema = dispatch_semaphore_create(1);
     }
     return self;
 }
@@ -35,6 +37,10 @@ static CWSqliteModelTool * instance = nil;
         instance = [[CWSqliteModelTool alloc] init];
     });
     return instance;
+}
+
+- (dispatch_semaphore_t)dsema {
+    return dsema;
 }
 
 #pragma mark - 创建数据库表格
