@@ -143,7 +143,7 @@ BOOL result = [CWSqliteModelTool deleteModelWithSql:deleteSql uid:nil];
 
 - **删除表内所有数据或者直接将表以及表内数据全部删除**
 ```objective-c
-// 最后一个参数传NO表示部保留表结构,将表结构一起删除,传YES表示保留表
+// 最后一个参数传NO表示不保留表结构,将表结构一起删除,传YES表示保留表
 BOOL result = [CWSqliteModelTool deleteTableAllData:[CWSchool class] uid:nil targetId:nil isKeepTable:YES];
 
 ```
