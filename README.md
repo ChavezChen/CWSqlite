@@ -33,7 +33,7 @@ CWSqliteTableTool.h、CWSqliteTableTool. | 处理数据库表的工具类
 @end
  ```
  
-### 第二步，一行代码随心所欲来操作你的数据库吧～
+### 第二步，为所欲为之为所欲为操作数据库～
 
 - **插入或者更新数据**
 ```objective-c
