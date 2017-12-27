@@ -19,8 +19,15 @@ CWSqliteTableTool.h、CWSqliteTableTool. | 处理数据库表的工具类
 - **还原**: 存入数据库时为A模型，查询的数据一定还给你A模型。
 
 ## 来一句洋文，How to use？
+### 第一步，给项目添加sqlite3.0.tbd依赖库,将CWDB拖进你的项目或者使用cocoapods的方式
+```
+platform :ios, '8.0'
 
-### 第一步，将CWDB拖进你的项目（目前还没支持cocoapods，马上会支持的,写完这篇文章就去），给项目添加sqlite3.0.tbd库,需要保存入数据库的模型Import并遵守CWModelProtocol协议，实现+ (NSString *)primaryKey；方法返回主键信息，主键为数据的唯一标识，如
+target '工程名称' do
+pod ‘CWDB’, '~> 1.5.0’
+end
+```
+### 第二步，需要保存入数据库的模型Import并遵守CWModelProtocol协议，实现+ (NSString *)primaryKey；方法返回主键信息，主键为数据的唯一标识，如
  ```objective-c
 
 // 实现协议方法
@@ -33,7 +40,7 @@ CWSqliteTableTool.h、CWSqliteTableTool. | 处理数据库表的工具类
 @end
  ```
  
-### 第二步，为所欲为之为所欲为操作数据库～
+### 第三步，为所欲为之为所欲为操作数据库～
 
 - **插入或者更新数据**
 ```objective-c
