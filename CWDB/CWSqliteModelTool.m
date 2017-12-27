@@ -93,7 +93,7 @@ static CWSqliteModelTool * instance = nil;
         // 1、检查缓存，表格是否更新过,不考虑动态添加属性的情况下，只要更新更高一次即可
         if (!targetId) targetId = @"";
         NSString *cacheKey = [NSString stringWithFormat:@"%@%@CWUpdated",NSStringFromClass(cls),targetId];
-        BOOL updated = [[CWCache shareInstance] objectForKey:cacheKey]; // 表格是否更新过
+        BOOL updated = [[[CWCache shareInstance] objectForKey:cacheKey] boolValue]; // 表格是否更新过
         if (!updated) { // 2、如果表格没有更新过,检测是否需要更新
             if ([CWSqliteTableTool isTableNeedUpdate:cls uid:uid targetId:targetId] ) {
                 // 2.1、表格需要更新,则进行更新操作
