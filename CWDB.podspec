@@ -46,7 +46,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "ChavezChen" => "543438338@qq.com" }
+  s.author             = { "chenwang" => "543438338@qq.com" }
   # Or just: s.author    = "ChavezChen"
   # s.authors            = { "ChavezChen" => "543438338@qq.com" }
   # s.social_media_url   = "http://twitter.com/ChavezChen"
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/ChavezChen/CWDB.git", :tag => "s.version" }
+  s.source       = { :git => "https://github.com/ChavezChen/CWDB.git", :tag => "1.5.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
