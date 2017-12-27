@@ -20,16 +20,8 @@ CWSqliteTableTool.h、CWSqliteTableTool. | 处理数据库表的工具类
 
 ## 来一句洋文，How to use？
 
-### 第一步，需要保存入数据库的模型Import并遵守<CWModelProtocol>协议，实现+ (NSString *)primaryKey；方法返回主键信息，主键为数据的唯一标识，如
+### 第一步，将CWDB拖进你的项目（目前还没支持cocoapods，马上会支持的,写完这篇文章就去），给项目添加sqlite3.0.tbd库,需要保存入数据库的模型Import并遵守<CWModelProtocol>协议，实现+ (NSString *)primaryKey；方法返回主键信息，主键为数据的唯一标识，如
  ```objective-c
-  // 一个学校模型，遵守CWModelProtocol协议
-@interface CWSchool : NSObject<CWModelProtocol>
-
-@property (nonatomic,assign) int schoolId; // 学校ID
-@property (nonatomic,assign) float grade; // 学校评分
-@property (nonatomic,copy) NSString *schoolName; // 学校名称
-@property (nonatomic,strong) NSURL *schoolUrl; // 学校主页地址
-@end
 
 // 实现协议方法
 @implementation CWSchool
