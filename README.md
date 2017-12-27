@@ -63,14 +63,14 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
 
 **关于数据库升级以及数据库迁移**，我们先模拟一个场景，比如我存在数据库的数据为聊天记录Message，里面有10个成员变量，有一天，业务的提升，我要在Message里面多加一个成员变量，比如新增一个成员变量用来标记是否是撤回的消息，这个时候由于数据库的表结构固定死了没这个字段，**我们将要进行数据库升级，并且要将之前的数据都保留下来，这么麻烦？这个要怎么做呢？这里压根不需要你思考这个问题，我们作为一个负责任的男人，我们很负责任的告诉你，假如你的Message模型增加了1个两个10个成员变量，你只管加，加了之后只管调用上面的方法存，数据的升级以及迁移我们默认会帮你完成！！！** 
 
-当然，还有另外一种场景，**字段改名**比如你的Message模型里面有10个成员变量，其中有一个成员变量为 VoiceUrl（语音路径），有一天脑袋被门夹了一下，你们要把VoiceUrl改为VoicePath，并且以前存在数据库的值也不能删除，怎么办？难道你只能说 **what‘s the fuck**？？这里就用到我们的字段改名，非常的方便，首先你尽管在模型里面将VoiceUrl改为VoicePath，然后你改了之后需要在模型里实现我们CWModelProtocol协议的另一个方法，直接上用例:
+当然，还有另外一种场景，**字段改名**比如你的Message模型里面有10个成员变量，其中有一个成员变量为 VoiceUrl（语音路径），有一天脑袋被门夹了一下，你们要把VoiceUrl改为VoicePath，并且以前存在数据库的值也不能删除，怎么办？难道你只能说 **what‘s the fuck**？？这里就用到我们的字段改名，非常的方便，首先你尽管在模型里面将VoiceUrl改为VoicePath，改了之后只需要在模型里实现我们CWModelProtocol协议的另一个方法+ (NSDictionary *)newNameToOldNameDic告诉我你要使用哪一个值来替换原来的值即可。直接上用例:
 ```objective-c
 // 字段改名，实现这个方法，key 为 新的成员变量名称，value为老的成员变量名称，实现之后我们会帮你把之前VoiceUrl下面的值存到VoicePath下！
 + (NSDictionary *)newNameToOldNameDic {
     return @{@"VoicePath" : @"VoiceUrl"};
 }
 ```
-**最后一个场景**，假如你的模型有10个成员变量,但是其中有几个成员变量我不希望存到数据库里面，怎么办？？同样的，在模型里实现我们CWModelProtocol协议的方法,直接上用例
+**最后一个场景**，假如你的模型有10个成员变量,但是其中有几个成员变量我不希望存到数据库里面，怎么办？？同样的，只要在模型里实现我们CWModelProtocol协议的方法+ (NSArray *)ignoreColumnNames告诉我哪几个字段你不想存知道数据库即可,直接上用例
 ```objective-c
 // 不想将模型里面的height 以及 weight 保存到数据库,在模型的.m内实现这个方法
 + (NSArray *)ignoreColumnNames {
