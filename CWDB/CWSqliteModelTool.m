@@ -13,7 +13,7 @@
 
 @interface CWSqliteModelTool ()
 
-@property (nonatomic) dispatch_semaphore_t dsema;
+@property (nonatomic,retain) dispatch_semaphore_t dsema;
 
 @end
 
