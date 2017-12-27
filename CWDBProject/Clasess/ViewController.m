@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "CWSqliteModelTool.h"
 #import "CWSchool.h"
+
+#import "CWSqliteModelTool.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -26,7 +27,7 @@
     _dataSource = @[@"插入单条数据",@"异步插入单条数据",@"批量插入数据",@"异步批量插入数据",@"查询所有数据",@"异步查询所有数据",@"单条件查询(schoolId<2)",@"多条件查询(schoolId <2或者>=5)",@"自己写sql语句查询数据",@"删除表内所有数据",@"删除一条数据",@"单条件删除(schoolId小于2的)",@"多条件删除(schoolId小于2或大于5)",@"自己写sql语句删除数据"];
     [self setupShowLabel];
     
-    
+    NSLog(@"------SqliteDBPath:%@",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject);
     
 }
 
