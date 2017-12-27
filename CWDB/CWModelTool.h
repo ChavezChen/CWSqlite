@@ -7,6 +7,7 @@
 //  模型的工具类，解析模型的所有成员变量
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CWModelTool : NSObject
 

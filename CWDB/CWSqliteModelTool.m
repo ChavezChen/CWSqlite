@@ -13,7 +13,7 @@
 
 @interface CWSqliteModelTool ()
 
-@property (nonatomic, strong) dispatch_semaphore_t dsema;
+@property (nonatomic) dispatch_semaphore_t dsema;
 
 @end
 
@@ -100,16 +100,16 @@ static CWSqliteModelTool * instance = nil;
                 BOOL result = [self updateTable:cls uid:uid targetId:targetId];
                 if (!result) {
                     // 2.2、更新失败，设置缓存为未更新
-                    [[CWCache shareInstance] setObject:@(0) forKey:cacheKey];
+                    [[CWCache shareInstance] setObject:@(NO) forKey:cacheKey];
                     NSLog(@"更新数据库表结构失败!插入或更新数据失败!");
                     dispatch_semaphore_signal([[self shareInstance] dsema]);
                     return NO;
                 }
                 // 2.3、更新成功，设置缓存为已更新
-                [[CWCache shareInstance] setObject:@(1) forKey:cacheKey];
+                [[CWCache shareInstance] setObject:@(YES) forKey:cacheKey];
             }else {
                 // 3、表格不需要更新,设置缓存为已更新
-                [[CWCache shareInstance] setObject:@(1) forKey:cacheKey];
+                [[CWCache shareInstance] setObject:@(YES) forKey:cacheKey];
             }
         }
     }

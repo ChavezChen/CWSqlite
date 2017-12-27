@@ -9,7 +9,6 @@
 #import "CWModelTool.h"
 #import "CWModelProtocol.h"
 #import <objc/runtime.h>
-#import <UIKit/UIKit.h>
 
 @implementation CWModelTool
 
