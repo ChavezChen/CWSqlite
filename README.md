@@ -31,6 +31,10 @@ platform :ios, '8.0'
 target '工程名称' do
 pod ‘CWDB’, '~> 1.5.0’
 end
+/* 如果搜索不到
+1、执行rm ~/Library/Caches/CocoaPods/search_index.json 删除索引的缓存再搜索，还不行执行第2步更新cocoapods
+2、执行 pod repo update --verbose 更新成功之后就没问题了
+*/
 ```
 ### 第二步，需要保存入数据库的模型Import并遵守CWModelProtocol协议，实现+ (NSString *)primaryKey；方法返回主键信息，主键为数据的唯一标识，如
  ```objective-c
