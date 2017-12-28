@@ -18,9 +18,14 @@ CWSqliteTableTool.h、CWSqliteTableTool. | 处理数据库表的工具类
 - **灵活**: 支持多种查询、删除操作，支持使用sql语句查询、删除。
 - **还原**: 存入数据库时为A模型，查询的数据一定还给你A模型。
 
+**我们支持的数据类型有**：
+```objective-c
+所有的基本数据类型（int，float），NSNumber，NSArray，NSMutableArray，NSDictionary，NSMutableDictionary，
+UIImage，NSURL，UIColor，NSSet，NSRange，NSAttributedString，NSData，自定义模型，以及数组、字典、模型相互嵌套。
+```
 ## 来一句洋文，How to use？
 ### 第一步，给项目添加sqlite3.0.tbd依赖库,将CWDB拖进你的项目或者使用cocoapods的方式
-```
+```objective-c
 platform :ios, '8.0'
 
 target '工程名称' do
