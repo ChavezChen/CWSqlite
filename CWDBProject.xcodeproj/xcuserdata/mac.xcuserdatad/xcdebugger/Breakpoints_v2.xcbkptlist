@@ -6,15 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CWDBProject/Clasess/ViewController.m"
-            timestampString = "536046869.887656"
+            timestampString = "536210664.905276"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "-queryAllModel"
             landmarkType = "7">
          </BreakpointContent>

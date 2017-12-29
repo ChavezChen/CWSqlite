@@ -93,6 +93,15 @@
 }
 #pragma mark 异步批量插入数据
 - (void)asyncInsertGroupModels {
+    
+    dispatch_group_t group = dispatch_group_create();
+    
+    dispatch_group_enter(group);
+    dispatch_group_enter(group);
+    dispatch_group_enter(group);
+    
+    __block int successCount = 0;
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         NSMutableArray *schools = [NSMutableArray array];
@@ -107,15 +116,61 @@
         // 只要调用这个方法
         BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
         
-        // 主线程进行UI操作
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (result) {
-                [self showMessage:@"保存成功。。。快去数据库查看吧"];
-            }else {
-                [self showMessage:@"保存失败。。。"];
-            }
-        });
+        if (result) {
+            successCount++;
+        }
+        dispatch_group_leave(group);
     });
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSMutableArray *schools = [NSMutableArray array];
+        for (int i = 5; i < 10; i++) {
+            @autoreleasepool {
+                // 注意：名字不同～
+                CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
+                [schools addObject:school];
+            }
+        }
+        
+        // 只要调用这个方法
+        BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
+        
+        if (result) {
+            successCount++;
+        }
+        dispatch_group_leave(group);
+    });
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        NSMutableArray *schools = [NSMutableArray array];
+        for (int i = 10; i < 15; i++) {
+            @autoreleasepool {
+                // 注意：名字不同～
+                CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
+                [schools addObject:school];
+            }
+        }
+        
+        // 只要调用这个方法
+        BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
+        
+        if (result) {
+            successCount++;
+        }
+        dispatch_group_leave(group);
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        // 必须所有数据都插入成功，才提示成功.
+        if (successCount == 3) {
+            [self showMessage:@"所有线程数据保存成功。。。快去数据库查看吧"];
+        }else {
+            [self showMessage:@"有线程数据保存失败。。。"];
+        }
+    });
+    
 }
 
 
