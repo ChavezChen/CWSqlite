@@ -29,7 +29,7 @@ UIImage，NSURL，UIColor，NSSet，NSRange，NSAttributedString，NSData，自�
 platform :ios, '8.0'
 
 target '工程名称' do
-pod ‘CWDB’, '~> 1.5.0’
+pod ‘CWDB’, '~> 1.5.1’
 end
 /* 如果搜索不到
 1、执行rm ~/Library/Caches/CocoaPods/search_index.json 删除索引的缓存再搜索，还不行执行第2步更新cocoapods
