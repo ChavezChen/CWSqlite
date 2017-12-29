@@ -97,8 +97,10 @@ static CWSqliteModelTool * instance = nil;
         BOOL updated = [[[CWCache shareInstance] objectForKey:cacheKey] boolValue]; // 表格是否更新过
         if (!updated) { // 2、如果表格没有更新过,检测是否需要更新
             if ([CWSqliteTableTool isTableNeedUpdate:cls uid:uid targetId:targetId] ) {
+                dispatch_semaphore_signal([[self shareInstance] dsema]);
                 // 2.1、表格需要更新,则进行更新操作
                 BOOL result = [self updateTable:cls uid:uid targetId:targetId];
+                dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
                 if (!result) {
                     // 2.2、更新失败，设置缓存为未更新
                     [[CWCache shareInstance] setObject:@(NO) forKey:cacheKey];
