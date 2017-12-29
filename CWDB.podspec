@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CWDB"
-  s.version      = "1.5.0"
+  s.version      = "1.5.1"
   s.summary      = "OC数据库"
 
   s.description  = "一行代码操作数据库CWDB."
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/ChavezChen/CWDB.git", :tag => "1.5.0"  }
+  s.source       = { :git => "https://github.com/ChavezChen/CWDB.git", :tag => "1.5.1"  }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
