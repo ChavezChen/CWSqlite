@@ -22,6 +22,25 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
 
 #pragma mark - 插入或更新数据
 
+#pragma mark 简易方法
+/**
+ 简易方法!向数据库单个插入或者更新数据.
+
+ @param model 需要保存或者更新的模型
+ @return 插入或者更新数据是否成功，成功返回YES 失败返回NO
+ */
++ (BOOL)insertOrUpdateModel:(id)model;
+
+
+/**
+ 简易方法!向数据库批量插入或者更新数据.
+
+ @param modelsArray 模型的数组，数组内的模型必须是同一类型，否则会失败
+ @return 插入或者更新数据是否成功，成功返回YES 失败返回NO。（事务控制，必须全部插入成功才返回YES，有一条失败则返回NO）
+ */
++ (BOOL)insertOrUpdateModels:(NSArray<id> *)modelsArray;
+
+#pragma mark 完整方法
 /**
  向数据库批量插入或者更新数据
  --方法内部会根据所传模型的主键值来判断数据库内是否存在数据；
@@ -49,12 +68,52 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
 
 #pragma mark - 数据查询
 
+#pragma mark 简易方法
+/**
+ 简易方法!查询数据库所有数据.
+
+ @param cls 模型的类型 [obj class]
+ @return  查询到的结果数组，数组内元素为第一个参数cls类型的模型
+ */
++ (NSArray *)queryAllModels:(Class)cls;
+
+/**
+ 简易方法!根据单个条件查询数据.
+ 比如我想查找数据库内Student模型的 age 大于 10岁的所有数据：第一个参数name传age，第二个参数relation传CWDBRelationTypeMore，第三个参数传值@(10)，连着读就是，age大于10
+ 
+ @param cls             模型的类型
+ @param name            条件字段名称
+ @param relation        字段与值的关系，大于、小于、等于......
+ @param value           字段的值
+ @return                查询到的结果数组，数组内元素为第一个参数cls类型的模型
+ */
++ (NSArray *)queryModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value;
+
+/**
+ 简易方法!根据多个条件与查询(and必须所有条件都满足才能查询到 or 满足其中一个条件就都查询得到)
+ 比如我想查找数据库内Student模型的 age大于10岁，并且 height小于等于100厘米的小朋友：
+ 第一个参数传 @[@"age",@"height"]
+ 第二个参数传 @[@(CWDBRelationTypeMore),@(CWDBRelationTypeLessEqual)]
+ 第三个参数传 @[@(10),@(100)]
+ 第四个参数传 YES，如果 age>10 和 height<=100 只要满足其中一个就行 就传NO
+ 
+ @param cls             模型的类型
+ @param columnNames     条件字段名称组成的数组  columnNames、relations、values数组元素的个数必须相等
+ @param relations       字段与值的关系数组
+ @param values          字段的值数组
+ @param isAnd           各个条件之前是否需要全部满足还是只要满足其中的一个条件，YES对应and NO对应or
+ @return                查询到的结果数组，数组内元素为第一个参数cls类型的模型
+ */
++ (NSArray *)queryModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd;
+
+
+#pragma mark 完整方法
 /**
  查询对应uid的数据库内对应targetId表内的所有数据
 
  @param cls         模型的类型 [obj class]
- @param uid         userId,可为nil，保存数据时传的啥，这里就传啥
- @param targetId    目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
+ @param uid         userId,可为nil，保存数据时传的啥，这里就传啥，（使用简易方法保存的数据传nil即可）
+ @param targetId    目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥（使用简易方法保存的数据传nil即可）
  @return            查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
@@ -111,11 +170,62 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
 
 #pragma mark -数据删除
 
+#pragma mark 简易方法
+/**
+ 简易方法!删除指定模型.
+ 会根据model的主键值来删除对应的数据，模型不一定要完全一样，删除的数据只和主键相关
+
+ @param model 要删除的模型
+ @return 删除是否成功
+ */
++ (BOOL)deleteModel:(id)model;
+
+
+/**
+ 简易方法!删除数据库表中所有数据.
+
+ @param cls 模型类型
+ @param isKeep 是否保留表，传YES表保留只删除表内所有数据，传NO直接将表销毁
+ @return 删除是否成功
+ */
++ (BOOL)deleteTableAllData:(Class)cls isKeepTable:(BOOL)isKeep;
+
+/**
+ 简易方法!根据单个条件删除数据库内数据.
+ 
+ 比如我想删除数据库内Student模型的 age 大于 10岁的所有数据：第一个参数name传age，第二个参数relation传CWDBRelationTypeMore，第三个参数传值@(10)，连着读就是，age>10
+ 
+ @param cls             模型的类型
+ @param name            条件字段名称
+ @param relation        字段与值的关系，大于、小于、等于......
+ @param value           字段的值
+ @return                删除是否成功
+ */
++ (BOOL)deleteModels:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value;
+
+/**
+ 简易方法!根据多个条件删除(and删除满足所有条件的数据 or 删除满足其中任何一个条件的数据)
+ 比如我想删除数据库内Student模型的age大于10岁并且height小于等于100厘米的所有小朋友：
+ 第一个参数传 @[@"age",@"height"]
+ 第二个参数传 @[@(CWDBRelationTypeMore),@(CWDBRelationTypeLessEqual)]
+ 第三个参数传 @[@(10),@(100)]
+ 第四个参数传 YES；  如果age>10和height<=100只要满足其中一个就删除就传NO
+ 
+ @param cls             模型的类型
+ @param columnNames     条件字段名称组成的数组  columnNames、relations、values数组元素的个数必须相等
+ @param relations       字段与值的关系数组
+ @param values          字段的值数组
+ @param isAnd           各个条件之前是否需要全部满足还是只要满足其中的一个条件，YES对应and NO对应or
+ @return                删除是否成功
+ */
++ (BOOL)deleteModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd;
+
+#pragma mark 完整方法
 /**
  删除数据库表中所有数据
 
  @param cls         模型类型
- @param uid         userId，可为nil，数据库名称是以uid命名，保存数据时传的啥，这里就传啥
+ @param uid         userId，可为nil，数据库名称是以uid命名，保存数据时传的啥，这里就传啥（使用简易方法保存的数据传nil即可）
  @param targetId    目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @param isKeep      是否保留表，传YES表保留只删除表内所有数据，传NO直接将表销毁
  @return            删除是否成功

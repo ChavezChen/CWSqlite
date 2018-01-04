@@ -69,6 +69,17 @@ static CWSqliteModelTool * instance = nil;
 
 #pragma mark - 插入或者更新数据
 
+#pragma mark 简易方法
+
++ (BOOL)insertOrUpdateModel:(id)model {
+    return [self insertOrUpdateModels:@[model] uid:nil targetId:nil];
+}
+
++ (BOOL)insertOrUpdateModels:(NSArray<id> *)modelsArray {
+    return [self insertOrUpdateModels:modelsArray uid:nil targetId:nil];
+}
+
+#pragma mark 完整方法
 // 插入单个模型
 + (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId {
     return [self insertOrUpdateModels:@[model] uid:uid targetId:targetId];
@@ -198,6 +209,26 @@ static CWSqliteModelTool * instance = nil;
 }
 
 #pragma mark - 查询数据
+
+#pragma mark 简易方法
+
+// 查询所有数据
++ (NSArray *)queryAllModels:(Class)cls {
+    return [self queryAllModels:cls uid:nil targetId:nil];
+}
+
+// 单个条件查询
++ (NSArray *)queryModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value {
+    return [self queryModels:cls name:name relation:relation value:value uid:nil targetId:nil];
+}
+
+// 多个条件查询
++ (NSArray *)queryModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd {
+    return [self queryModels:cls columnNames:columnNames relations:relations values:values isAnd:isAnd uid:nil targetId:nil];
+}
+
+#pragma mark 完整方法
+
 // 查询表内所有数据
 + (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId {
     
@@ -284,6 +315,30 @@ static CWSqliteModelTool * instance = nil;
 }
 
 #pragma mark - 删除数据
+
+#pragma mark 简易方法
+
+// 删除模型
++ (BOOL)deleteModel:(id)model {
+    return [self deleteModel:model uid:nil targetId:nil];
+}
+
+// 删除数据表所有数据
++ (BOOL)deleteTableAllData:(Class)cls isKeepTable:(BOOL)isKeep {
+    return [self deleteTableAllData:cls uid:nil targetId:nil isKeepTable:isKeep];
+}
+
+// 根据单个条件删除
++ (BOOL)deleteModels:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value {
+    return [self deleteModels:cls columnName:name relation:relation value:value uid:nil targetId:nil];
+}
+
+// 根据多个条件删除
++ (BOOL)deleteModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd {
+    return [self deleteModels:cls columnNames:columnNames relations:relations values:values isAnd:isAnd uid:nil targetId:nil];
+}
+
+#pragma mark 完整方法
 // 删除表中所有数据，或者干脆把表也一块删了
 + (BOOL)deleteTableAllData:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId isKeepTable:(BOOL)isKeep {
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];

@@ -40,7 +40,8 @@
     CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想学院"];
     
     // 只要这一句代码即可
-    BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil];
+    BOOL result = [CWSqliteModelTool insertOrUpdateModel:school];
+//    [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil]; 与这样调用效果一样
     
     if (result) {
         [self showMessage:@"保存成功。。。快去数据库查看吧"];
@@ -59,7 +60,7 @@
         
         // 如果先执行了上面inserModel方法，数据库里面存在一个id为9999的学校，则会自动将名字更新为 梦想女子学院,就是做更新操作了
         BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil];
-        
+//        [CWSqliteModelTool insertOrUpdateModel:school]; 与这样调用效果一样
         // 主线程进行UI操作
         dispatch_async(dispatch_get_main_queue(), ^{
             if (result) {
@@ -83,6 +84,7 @@
     }
     
     // 只要调用这个方法
+//    [CWSqliteModelTool insertOrUpdateModels:schools]; 与这样调用效果一样
     BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
     
     if (result) {
@@ -114,7 +116,8 @@
         }
         
         // 只要调用这个方法
-        BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
+//        [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil]; 与这样调用效果一样
+        BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools];
         
         if (result) {
             successCount++;
@@ -179,7 +182,7 @@
 - (void)queryAllModel {
     
     [self showMessage:@"开始查询"];
-    
+    //    NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class]]; 这样调用效果一样
     NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class] uid:nil targetId:nil];
     
     [self showMessage:[NSString stringWithFormat:@"数据库有%zd条数据",result.count]];
@@ -192,7 +195,7 @@
 - (void)asyncQueryAllModel {
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
+        //    NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class]]; 这样调用效果一样
         NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class] uid:nil targetId:nil];
         
         // 主线程进行UI操作
@@ -209,6 +212,8 @@
 - (void)queryModelWithOneCondition {
     
     // 查询数据库内 schoolId < 2 的所有数据
+//    NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] name:@"schoolId" relation:CWDBRelationTypeLess value:@(2)]; 这样调用效果一样
+    
     NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] name:@"schoolId" relation:CWDBRelationTypeLess value:@(2) uid:nil targetId:nil];
     
     [self showMessage:[NSString stringWithFormat:@"数据库有%zd条数据",result.count]];

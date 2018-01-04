@@ -168,7 +168,7 @@
 // 根据多个条件删除数据
 - (void)testDeleteModelWithMultipleConditions {
     
-    BOOL result = [CWSqliteModelTool deleteModels:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(190)] isAnd:YES uid:@"Chavez" targetId:nil];
+    BOOL result = [CWSqliteModelTool deleteModels:[Student class] columnNames:@[@"age",@"score",@"height"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeLessEqual),@(CWDBRelationTypeMoreEqual)] values:@[@(100),@(20),@(190)] isAnd:NO uid:@"Chavez" targetId:nil];
     XCTAssertTrue(result);
 }
 
