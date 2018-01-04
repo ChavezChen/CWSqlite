@@ -29,7 +29,7 @@ UIImage，NSURL，UIColor，NSSet，NSRange，NSAttributedString，NSData，自�
 platform :ios, '8.0'
 
 target '工程名称' do
-pod ‘CWDB’, '~> 1.5.1’
+pod ‘CWDB’, '~> 1.6.0’
 end
 /* 如果搜索不到
 1、执行rm ~/Library/Caches/CocoaPods/search_index.json 删除索引的缓存再搜索，还不行执行第2步更新cocoapods
@@ -187,3 +187,5 @@ BOOL result = [CWSqliteModelTool deleteTableAllData:[CWSchool class] uid:nil tar
 [从0开始弄一个面向OC数据库（四）](https://juejin.im/post/5a3a158d6fb9a045211eda38) 
 
 [从0开始弄一个面向OC数据库（五）](https://juejin.im/post/5a3e367f5188257c4d1b5e75) 
+
+[从0开始弄一个面向OC数据库--终结篇](https://juejin.im/post/5a433e1f6fb9a04524061b12) 
