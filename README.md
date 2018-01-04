@@ -56,15 +56,17 @@ end
 // 使用工厂方法创建的shool模型
 CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想学院"];
     
-// 调用保存或者更新方法,uid为userId，对应数据库的名字，targetId为目标ID，与数据库表名相关，可以传nil，下面我会详细讲解这两个参数的用途。
-BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil];
-
+// 调用保存或者更新方法
+BOOL result = [CWSqliteModelTool insertOrUpdateModel:school];
+// 下面这个方法uid为userId，对应数据库的名字，targetId为目标ID，与数据库表名相关，可以传nil，下面我会详细讲解这两个参数的用途。
+// BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil]; 这样调用也是一样的
 ```
 - **异步插入或更新数据**
 ```objective-c
 CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想女子学院"];
 dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil];
+    BOOL result = [CWSqliteModelTool insertOrUpdateModel:school];
+//    BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil];这样调用也是一样的
 });
 ```
 ### 首先我要对上面这个方法做一部分介绍（非常重要！）：我们在插入数据这个方法里面直接承载的业务有：插入模型，更新模型，数据库升级，数据迁移。这四个业务我们都智能帮你封装在一个方法内部，你不需要去处理其中的任何一种单独情况！
@@ -92,7 +94,7 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
     return @[@"height",@"weight"];
 }
 ```
-### 其他方法使用
+### 其他方法使用,每个方法对应有简易方法和完整方法
 - **批量插入或者更新数据**
 ```objective-c
 // 生成5个学校模型保存在数组
@@ -106,21 +108,26 @@ for (int i = 0; i < 5; i++) {
 
 // 第一个参数数组内的元素必须全部是同一类型，异步和单个插入类似
 BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
+// BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools]; 这样调用是同样的效果
+
 ```
 - **查询数据库表内所有数据**
 ```objective-c
 // 查询CWShool表里的所有数据，uid对应数据库，targetId和表名姓关。返回的数组里面的元素都是CWSchool的模型。
 NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class] uid:nil targetId:nil];
+// NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class]]; 这样调用是同样的效果
 ```
 - **按照单个条件查询数据表内的数据**
 ```objective-c
 // 查询CWSchool数据表内 schoolId < 2 的所有数据,详细讲解可以看代码里的API注释
 NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] name:@"schoolId" relation:CWDBRelationTypeLess value:@(2) uid:nil targetId:nil];
+// NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] name:@"schoolId" relation:CWDBRelationTypeLess value:@(2)]; 这样调用是同样的效果
 ```
 - **按照多个条件查询**
 ```objective-c
 // 查询CWSchool数据表内 schoolId < 2 或者 schoolId >= 5 的所有数据,详细讲解可以看代码里的API注释
 NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] columnNames:@[@"schoolId",@"schoolId"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeMoreEqual)] values:@[@(2),@(5)] isAnd:NO uid:nil targetId:nil];
+// NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] columnNames:@[@"schoolId",@"schoolId"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeMoreEqual)] values:@[@(2),@(5)] isAnd:NO]; 这样调用是同样的效果
 ```
 - **自己写sql语句查询**
 ```objective-c
@@ -136,11 +143,13 @@ NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] Sql:querySql u
 CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想学院"];
 // 这个方法，会根据传进来的模型的主键值去找到数据表里面的数据删除，与模型的其他字段值无关
 BOOL result = [CWSqliteModelTool deleteModel:school uid:nil targetId:nil];
+// BOOL result = [CWSqliteModelTool deleteModel:school]; 这样调用是同样的效果
 ```
 - **按照单个条件删除**
 ```objective-c
 // 删除schoolId小于2的所有数据
 BOOL result = [CWSqliteModelTool deleteModels:[CWSchool class] columnName:@"schoolId" relation:CWDBRelationTypeLess value:@(2) uid:nil targetId:nil];
+// BOOL result = [CWSqliteModelTool deleteModels:[CWSchool class] columnName:@"schoolId" relation:CWDBRelationTypeLess value:@(2)]; 这样调用是同样的效果
 ```
 - **按照多个条件删除**
 ```objective-c
