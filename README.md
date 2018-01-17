@@ -18,6 +18,7 @@ CWSqliteTableTool.h、CWSqliteTableTool. | 处理数据库表的工具类
 - **灵活**: 支持多种查询、删除操作，支持使用sql语句查询、删除。
 - **还原**: 存入数据库时为A模型，查询的数据一定还给你A模型。
 - **安全**: 多线程安全可靠。
+
 **我们支持的数据类型有**：
 ```objective-c
 所有的基本数据类型（int，float），NSNumber，NSArray，NSMutableArray，NSDictionary，NSMutableDictionary，
