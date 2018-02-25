@@ -9,6 +9,8 @@ CWModelTool.h、CWModelTool.m  | 处理模型的工具类
 CWSqliteTableTool.h、CWSqliteTableTool. | 处理数据库表的工具类
 ## 前言
 首先介绍一下我们的功能：**嗯。。。一句话：简单、实用。** 
+
+
 ![效果](https://github.com/ChavezChen/CWDB/blob/master/lalala.gif)
 - **直接**: 调用sqlite原生API操作数据库，没有中间框架。
 - **易用**: 一行代码实现数据库增删查改操作。
