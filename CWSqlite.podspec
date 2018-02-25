@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CWSqlite"
-  s.version      = "1.6.0"
+  s.version      = "1.6.1"
   s.summary      = "OC数据库"
 
   s.description  = "一行代码操作数据库CWSqlite."
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/ChavezChen/CWSqlite.git", :tag => "1.6.0"  }
+  s.source       = { :git => "https://github.com/ChavezChen/CWSqlite.git", :tag => "1.6.1"  }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

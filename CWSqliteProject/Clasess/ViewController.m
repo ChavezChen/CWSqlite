@@ -45,8 +45,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    
     [self setupShowLabel];
     
     NSLog(@"------SqliteDBPath:%@",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject);
