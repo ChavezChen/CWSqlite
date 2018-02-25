@@ -94,10 +94,8 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
 // 生成5个学校模型保存在数组
 NSMutableArray *schools = [NSMutableArray array];
 for (int i = 0; i < 5; i++) {
-    @autoreleasepool {
-        CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想学院%zd",i]];
-        [schools addObject:school];
-    }
+    CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想学院%zd",i]];
+    [schools addObject:school];
 }
 
 // 第一个参数数组内的元素必须全部是同一类型，异步和单个插入类似
