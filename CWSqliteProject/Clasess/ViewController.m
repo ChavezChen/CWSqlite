@@ -258,10 +258,14 @@
 #pragma mark 自己写sql语句查询
 - (void)queryModelsWithSql {
     
-    NSString *tableName = [NSString stringWithFormat:@"%@",NSStringFromClass([CWSchool class])];
-    NSString *querySql = [NSString stringWithFormat:@"select * from %@ limit 6",tableName];
+//    NSString *tableName = [NSString stringWithFormat:@"%@",NSStringFromClass([CWSchool class])];
+//    NSString *querySql = [NSString stringWithFormat:@"select * from %@ where schoolName = '梦想女子学院2'",tableName];
+//
+//    NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] Sql:querySql uid:nil];
+//    NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] limit:2 offset:3];  // 跳过3条数据取其中的两条数据
     
-    NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] Sql:querySql uid:nil];
+    // 分页查询
+    NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] cloumnName:@"schoolId" relation:CWDBRelationTypeLess value:@(5) orderName:@"schoolId" isDesc:YES limit:10 offset:0];
     
     [self showMessage:[NSString stringWithFormat:@"数据库查询到%zd条数据",result.count]];
     NSLog(@"查询结果: %@",result);

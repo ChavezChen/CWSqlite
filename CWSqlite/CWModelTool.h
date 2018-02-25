@@ -11,17 +11,13 @@
 
 @interface CWModelTool : NSObject
 
-
  // 获取模型对应的数据库表名
 + (NSString *)tableName:(Class)cls targetId:(NSString *)targetId;
-
 // 获取临时表名
 + (NSString *)tmpTableName:(Class)cls targetId:(NSString *)targetId;
 
-
 // 获取类所有成员变量的类型以及名称组成的字典 例如 int stuId --> { stuId : int }
 + (NSDictionary *)classIvarNameAndTypeDic:(Class)cls;
-
  // 将模型的所有成员变量的类型以及名称转换成sql语句可用的字符串 例如 int a ； int b； --> a i，b i
 + (NSString *)sqlColumnNamesAndTypesStr:(Class)cls;
 

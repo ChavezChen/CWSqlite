@@ -70,7 +70,6 @@
     NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
     NSArray *tableNames = [self allTableColumnNames:tableName uid:uid];
     
-    
     return ![modelNames isEqualToArray:tableNames];
 }
 

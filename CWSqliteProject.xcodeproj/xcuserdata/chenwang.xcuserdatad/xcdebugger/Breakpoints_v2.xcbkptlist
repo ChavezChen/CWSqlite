@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CWSqliteProject/Clasess/ViewController.m"
-            timestampString = "541216914.320199"
+            timestampString = "541239236.386022"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "-queryModelsWithSql"
             landmarkType = "7">
          </BreakpointContent>

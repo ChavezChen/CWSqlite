@@ -31,7 +31,6 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  */
 + (BOOL)insertOrUpdateModel:(id)model;
 
-
 /**
  简易方法!向数据库批量插入或者更新数据.
 
@@ -52,7 +51,9 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        目标id，可为nil，主要用于分辨数据库表名，方法内部创建数据库表时根据模型的类型className来创建对应的数据库表，但是有的场景并不适合仅用className为表名，比如聊天记录，和张三聊天希望是和张三聊天对应的一个表，和李四聊天就对应另一个表，带上目标ID我们就能将要保存的数据分别给张三、李四对应的表内存储，查询数据的时候会按照targetId找到对应的表格进行查询，如果你不需要同个模型分别建多张表格，传nil即可
  @return                插入或者更新数据是否成功，成功返回YES 失败返回NO。（事务控制，必须全部插入成功才返回YES，有一条失败则返回NO）
  */
-+ (BOOL)insertOrUpdateModels:(NSArray<id> *)modelsArray uid:(NSString *)uid targetId:(NSString *)targetId;
++ (BOOL)insertOrUpdateModels:(NSArray<id> *)modelsArray
+                         uid:(NSString *)uid
+                    targetId:(NSString *)targetId;
 
 
 /**
@@ -63,7 +64,9 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId    目标id，可为nil，作用看前一个方法（批量插入数据）的解释
  @return            插入或者更新数据是否成功，成功返回YES 失败返回NO
  */
-+ (BOOL)insertOrUpdateModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
++ (BOOL)insertOrUpdateModel:(id)model
+                        uid:(NSString *)uid
+                   targetId:(NSString *)targetId;
 
 
 #pragma mark - 数据查询
@@ -87,7 +90,10 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param value           字段的值
  @return                查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)queryModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value;
++ (NSArray *)queryModels:(Class)cls
+                    name:(NSString *)name
+                relation:(CWDBRelationType)relation
+                   value:(id)value;
 
 /**
  简易方法!根据多个条件与查询(and必须所有条件都满足才能查询到 or 满足其中一个条件就都查询得到)
@@ -104,8 +110,48 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param isAnd           各个条件之前是否需要全部满足还是只要满足其中的一个条件，YES对应and NO对应or
  @return                查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)queryModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd;
++ (NSArray *)queryModels:(Class)cls
+             columnNames:(NSArray <NSString *>*)columnNames
+               relations:(NSArray <NSNumber *>*)relations
+                  values:(NSArray *)values
+                   isAnd:(BOOL)isAnd;
 
+/**
+ 简单分页查询
+ 从数据表内跳过offset条数据，取limit条数据。
+ 假设：limit传10，offset传1 表示： cls模型表内跳过1条数据取10条数据
+ @param cls 模型的类型
+ @param limit 查找多少条
+ @param offset 偏移多少条
+ @return 查询到的结果数组，数组内元素为第一个参数cls类型的模型
+ */
++ (NSArray *)queryModels:(Class)cls
+                   limit:(NSInteger)limit
+                  offset:(NSInteger)offset;
+
+/**
+ 根据条件分页查询
+ 从数据表内跳过offset条数据，取满足条件columnName、relation、value的数据，并按照orderName字段升序或者降序排列。
+ 例如：我想取班级里面学号大于20的同学按照英语成绩降序的方式排序，并取其中的第5-10名,可以这样传:
+ columnName:stuId;   relation:CWDBRelationTypeMore;  value:@(20);    orderName:english;  isDesc:YES;    limit:5;    offset:5;
+ @param cls 模型的类型
+ @param columnName 条件字段名称 （可为空，代表没有条件筛选）
+ @param relation 关系 是否传值必须和columnName字段一致
+ @param value 条件字段的值 是否传值必须和columnName字段一致
+ @param orderName 排序的字段名称 （可为空，代表没有条件排序）
+ @param isDesc 是否为降序
+ @param limit 查找多少条
+ @param offset 偏移多少条
+ @return 查询到的结果数组，数组内元素为第一个参数cls类型的模型
+ */
++ (NSArray *)queryModels:(Class)cls
+              cloumnName:(NSString *)columnName
+                relation:(CWDBRelationType)relation
+                   value:(id)value
+               orderName:(NSString *)orderName
+                  isDesc:(BOOL)isDesc
+                   limit:(NSInteger)limit
+                  offset:(NSInteger)offset;
 
 #pragma mark 完整方法
 /**
@@ -116,7 +162,9 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId    目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥（使用简易方法保存的数据传nil即可）
  @return            查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)queryAllModels:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId;
++ (NSArray *)queryAllModels:(Class)cls
+                        uid:(NSString *)uid
+                   targetId:(NSString *)targetId;
 
 
 /**
@@ -130,7 +178,9 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param uid     userId,可为nil，数据库名称是以uid命名，保存数据时传的啥，这里就传啥
  @return        查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)queryModels:(Class)cls Sql:(NSString *)sql uid:(NSString *)uid;
++ (NSArray *)queryModels:(Class)cls
+                     Sql:(NSString *)sql
+                     uid:(NSString *)uid;
 
 //
 
@@ -146,7 +196,11 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        targetId 目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return                查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)queryModels:(Class)cls name:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
++ (NSArray *)queryModels:(Class)cls
+                    name:(NSString *)name
+                relation:(CWDBRelationType)relation
+                   value:(id)value uid:(NSString *)uid
+                targetId:(NSString *)targetId;
 
 /**
  根据多个条件与查询(and必须所有条件都满足才能查询到 or 满足其中一个条件就都查询得到)
@@ -165,7 +219,58 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return                查询到的结果数组，数组内元素为第一个参数cls类型的模型
  */
-+ (NSArray *)queryModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId;
++ (NSArray *)queryModels:(Class)cls
+             columnNames:(NSArray <NSString *>*)columnNames
+               relations:(NSArray <NSNumber *>*)relations
+                  values:(NSArray *)values
+                   isAnd:(BOOL)isAnd uid:(NSString *)uid
+                targetId:(NSString *)targetId;
+
+
+/**
+ 简单分页查询
+ 从数据表内跳过offset条数据，取limit条数据。
+ 假设：limit传10，offset传1 表示： cls模型表内跳过1条数据取10条数据
+ @param cls 模型的类型
+ @param limit 查找多少条
+ @param offset 偏移多少条
+ @param uid userId,可为nil，保存数据时传的啥，这里就传啥，（使用简易方法保存的数据传nil即可）
+ @param targetId 目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥（使用简易方法保存的数据传nil即可）
+ @return 查询到的结果数组，数组内元素为第一个参数cls类型的模型
+ */
++ (NSArray *)queryModels:(Class)cls
+                   limit:(NSInteger)limit
+                  offset:(NSInteger)offset
+                     uid:(NSString *)uid
+                targetId:(NSString *)targetId;
+
+/**
+ 根据条件分页查询
+ 从数据表内跳过offset条数据，取满足条件columnName、relation、value的数据，并按照orderName字段升序或者降序排列。
+ 例如：我想取班级里面学号大于20的同学按照英语成绩降序的方式排序，并取其中的第5-10名,可以这样传:
+ columnName:stuId;   relation:CWDBRelationTypeMore;  value:@(20);    orderName:english;  isDesc:YES;    limit:5;    offset:5;
+ @param cls 模型的类型
+ @param columnName 条件字段名称 （可为空，代表没有条件筛选）
+ @param relation 关系 是否传值必须和columnName字段一致
+ @param value 条件字段的值 是否传值必须和columnName字段一致
+ @param orderName 排序的字段名称 （可为空，代表没有条件排序）
+ @param isDesc 是否为降序
+ @param limit 查找多少条
+ @param offset 偏移多少条
+ @param uid userId,可为nil，保存数据时传的啥，这里就传啥，（使用简易方法保存的数据传nil即可）
+ @param targetId 目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥（使用简易方法保存的数据传nil即可）
+ @return 查询到的结果数组，数组内元素为第一个参数cls类型的模型
+ */
++ (NSArray *)queryModels:(Class)cls
+              cloumnName:(NSString *)columnName
+                relation:(CWDBRelationType)relation
+                   value:(id)value
+               orderName:(NSString *)orderName
+                  isDesc:(BOOL)isDesc
+                   limit:(NSInteger)limit
+                  offset:(NSInteger)offset
+                     uid:(NSString *)uid
+                targetId:(NSString *)targetId;
 
 
 #pragma mark -数据删除
@@ -201,7 +306,10 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param value           字段的值
  @return                删除是否成功
  */
-+ (BOOL)deleteModels:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value;
++ (BOOL)deleteModels:(Class)cls
+          columnName:(NSString *)name
+            relation:(CWDBRelationType)relation
+               value:(id)value;
 
 /**
  简易方法!根据多个条件删除(and删除满足所有条件的数据 or 删除满足其中任何一个条件的数据)
@@ -218,7 +326,11 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param isAnd           各个条件之前是否需要全部满足还是只要满足其中的一个条件，YES对应and NO对应or
  @return                删除是否成功
  */
-+ (BOOL)deleteModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd;
++ (BOOL)deleteModels:(Class)cls
+         columnNames:(NSArray <NSString *>*)columnNames
+           relations:(NSArray <NSNumber *>*)relations
+              values:(NSArray *)values
+               isAnd:(BOOL)isAnd;
 
 #pragma mark 完整方法
 /**
@@ -230,7 +342,10 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param isKeep      是否保留表，传YES表保留只删除表内所有数据，传NO直接将表销毁
  @return            删除是否成功
  */
-+ (BOOL)deleteTableAllData:(Class)cls uid:(NSString *)uid targetId:(NSString *)targetId isKeepTable:(BOOL)isKeep;
++ (BOOL)deleteTableAllData:(Class)cls
+                       uid:(NSString *)uid
+                  targetId:(NSString *)targetId
+               isKeepTable:(BOOL)isKeep;
 
 
 /**
@@ -241,7 +356,9 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId    目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return            删除是否成功
  */
-+ (BOOL)deleteModel:(id)model uid:(NSString *)uid targetId:(NSString *)targetId;
++ (BOOL)deleteModel:(id)model
+                uid:(NSString *)uid
+           targetId:(NSString *)targetId;
 
 
 /**
@@ -271,9 +388,13 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        targetId 目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return                删除是否成功
  */
-+ (BOOL)deleteModels:(Class)cls columnName:(NSString *)name relation:(CWDBRelationType)relation value:(id)value uid:(NSString *)uid targetId:(NSString *)targetId;
++ (BOOL)deleteModels:(Class)cls
+          columnName:(NSString *)name
+            relation:(CWDBRelationType)relation
+               value:(id)value
+                 uid:(NSString *)uid
+            targetId:(NSString *)targetId;
 
-// 根据多个条件删除(and删除满足所有条件的数据 or 删除满足其中任何一个条件的数据)
 
 /**
  根据多个条件删除(and删除满足所有条件的数据 or 删除满足其中任何一个条件的数据)
@@ -292,11 +413,15 @@ typedef NS_ENUM(NSUInteger,CWDBRelationType) {
  @param targetId        目标ID，可为nil，与数据库表名相关，保存数据时传的啥，这里就传啥
  @return                删除是否成功
  */
-+ (BOOL)deleteModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd uid:(NSString *)uid targetId:(NSString *)targetId;
++ (BOOL)deleteModels:(Class)cls
+         columnNames:(NSArray <NSString *>*)columnNames
+           relations:(NSArray <NSNumber *>*)relations
+              values:(NSArray *)values
+               isAnd:(BOOL)isAnd
+                 uid:(NSString *)uid
+            targetId:(NSString *)targetId;
 
 #pragma mark - 更新数据库表结构，数据迁移
-// 更新数据库表结构、字段改名、数据迁移
-
 /**
  更新数据库某表的结构并且数据迁移，大多数情况下，你并不需要自行调用这个方法，因为在我们插入或这更新数据的方法内，已经做了判断，如果需要更新数据库表结构，在插入或者更新数据时就已经做了更新与迁移了，如果你实在需要自行执行更新操作，调用此方法即可
 

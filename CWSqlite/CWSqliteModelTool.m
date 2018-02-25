@@ -60,8 +60,6 @@ static CWSqliteModelTool * instance = nil;
     NSString *createTableSql = [NSString stringWithFormat:@"create table if not exists %@(%@, primary key(%@))",tableName,[CWModelTool sqlColumnNamesAndTypesStr:cls],primaryKey];
     // 执行语句
     BOOL result = [CWDatabase execSQL:createTableSql uid:uid];
-    // 关闭数据库
-//    [CWDatabase closeDB];
     
     return result;
 }
@@ -173,7 +171,6 @@ static CWSqliteModelTool * instance = nil;
         }
         // 字段1=字段1值 allIvarNames[i]=allIvarValues[i]
         NSMutableArray *ivarNameValueArray = [NSMutableArray array];
-        //    NSInteger count = allIvarNames.count;
         
         [allIvarNames enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSString *name = obj;
@@ -225,6 +222,16 @@ static CWSqliteModelTool * instance = nil;
 // 多个条件查询
 + (NSArray *)queryModels:(Class)cls columnNames:(NSArray <NSString *>*)columnNames relations:(NSArray <NSNumber *>*)relations values:(NSArray *)values isAnd:(BOOL)isAnd {
     return [self queryModels:cls columnNames:columnNames relations:relations values:values isAnd:isAnd uid:nil targetId:nil];
+}
+
+// limit 分页查询
++ (NSArray *)queryModels:(Class)cls limit:(NSInteger)limit offset:(NSInteger)offset {
+    return [self queryModels:cls limit:limit offset:offset uid:nil targetId:nil];
+}
+
+// 根据条件与排序 进行分页查询
++ (NSArray *)queryModels:(Class)cls cloumnName:(NSString *)columnName relation:(CWDBRelationType)relation value:(id)value orderName:(NSString *)orderName isDesc:(BOOL)isDesc limit:(NSInteger)limit offset:(NSInteger)offset {
+    return [self queryModels:cls cloumnName:columnName relation:relation value:value orderName:orderName isDesc:isDesc limit:limit offset:offset uid:nil targetId:nil];
 }
 
 #pragma mark 完整方法
@@ -300,6 +307,29 @@ static CWSqliteModelTool * instance = nil;
 
     return [self parseResults:results withClass:cls];
 }
+
+
+// limit 分页查询
++ (NSArray *)queryModels:(Class)cls limit:(NSInteger)limit offset:(NSInteger)offset uid:(NSString *)uid targetId:(NSString *)targetId {
+    return [self queryModels:cls cloumnName:nil relation:0 value:nil orderName:nil isDesc:YES limit:limit offset:offset uid:uid targetId:targetId];
+}
+
+// 根据条件与排序 进行分页查询
++ (NSArray *)queryModels:(Class)cls cloumnName:(NSString *)columnName relation:(CWDBRelationType)relation value:(id)value orderName:(NSString *)orderName isDesc:(BOOL)isDesc limit:(NSInteger)limit offset:(NSInteger)offset uid:(NSString *)uid targetId:(NSString *)targetId {
+    
+    dispatch_semaphore_wait([[self shareInstance] dsema], DISPATCH_TIME_FOREVER);
+    NSString *sortType = isDesc ? @"desc" : @"asc";
+    NSString *whereSqliteStr = (columnName && value) ? [NSString stringWithFormat:@" where %@%@%@",columnName,self.CWDBNameToValueRelationTypeDic[@(relation)],value] : @"";
+    NSString *orderSqliteStr = orderName ? [NSString stringWithFormat:@" order by %@ %@",orderName,sortType] : @"";
+    NSString *tableName = [CWModelTool tableName:cls targetId:targetId];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@%@%@ limit %zd offset %zd", tableName,whereSqliteStr,orderSqliteStr,limit,offset];
+    NSArray <NSDictionary *>*results = [CWDatabase querySql:sql uid:uid];
+    [CWDatabase closeDB];
+    dispatch_semaphore_signal([[self shareInstance] dsema]);
+    
+    return [self parseResults:results withClass:cls];
+}
+
 
 // 解析数组                             {字段名称 : 值}
 + (NSArray *)parseResults:(NSArray <NSDictionary *>*)results withClass:(Class)cls  {

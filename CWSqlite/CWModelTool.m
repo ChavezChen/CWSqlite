@@ -10,6 +10,7 @@
 #import "CWModelProtocol.h"
 #import <objc/runtime.h>
 
+
 @implementation CWModelTool
 
 + (NSString *)tableName:(Class)cls targetId:(NSString *)targetId {
@@ -117,11 +118,9 @@
     if (isEncode && value == nil) { // 只有对象才能为nil，基本数据类型没值时为0
         return @"";
     }
-    
     if (!isEncode && [value isKindOfClass:[NSString class]] && [value isEqualToString:@""]) {
         return [NSClassFromString(type) new];
     }
-    
     if([type isEqualToString:@"i"]||[type isEqualToString:@"I"]||
        [type isEqualToString:@"s"]||[type isEqualToString:@"S"]||
        [type isEqualToString:@"q"]||[type isEqualToString:@"Q"]||

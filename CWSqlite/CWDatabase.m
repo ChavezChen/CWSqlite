@@ -119,7 +119,6 @@ static NSTimeInterval _startBusyRetryTime; // 第一次重试的时间
     // 5、重制（省略）
     // 6、释放资源，关闭数据库
     sqlite3_finalize(ppStmt);
-//    [self closeDB];
     
     return rowDicArray;
 }
