@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint CWDB.podspec' to ensure this is a
+#  Be sure to run `pod spec lint CWSqlite.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -15,13 +15,13 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "CWDB"
+  s.name         = "CWSqlite"
   s.version      = "1.6.0"
   s.summary      = "OC数据库"
 
-  s.description  = "一行代码操作数据库CWDB."
+  s.description  = "一行代码操作数据库CWSqlite."
 
-  s.homepage     = "https://github.com/ChavezChen/CWDB"
+  s.homepage     = "https://github.com/ChavezChen/CWSqlite"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/ChavezChen/CWDB.git", :tag => "1.6.0"  }
+  s.source       = { :git => "https://github.com/ChavezChen/CWSqlite.git", :tag => "1.6.0"  }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -84,7 +84,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = 'CWDB/*.{h,m}'
+  s.source_files  = 'CWSqlite/*.{h,m}'
 #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"

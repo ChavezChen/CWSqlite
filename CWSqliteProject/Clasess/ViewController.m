@@ -21,10 +21,32 @@
 {
     NSUInteger _showCount;
 }
+
+- (NSArray *)dataSource {
+    if (_dataSource == nil) {
+        _dataSource = @[@"插入单条数据",
+                        @"异步插入单条数据",
+                        @"批量插入数据",
+                        @"异步批量插入数据",
+                        @"查询所有数据",
+                        @"异步查询所有数据",
+                        @"单条件查询(schoolId<2)",
+                        @"多条件查询(schoolId <2或者>=5)",
+                        @"自己写sql语句查询数据",
+                        @"删除表内所有数据",
+                        @"删除一条数据",
+                        @"单条件删除(schoolId小于2的)",
+                        @"多条件删除(schoolId小于2或大于5)",
+                        @"自己写sql语句删除数据"];
+    }
+    return _dataSource;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _dataSource = @[@"插入单条数据",@"异步插入单条数据",@"批量插入数据",@"异步批量插入数据",@"查询所有数据",@"异步查询所有数据",@"单条件查询(schoolId<2)",@"多条件查询(schoolId <2或者>=5)",@"自己写sql语句查询数据",@"删除表内所有数据",@"删除一条数据",@"单条件删除(schoolId小于2的)",@"多条件删除(schoolId小于2或大于5)",@"自己写sql语句删除数据"];
+
+    
     [self setupShowLabel];
     
     NSLog(@"------SqliteDBPath:%@",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject);
@@ -59,8 +81,10 @@
         CWSchool *school = [self cwSchoolWithID:9999 name:@"梦想女子学院"];
         
         // 如果先执行了上面inserModel方法，数据库里面存在一个id为9999的学校，则会自动将名字更新为 梦想女子学院,就是做更新操作了
-        BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil];
-//        [CWSqliteModelTool insertOrUpdateModel:school]; 与这样调用效果一样
+//        BOOL result = [CWSqliteModelTool insertOrUpdateModel:school uid:nil targetId:nil];
+        // 与这样调用效果一样
+        BOOL result = [CWSqliteModelTool insertOrUpdateModel:school];
+        
         // 主线程进行UI操作
         dispatch_async(dispatch_get_main_queue(), ^{
             if (result) {
@@ -84,8 +108,8 @@
     }
     
     // 只要调用这个方法
-//    [CWSqliteModelTool insertOrUpdateModels:schools]; 与这样调用效果一样
-    BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
+    BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools]; // 与这样调用效果一样
+//    BOOL result = [CWSqliteModelTool insertOrUpdateModels:schools uid:nil targetId:nil];
     
     if (result) {
         [self showMessage:@"保存成功。。。快去数据库查看吧"];
@@ -182,10 +206,11 @@
 - (void)queryAllModel {
     
     [self showMessage:@"开始查询"];
-    //    NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class]]; 这样调用效果一样
-    NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class] uid:nil targetId:nil];
+    NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class]];
+    // 这样调用效果一样
+//    NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class] uid:nil targetId:nil];
     
-    [self showMessage:[NSString stringWithFormat:@"数据库有%zd条数据",result.count]];
+    [self showMessage:[NSString stringWithFormat:@"数据库查询到%zd条数据",result.count]];
     
     NSLog(@"查询结果: %@",result);
     
@@ -195,13 +220,14 @@
 - (void)asyncQueryAllModel {
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        //    NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class]]; 这样调用效果一样
-        NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class] uid:nil targetId:nil];
+    NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class]];
+        // 这样调用效果一样
+//        NSArray *result = [CWSqliteModelTool queryAllModels:[CWSchool class] uid:nil targetId:nil];
         
         // 主线程进行UI操作
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [self showMessage:[NSString stringWithFormat:@"数据库有%zd条数据",result.count]];
+            [self showMessage:[NSString stringWithFormat:@"数据库查询到%zd条数据",result.count]];
             NSLog(@"查询结果: %@",result);
         });
         
@@ -216,7 +242,7 @@
     
     NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] name:@"schoolId" relation:CWDBRelationTypeLess value:@(2) uid:nil targetId:nil];
     
-    [self showMessage:[NSString stringWithFormat:@"数据库有%zd条数据",result.count]];
+    [self showMessage:[NSString stringWithFormat:@"数据库查询到%zd条数据",result.count]];
     NSLog(@"查询结果: %@",result);
 }
 
@@ -226,18 +252,18 @@
     // 查询数据库内 schoolId < 2 或者 schoolId >= 5 的所有数据
     NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] columnNames:@[@"schoolId",@"schoolId"] relations:@[@(CWDBRelationTypeLess),@(CWDBRelationTypeMoreEqual)] values:@[@(2),@(5)] isAnd:NO uid:nil targetId:nil];
     
-    [self showMessage:[NSString stringWithFormat:@"数据库有%zd条数据",result.count]];
+    [self showMessage:[NSString stringWithFormat:@"数据库查询到%zd条数据",result.count]];
     NSLog(@"查询结果: %@",result);
 }
 #pragma mark 自己写sql语句查询
 - (void)queryModelsWithSql {
     
     NSString *tableName = [NSString stringWithFormat:@"%@",NSStringFromClass([CWSchool class])];
-    NSString *querySql = [NSString stringWithFormat:@"select * from %@ where schoolName = '梦想女子学院2'",tableName];
+    NSString *querySql = [NSString stringWithFormat:@"select * from %@ limit 6",tableName];
     
     NSArray *result = [CWSqliteModelTool queryModels:[CWSchool class] Sql:querySql uid:nil];
     
-    [self showMessage:[NSString stringWithFormat:@"数据库有%zd条数据",result.count]];
+    [self showMessage:[NSString stringWithFormat:@"数据库查询到%zd条数据",result.count]];
     NSLog(@"查询结果: %@",result);
 }
 
@@ -438,7 +464,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _dataSource.count;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -446,7 +472,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%zd.%@",indexPath.row,_dataSource[indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%zd.%@",indexPath.row,self.dataSource[indexPath.row]];
     return cell;
 }
 

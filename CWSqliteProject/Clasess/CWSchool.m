@@ -16,11 +16,11 @@
     return @"schoolId";
 }
 
-// 忽略的成员变量
-+ (NSArray *)ignoreColumnNames {
-    // 不想将学校评分存入数据库
-    return @[@"grade"];
-}
+//// 忽略的成员变量
+//+ (NSArray *)ignoreColumnNames {
+//    // 不想将学校评分存入数据库
+//    return @[@"grade"];
+//}
 
 @end
 
