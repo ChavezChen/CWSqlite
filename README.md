@@ -27,12 +27,12 @@ CWSqliteTableTool.h、CWSqliteTableTool. | 处理数据库表的工具类
 UIImage，NSURL，UIColor，NSSet，NSRange，NSAttributedString，NSData，自定义模型，以及数组、字典、模型相互嵌套。
 ```
 ## 来一句洋文，How to use？
-### 第一步，给项目添加sqlite3.0.tbd依赖库,将CWDB拖进你的项目或者使用cocoapods的方式
+### 第一步，给项目添加sqlite3.0.tbd依赖库,将CWSqlite拖进你的项目或者使用cocoapods的方式
 ```objective-c
 platform :ios, '8.0'
 
 target '工程名称' do
-pod ‘CWDB’, '~> 1.6.0’
+pod ‘CWSqlite’, '~> 1.6.1’
 end
 /* 如果搜索不到
 1、执行rm ~/Library/Caches/CocoaPods/search_index.json 删除索引的缓存再搜索，还不行执行第2步更新cocoapods
