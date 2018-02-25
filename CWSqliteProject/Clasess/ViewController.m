@@ -132,11 +132,9 @@
         
         NSMutableArray *schools = [NSMutableArray array];
         for (int i = 0; i < 5; i++) {
-            @autoreleasepool {
-                // 注意：名字不同～
-                CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
-                [schools addObject:school];
-            }
+            // 注意：名字不同～
+            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
+            [schools addObject:school];
         }
         
         // 只要调用这个方法
@@ -153,11 +151,9 @@
         
         NSMutableArray *schools = [NSMutableArray array];
         for (int i = 5; i < 10; i++) {
-            @autoreleasepool {
-                // 注意：名字不同～
-                CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
-                [schools addObject:school];
-            }
+            // 注意：名字不同～
+            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
+            [schools addObject:school];
         }
         
         // 只要调用这个方法
@@ -173,11 +169,9 @@
         
         NSMutableArray *schools = [NSMutableArray array];
         for (int i = 10; i < 15; i++) {
-            @autoreleasepool {
-                // 注意：名字不同～
-                CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
-                [schools addObject:school];
-            }
+            // 注意：名字不同～
+            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
+            [schools addObject:school];
         }
         
         // 只要调用这个方法
