@@ -84,7 +84,7 @@
     NSArray *models = [CWSqliteModelTool queryAllModels:[Student class] uid:@"Chavez" targetId:nil];
 //    NSLog(@"query models : %@",models);
     for (Student *stu in models) {
-        NSLog(@"--------stu : %zd",stu.stuId);
+        NSLog(@"--------stu : %d",stu.stuId);
     }
     
     XCTAssertNotNil(models);

@@ -100,7 +100,7 @@
     NSMutableArray *schools = [NSMutableArray array];
     for (int i = 0; i < 5; i++) {
         @autoreleasepool {
-            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想学院%zd",i]];
+            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想学院%d",i]];
             [schools addObject:school];
         }
     }
@@ -131,7 +131,7 @@
         NSMutableArray *schools = [NSMutableArray array];
         for (int i = 0; i < 5; i++) {
             // 注意：名字不同～
-            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
+            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%d",i]];
             [schools addObject:school];
         }
         
@@ -150,7 +150,7 @@
         NSMutableArray *schools = [NSMutableArray array];
         for (int i = 5; i < 10; i++) {
             // 注意：名字不同～
-            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
+            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%d",i]];
             [schools addObject:school];
         }
         
@@ -168,7 +168,7 @@
         NSMutableArray *schools = [NSMutableArray array];
         for (int i = 10; i < 15; i++) {
             // 注意：名字不同～
-            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%zd",i]];
+            CWSchool *school = [self cwSchoolWithID:i name:[NSString stringWithFormat:@"梦想女子学院%d",i]];
             [schools addObject:school];
         }
         
